@@ -287,8 +287,8 @@ a { color: inherit; }
    Elementos com .reveal começam invisíveis; o js/main.js adiciona
    .visivel quando entram na tela (IntersectionObserver — a mesma
    técnica que você já viu na seção de certificados do site antigo) */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s, transform .6s; }
-.reveal.visivel { opacity: 1; transform: translateY(0); }
+.reveal { opacity: 0; transform: translateY(24px); filter: blur(8px); transition: opacity .6s, transform .6s, filter .6s; }
+.reveal.visivel { opacity: 1; transform: translateY(0); filter: blur(0); }
 
 /* ── RESPONSIVO ───────────────────────────────────────────── */
 @media (max-width: 768px) {
@@ -309,3 +309,13 @@ a { color: inherit; }
   .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
 }
+
+.btn-solid { position: relative; overflow: hidden; }
+.btn-solid::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+  transform: translateX(-100%) skewX(-15deg);
+}
+.btn-solid:hover::after { animation: shimmer .7s ease; }
+@keyframes shimmer { to { transform: translateX(200%) skewX(-15deg); } }
