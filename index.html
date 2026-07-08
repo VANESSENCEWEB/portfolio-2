@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!--
+  ═══════════════════════════════════════════════════════════
+  PORTFOLIO VANESSA LIMA — v2 "stop scroll"
+  Stack: HTML + CSS + JS puro (sem framework)
+  Estrutura: index.html · css/styles.css · js/main.js
+  Repare: o <link> abaixo aponta pra "css/styles.css"
+  porque o arquivo está DENTRO da pasta css/ (lembra da armadilha!)
+  ═══════════════════════════════════════════════════════════
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vanessa Lima — Front-end Developer</title>
+  <meta name="description" content="Front-end developer em Recife. Fundadora da Vanessenceweb Ltd (UK). HTML, CSS, JavaScript, Python e SQL." />
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Fontes: Archivo Black (títulos gigantes) + Space Grotesk (texto) + JetBrains Mono (etiquetas técnicas) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- ══════════════ NAVBAR ══════════════ -->
+  <header class="nav">
+    <a class="nav-logo" href="#topo">VL<span class="dot">.</span></a>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="#projetos">Projetos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#skills">Skills</a>
+    </nav>
+    <a class="btn btn-solid" href="#contato">Fala comigo</a>
+  </header>
+
+  <!-- ══════════════ HERO ══════════════
+       A tese da página: nome gigante + quem sou em 1 frase.
+       As letras sobem uma a uma no carregamento (só CSS). -->
+  <main id="topo">
+    <section class="hero">
+
+      <p class="eyebrow mono">
+        <span class="pin">LAT 8°03'S · RECIFE, BR</span>
+        <span class="arrow" aria-hidden="true">⟶</span>
+        <span class="pin">LON 0°07'W · LONDON, UK</span>
+      </p>
+
+      <!-- Cada <span> é uma "fatia" que anima. aria-label mantém acessível pra leitor de tela. -->
+      <h1 class="hero-title" aria-label="Vanessa Lima">
+        <span class="line"><span class="slice">VANESSA</span></span>
+        <span class="line">
+          <span class="slice">LIMA</span>
+          <span class="sticker sticker-amarelo">front-end dev</span>
+        </span>
+      </h1>
+
+      <p class="hero-sub">
+        Construo sites e interfaces em <strong>HTML, CSS e JavaScript</strong> —
+        estudante de Sistemas para Internet na UNICAP e fundadora da
+        <strong>Vanessenceweb&nbsp;Ltd</strong>, registrada no Reino Unido.
+      </p>
+
+      <div class="hero-ctas">
+        <a class="btn btn-solid" href="#projetos">Ver projetos ↓</a>
+        <a class="btn btn-ghost" href="https://github.com/VANESSENCEWEB" target="_blank" rel="noopener">GitHub ↗</a>
+        <!-- TODO: cola aqui o link do teu LinkedIn -->
+        <a class="btn btn-ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+
+    </section>
+
+    <!-- ══════════════ MARQUEE (o movimento "stop scroll") ══════════════
+         A faixa se repete 2x no HTML pra animação parecer infinita.
+         aria-hidden na cópia: leitor de tela não lê duas vezes. -->
+    <div class="marquee" role="presentation">
+      <div class="marquee-track">
+        <span>HTML</span><i>✦</i><span>CSS</span><i>✦</i><span>JAVASCRIPT</span><i>✦</i>
+        <span>PYTHON</span><i>✦</i><span>SQL</span><i>✦</i><span>FIGMA</span><i>✦</i>
+        <span>HTML</span><i>✦</i><span>CSS</span><i>✦</i><span>JAVASCRIPT</span><i>✦</i>
+        <span>PYTHON</span><i>✦</i><span>SQL</span><i>✦</i><span>FIGMA</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- ══════════════ STATS (100% reais) ══════════════ -->
+    <section class="stats reveal">
+      <div class="stat">
+        <p class="stat-n">80+</p>
+        <p class="stat-l mono">certificações</p>
+      </div>
+      <div class="stat">
+        <p class="stat-n">UK</p>
+        <p class="stat-l mono">Ltd registrada · Companies House</p>
+      </div>
+      <div class="stat">
+        <p class="stat-n">4</p>
+        <p class="stat-l mono">projetos no ar</p>
+      </div>
+    </section>
+
+    <!-- ══════════════ PROJETOS ══════════════
+         Capas tipográficas: cada projeto tem uma "capa" feita só
+         com CSS (cor + letra gigante). Zero screenshot fake.
+         Quando você tiver prints reais, é só trocar (te explico). -->
+    <section class="section" id="projetos">
+      <h2 class="section-title">
+        Projetos <span class="sticker sticker-laranja">reais e no ar</span>
+      </h2>
+
+      <div class="projects">
+
+        <!-- Projeto 1: Simulador IRPF -->
+        <a class="project reveal" href="https://vanessenceweb.github.io/simulador-irpf/" target="_blank" rel="noopener">
+          <div class="project-cover cover-a"><span>IRPF</span></div>
+          <div class="project-info">
+            <h3>Simulador IRPF 2025</h3>
+            <p>Calculadora do Imposto de Renda com tabela progressiva e alíquota efetiva. Projeto da disciplina Programação para Web — UNICAP.</p>
+            <p class="project-tags mono">HTML · CSS · JS</p>
+          </div>
+        </a>
+
+        <!-- Projeto 2: Dashboard Recife Flats -->
+        <a class="project reveal" href="https://recifeflats-financeiro.netlify.app/" target="_blank" rel="noopener">
+          <div class="project-cover cover-b"><span>FLATS</span></div>
+          <div class="project-info">
+            <h3>Dashboard Recife Flats</h3>
+            <p>Gestão financeira de 4 apartamentos de temporada: receitas, despesas e ocupação integradas via Google Sheets API.</p>
+            <p class="project-tags mono">JS · Google Sheets API</p>
+          </div>
+        </a>
+
+        <!-- Projeto 3: Quality Travel (esse tem print real!) -->
+        <a class="project reveal" href="https://vanessenceweb.github.io/qualitytravel/" target="_blank" rel="noopener">
+          <div class="project-cover cover-img">
+            <img src="https://raw.githubusercontent.com/VANESSENCEWEB/qualitytravel/main/quality-travel-screenshot.png" alt="Tela do site Quality Travel" loading="lazy" />
+          </div>
+          <div class="project-info">
+            <h3>Quality Travel</h3>
+            <p>Site de agência de viagens com animações e interface moderna, em HTML, CSS e JavaScript puros.</p>
+            <p class="project-tags mono">HTML · CSS · JS</p>
+          </div>
+        </a>
+
+        <!-- Projeto 4: API REST Node.js
+             TODO: troca o href pelo link do repositório da API no GitHub -->
+        <a class="project reveal" href="https://github.com/VANESSENCEWEB" target="_blank" rel="noopener">
+          <div class="project-cover cover-c"><span>API</span></div>
+          <div class="project-info">
+            <h3>API REST — Node.js + Express</h3>
+            <p>CRUD completo com testes automatizados em Newman/Postman (40 assertions, 100% de aprovação) e deploy no Render com CD.</p>
+            <p class="project-tags mono">Node · Express · Newman</p>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ══════════════ SOBRE ══════════════ -->
+    <section class="section sobre" id="sobre">
+      <div class="sobre-foto reveal">
+        <!-- TODO: sobe tua foto no repositório como img/vanessa.jpg
+             e troca o src abaixo. Enquanto isso, a moldura fica vazia estilizada. -->
+        <img src="img/vanessa.jpg" alt="Foto de Vanessa Lima" onerror="this.parentElement.classList.add('sem-foto'); this.remove()" />
+        <span class="mono foto-legenda">recife, pe</span>
+      </div>
+
+      <div class="sobre-texto reveal">
+        <h2 class="section-title">Sobre</h2>
+        <p>
+          Sou desenvolvedora front-end em formação, cursando Sistemas para
+          Internet na UNICAP (Recife/PE). Combino a faculdade com prática real:
+          projetos próprios e mais de 80 certificações em desenvolvimento e
+          design — DIO Campus Expert, Origamid, Rocketseat e UNICAP RiseUp.
+        </p>
+        <p>
+          Fundei a <strong>Vanessenceweb Ltd</strong>, empresa registrada no
+          Reino Unido, com foco em desenvolvimento web moderno. Participei da
+          Residência Tecnológica do Porto Digital (RiseUp 2026.1), com projeto
+          selecionado para apresentar no CoDay.
+        </p>
+        <a class="badge-uk" href="https://find-and-update.company-information.service.gov.uk/company/16679666" target="_blank" rel="noopener">
+          <span class="mono">✓ UK COMPANIES HOUSE #16679666</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ══════════════ SKILLS ══════════════ -->
+    <section class="section" id="skills">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills reveal">
+        <div class="skill-grupo">
+          <p class="mono skill-titulo">// front-end</p>
+          <p>HTML5 · CSS3 · JavaScript · Responsividade · GSAP</p>
+        </div>
+        <div class="skill-grupo">
+          <p class="mono skill-titulo">// design</p>
+          <p>Figma · UI Design · Design Tokens · Canva</p>
+        </div>
+        <div class="skill-grupo">
+          <p class="mono skill-titulo">// dados & back</p>
+          <p>Python · SQL · Node.js · APIs REST · Postman/Newman</p>
+        </div>
+        <div class="skill-grupo">
+          <p class="mono skill-titulo">// ferramentas</p>
+          <p>Git · GitHub · VS Code · Netlify · GitHub Pages</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ CONTATO ══════════════ -->
+    <section class="section contato" id="contato">
+      <h2 class="contato-title reveal">
+        <span class="line">BORA</span>
+        <span class="line">TRABALHAR <span class="sticker sticker-amarelo">juntas?</span></span>
+      </h2>
+      <div class="hero-ctas reveal">
+        <!-- TODO: quando configurar contato@vanessenceweb.com, já está pronto.
+             Se ainda não configurou, troca pelo teu email atual. -->
+        <a class="btn btn-solid" href="mailto:contato@vanessenceweb.com">contato@vanessenceweb.com</a>
+        <a class="btn btn-ghost" href="https://github.com/VANESSENCEWEB" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer mono">
+    <span>© 2026 Vanessa Lima · Vanessenceweb Ltd</span>
+    <span>8°03'S ⟶ 51°30'N</span>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
