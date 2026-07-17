@@ -84,6 +84,28 @@
       </div>
     </div>
 
+    <!-- ══════════════ NOTEBOOK QUE ABRE COM O SCROLL ══════════════
+     Seção "pin": o pai é alto (220vh) e o palco fica sticky.
+     O JS transforma a posição do scroll em progresso 0→1. -->
+<section class="pin" id="demo">
+  <div class="pin-stage">
+    <div class="laptop">
+      <div class="laptop-lid" id="lid">
+        <div class="laptop-screen">
+          <div class="term-bar">
+            <i></i><i></i><i></i>
+            <span class="mono">vanessa@recife — zsh</span>
+          </div>
+          <pre class="term" id="term"></pre>
+        </div>
+      </div>
+      <div class="laptop-base"></div>
+    </div>
+    <p class="pin-hint mono" id="pinHint">continua rolando…</p>
+  </div>
+</section>
+
+
     <!-- ══════════════ STATS (100% reais) ══════════════ -->
     <section class="stats reveal">
       <div class="stat">

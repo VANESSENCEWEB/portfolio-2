@@ -300,10 +300,72 @@ a { color: inherit; }
   .sticker { transform: rotate(-4deg); }
 }
 
+/* ── NOTEBOOK 3D ──────────────────────────────────────────── */
+.pin { height: 220vh; position: relative; background: var(--papel); }
+.pin-stage {
+  position: sticky; top: 0; height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: var(--sp-3);
+  overflow: hidden;
+}
+.laptop { width: min(600px, 88vw); perspective: 1300px; }
+.laptop-lid {
+  aspect-ratio: 16/10;
+  background: var(--tinta);
+  border: 2px solid var(--tinta);
+  border-radius: 14px 14px 3px 3px;
+  padding: clamp(7px, 1.4vw, 11px);
+  transform-origin: bottom center;
+  transform: rotateX(-78deg);       /* começa fechado */
+  will-change: transform;
+}
+.laptop-base {
+  width: 106%; margin-left: -3%;
+  height: clamp(9px, 1.8vw, 14px);
+  background: var(--tinta);
+  border-radius: 2px 2px 12px 12px;
+}
+.laptop-screen {
+  height: 100%; border-radius: 8px;
+  background: #0C0A07;              /* tela mais escura que a tinta */
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  font-size: clamp(9px, 1.9vw, 14px);
+}
+.term-bar {
+  display: flex; align-items: center; gap: .5em;
+  padding: .7em 1em;
+  border-bottom: 1px solid rgba(245,239,228,.12);
+  color: rgba(245,239,228,.5);
+}
+.term-bar i { width: .8em; height: .8em; border-radius: 50%; background: var(--laranja); }
+.term-bar i:nth-child(2) { background: var(--amarelo); }
+.term-bar i:nth-child(3) { background: #2FBF71; }
+.term {
+  flex: 1; margin: 0; padding: 1.2em 1.4em;
+  font-family: var(--f-mono);
+  color: var(--papel);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+.term .cmd { color: var(--laranja); }
+.term .cursor {
+  display: inline-block; width: .55em; height: 1.1em;
+  background: var(--amarelo);
+  vertical-align: -.15em;
+  animation: pisca 1s steps(1) infinite;
+}
+@keyframes pisca { 50% { opacity: 0; } }
+.pin-hint { transition: opacity .4s; }
+.pin-hint.some { opacity: 0; }
+
+
+
 /* ── MOVIMENTO REDUZIDO ───────────────────────────────────────
    Respeita quem configura o sistema pra menos animação
    (acessibilidade — enjoo de movimento é coisa séria) */
 @media (prefers-reduced-motion: reduce) {
+  .laptop-lid { transform: rotateX(0deg); }
   .hero-title .slice { animation: none; transform: none; }
   .marquee-track { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
