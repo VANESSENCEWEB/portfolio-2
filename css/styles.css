@@ -135,10 +135,13 @@ a { color: inherit; }
 .marquee {
   background: var(--tinta);
   color: var(--papel);
-  overflow: hidden;         /* esconde o que passa da tela */
+  overflow: hidden;
   padding: var(--sp-2) 0;
   border-block: 2px solid var(--tinta);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
+.marquee:hover .marquee-track { animation-play-state: paused; }
 .marquee-track {
   display: flex; align-items: center; gap: var(--sp-3);
   width: max-content;        /* a faixa fica do tamanho do conteúdo */
@@ -190,6 +193,17 @@ a { color: inherit; }
   transition: transform .15s, box-shadow .15s;
 }
 .project:hover { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--tinta); }
+
+/* Case em destaque: ocupa a largura toda do grid */
+.project-destaque { grid-column: 1 / -1; }
+.project-destaque .project-cover { height: 260px; }
+.project-destaque .project-info { max-width: 46rem; }
+.feats { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
+.feats span {
+  font-family: var(--f-mono); font-size: .65rem;
+  border: 1px solid var(--tinta); padding: .2rem .6rem;
+  border-radius: 999px;
+}
 
 /* Capa tipográfica: cor sólida + palavra gigante. Honesta e rápida. */
 .project-cover {
@@ -283,6 +297,34 @@ a { color: inherit; }
   background: var(--tinta); color: var(--papel);
 }
 
+/* ── ÍCONES SOCIAIS ────────────────────────────────────────── */
+.social { display: flex; gap: var(--sp-2); margin-top: var(--sp-3); }
+.social-link {
+  display: grid; place-items: center;
+  width: 54px; height: 54px;
+  border: 2px solid var(--tinta);
+  border-radius: 50%;
+  color: var(--tinta);
+  transition: transform .15s, background .15s, color .15s, box-shadow .15s;
+}
+.social-link:hover {
+  background: var(--laranja);
+  color: var(--papel);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--tinta);
+}
+
+/* ── SHIMMER NOS BOTÕES ───────────────────────────────────── */
+.btn-solid { position: relative; overflow: hidden; }
+.btn-solid::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+  transform: translateX(-100%) skewX(-15deg);
+}
+.btn-solid:hover::after { animation: shimmer .7s ease; }
+@keyframes shimmer { to { transform: translateX(200%) skewX(-15deg); } }
+
 /* ── REVEAL AO ROLAR ──────────────────────────────────────────
    Elementos com .reveal começam invisíveis; o js/main.js adiciona
    .visivel quando entram na tela (IntersectionObserver — a mesma
@@ -300,84 +342,12 @@ a { color: inherit; }
   .sticker { transform: rotate(-4deg); }
 }
 
-/* ── NOTEBOOK 3D ──────────────────────────────────────────── */
-.pin { height: 220vh; position: relative; background: var(--papel); }
-.pin-stage {
-  position: sticky; top: 0; height: 100vh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: var(--sp-3);
-  overflow: hidden;
-}
-.laptop { width: min(600px, 88vw); perspective: 1300px; }
-.laptop-lid {
-  aspect-ratio: 16/10;
-  background: var(--tinta);
-  border: 2px solid var(--tinta);
-  border-radius: 14px 14px 3px 3px;
-  padding: clamp(7px, 1.4vw, 11px);
-  transform-origin: bottom center;
-  transform: rotateX(-78deg);       /* começa fechado */
-  will-change: transform;
-}
-.laptop-base {
-  width: 106%; margin-left: -3%;
-  height: clamp(9px, 1.8vw, 14px);
-  background: var(--tinta);
-  border-radius: 2px 2px 12px 12px;
-}
-.laptop-screen {
-  height: 100%; border-radius: 8px;
-  background: #0C0A07;              /* tela mais escura que a tinta */
-  overflow: hidden;
-  display: flex; flex-direction: column;
-  font-size: clamp(9px, 1.9vw, 14px);
-}
-.term-bar {
-  display: flex; align-items: center; gap: .5em;
-  padding: .7em 1em;
-  border-bottom: 1px solid rgba(245,239,228,.12);
-  color: rgba(245,239,228,.5);
-}
-.term-bar i { width: .8em; height: .8em; border-radius: 50%; background: var(--laranja); }
-.term-bar i:nth-child(2) { background: var(--amarelo); }
-.term-bar i:nth-child(3) { background: #2FBF71; }
-.term {
-  flex: 1; margin: 0; padding: 1.2em 1.4em;
-  font-family: var(--f-mono);
-  color: var(--papel);
-  line-height: 1.8;
-  white-space: pre-wrap;
-}
-.term .cmd { color: var(--laranja); }
-.term .cursor {
-  display: inline-block; width: .55em; height: 1.1em;
-  background: var(--amarelo);
-  vertical-align: -.15em;
-  animation: pisca 1s steps(1) infinite;
-}
-@keyframes pisca { 50% { opacity: 0; } }
-.pin-hint { transition: opacity .4s; }
-.pin-hint.some { opacity: 0; }
-
-
-
 /* ── MOVIMENTO REDUZIDO ───────────────────────────────────────
    Respeita quem configura o sistema pra menos animação
    (acessibilidade — enjoo de movimento é coisa séria) */
 @media (prefers-reduced-motion: reduce) {
-  .laptop-lid { transform: rotateX(0deg); }
   .hero-title .slice { animation: none; transform: none; }
   .marquee-track { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
 }
-
-.btn-solid { position: relative; overflow: hidden; }
-.btn-solid::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
-  transform: translateX(-100%) skewX(-15deg);
-}
-.btn-solid:hover::after { animation: shimmer .7s ease; }
-@keyframes shimmer { to { transform: translateX(200%) skewX(-15deg); } }
