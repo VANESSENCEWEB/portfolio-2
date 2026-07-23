@@ -1,0 +1,72 @@
+/* ═══════════════════════════════════════════════════════════
+   BASE — reset, body, utilitários globais, botões, reveal
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Reset ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--f-body);
+  background: var(--papel);
+  color: var(--tinta);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+/* ── Utilitários ──────────────────────────────────────────── */
+.mono { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+:focus-visible { outline: 3px solid var(--laranja); outline-offset: 3px; }
+
+/* ── Stickers (pílulas rotacionadas) ──────────────────────── */
+.sticker {
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: clamp(.7rem, 1.6vw, 1.1rem);
+  letter-spacing: .05em;
+  padding: .35em .9em;
+  border: 2px solid var(--tinta);
+  border-radius: 999px;
+  transform: rotate(-6deg) translateY(-1.2em);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.sticker-amarelo { background: var(--amarelo); }
+.sticker-laranja { background: var(--laranja); color: var(--papel); border-color: var(--laranja); }
+
+/* ── Botões ───────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: .7rem 1.5rem;
+  font-weight: 700; font-size: .85rem;
+  text-decoration: none;
+  border: 2px solid var(--tinta);
+  transition: transform .15s, box-shadow .15s;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--tinta); }
+.btn-solid { background: var(--tinta); color: var(--papel); position: relative; overflow: hidden; }
+.btn-ghost { background: transparent; color: var(--tinta); }
+
+/* Shimmer nos botões sólidos */
+.btn-solid::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+  transform: translateX(-100%) skewX(-15deg);
+}
+.btn-solid:hover::after { animation: shimmer .7s ease; }
+@keyframes shimmer { to { transform: translateX(200%) skewX(-15deg); } }
+
+/* ── Seções (padrão compartilhado) ────────────────────────── */
+.section { padding: var(--sp-5) 5vw; }
+.section-title {
+  font-family: var(--f-display);
+  font-size: clamp(2rem, 6vw, 4rem);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-4);
+}
+
+/* ── Reveal ao rolar ──────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(24px); filter: blur(8px); transition: opacity .6s, transform .6s, filter .6s; }
+.reveal.visivel { opacity: 1; transform: translateY(0); filter: blur(0); }
