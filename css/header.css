@@ -1,0 +1,34 @@
+/* ═══════════════════════════════════════════════════════════
+   HEADER — navbar, brand, links, toggle de idioma
+   ═══════════════════════════════════════════════════════════ */
+
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--sp-2);
+  padding: var(--sp-1) 5vw;
+  background: var(--papel);
+  border-bottom: 2px solid var(--tinta);
+}
+.nav-brand { text-decoration: none; display: flex; flex-direction: column; line-height: 1.2; }
+.nav-name { font-family: var(--f-display); font-size: 1.1rem; color: var(--tinta); }
+.nav-role { font-family: var(--f-mono); font-size: .65rem; color: var(--laranja); letter-spacing: .05em; }
+.nav-links { display: flex; gap: var(--sp-3); }
+.nav-links a {
+  text-decoration: none; font-weight: 500; font-size: .9rem; color: var(--tinta);
+  border-bottom: 2px solid transparent;
+  transition: border-color .2s, color .2s;
+}
+.nav-links a:hover { border-color: var(--laranja); color: var(--laranja); }
+.nav-right { display: flex; align-items: center; gap: var(--sp-2); }
+.btn-nav { padding: .5rem 1.2rem; font-size: .8rem; }
+.lang-toggle { display: flex; border: 2px solid var(--tinta); overflow: hidden; }
+.lang-btn {
+  font-family: var(--f-mono); font-size: .7rem; font-weight: 700;
+  padding: .35rem .6rem;
+  border: none; cursor: pointer;
+  background: transparent; color: var(--tinta);
+  transition: background .2s, color .2s;
+}
+.lang-btn:hover { background: var(--tinta); color: var(--papel); }
+.lang-active { background: var(--laranja); color: var(--papel); }
