@@ -329,7 +329,7 @@ a { color: inherit; }
    Elementos com .reveal começam invisíveis; o js/main.js adiciona
    .visivel quando entram na tela (IntersectionObserver — a mesma
    técnica que você já viu na seção de certificados do site antigo) */
-.reveal { opacity: 0; transform: translateY(24px); filter: blur(8px); transition: opacity .6s, transform .6s, filter .6s; }
+.reveal { opacity: 1; transform: none; filter: none; transition: opacity .6s, transform .6s, filter .6s; }
 .reveal.visivel { opacity: 1; transform: translateY(0); filter: blur(0); }
 
 /* ── RESPONSIVO ───────────────────────────────────────────── */
