@@ -1,0 +1,30 @@
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — todas as media queries num lugar só
+   Edita aqui quando algo quebrar em mobile/tablet.
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  /* Header */
+  .nav-links { display: none; }
+  .lang-toggle { display: none; }
+  .nav-name { font-size: .95rem; }
+
+  /* Stats */
+  .stats { grid-template-columns: 1fr; }
+  .stat { border-right: none; border-bottom: 2px solid var(--tinta); }
+  .stat:last-child { border-bottom: none; }
+
+  /* Sobre */
+  .sobre { grid-template-columns: 1fr; }
+
+  /* Sticker */
+  .sticker { transform: rotate(-4deg); }
+}
+
+/* ── Movimento reduzido (acessibilidade) ──────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-title .slice { animation: none; transform: none; }
+  .marquee-track { animation: none; }
+  .reveal { opacity: 1; transform: none; filter: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
