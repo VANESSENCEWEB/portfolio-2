@@ -1,0 +1,24 @@
+/* ═══════════════════════════════════════════════════════════
+   VARIABLES — cores, fontes, espaçamentos
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* Paleta */
+  --papel:    #F5EFE4;
+  --tinta:    #16110B;
+  --laranja:  #FF531A;
+  --amarelo:  #FFD400;
+  --azul:     #1D3FBF;
+
+  /* Tipografia */
+  --f-display: 'Archivo Black', sans-serif;
+  --f-body:    'Space Grotesk', sans-serif;
+  --f-mono:    'JetBrains Mono', monospace;
+
+  /* Espaçamento */
+  --sp-1: .5rem;
+  --sp-2: 1rem;
+  --sp-3: 2rem;
+  --sp-4: 4rem;
+  --sp-5: 7rem;
+}
