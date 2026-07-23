@@ -1,0 +1,88 @@
+/* ═══════════════════════════════════════════════════════════
+   SECTIONS — sobre, skills, contato, ícones sociais, footer
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Sobre ────────────────────────────────────────────────── */
+.sobre {
+  display: grid;
+  grid-template-columns: minmax(220px, 340px) 1fr;
+  gap: var(--sp-4);
+  align-items: start;
+  border-block: 2px solid var(--tinta);
+}
+.sobre-foto { position: relative; }
+.sobre-foto img {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  border: 2px solid var(--tinta);
+  filter: grayscale(30%);
+  transition: filter .3s;
+}
+.sobre-foto:hover img { filter: grayscale(0%); }
+.sobre-foto.sem-foto::before {
+  content: '📍';
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; aspect-ratio: 3/4;
+  font-size: 3rem;
+  background: repeating-linear-gradient(-45deg, var(--laranja), var(--laranja) 12px, #e8480f 12px, #e8480f 24px);
+  border: 2px solid var(--tinta);
+}
+.foto-legenda {
+  position: absolute; bottom: -0.8em; left: 1rem;
+  background: var(--amarelo);
+  border: 2px solid var(--tinta);
+  padding: .2rem .7rem;
+}
+.sobre-texto { display: grid; gap: var(--sp-2); max-width: 40rem; }
+.sobre-texto .section-title { margin-bottom: var(--sp-1); }
+.badge-uk {
+  justify-self: start;
+  text-decoration: none;
+  border: 2px solid var(--tinta);
+  padding: .6rem 1rem;
+  background: var(--papel);
+  transition: background .2s;
+}
+.badge-uk:hover { background: var(--amarelo); }
+
+/* ── Skills ───────────────────────────────────────────────── */
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: var(--sp-3);
+}
+.skill-grupo { border-left: 4px solid var(--laranja); padding-left: var(--sp-2); }
+.skill-titulo { color: var(--laranja); margin-bottom: var(--sp-1); }
+
+/* ── Contato ──────────────────────────────────────────────── */
+.contato { text-align: left; border-top: 2px solid var(--tinta); }
+.contato-title {
+  font-family: var(--f-display);
+  font-size: clamp(2.6rem, 10vw, 8rem);
+  line-height: .95;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-3);
+}
+.contato-title .line { display: block; }
+
+/* ── Ícones sociais ───────────────────────────────────────── */
+.social { display: flex; gap: var(--sp-2); margin-top: var(--sp-3); }
+.social-link {
+  display: grid; place-items: center;
+  width: 54px; height: 54px;
+  border: 2px solid var(--tinta);
+  border-radius: 50%;
+  color: var(--tinta);
+  transition: transform .15s, background .15s, color .15s, box-shadow .15s;
+}
+.social-link:hover {
+  background: var(--laranja);
+  color: var(--papel);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--tinta);
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+.footer {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-2);
+  padding: var(--sp-2) 5vw;
+  background: var(--tinta); color: var(--papel);
