@@ -61,4 +61,13 @@ if (pin) {
     const p = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
     if (!reduz) lid.style.transform = `rotateX(${-78 + 78 * Math.min(1, p / .5)}deg)`;
     const tp = reduz ? 1 : Math.min(1, Math.max(0, (p - .45) / .5));
-    renderTerm(Math.round(chars.le
+    renderTerm(Math.round(chars.length * tp));
+    hint.classList.toggle('some', p > .1);
+    aguardando = false;
+  }
+
+  addEventListener('scroll', () => {
+    if (!aguardando) { requestAnimationFrame(atualizaPin); aguardando = true; }
+  }, { passive: true });
+  atualizaPin();
+}
