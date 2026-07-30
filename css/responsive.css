@@ -1,30 +1,97 @@
 /* ═══════════════════════════════════════════════════════════
-   RESPONSIVE — todas as media queries num lugar só
-   Edita aqui quando algo quebrar em mobile/tablet.
+   RESPONSIVE
    ═══════════════════════════════════════════════════════════ */
 
-@media (max-width: 768px) {
-  /* Header */
-  .nav-links { display: none; }
-  .lang-toggle { display: none; }
-  .nav-name { font-size: .95rem; }
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
 
-  /* Stats */
-  .stats { grid-template-columns: 1fr; }
-  .stat { border-right: none; border-bottom: 2px solid var(--tinta); }
-  .stat:last-child { border-bottom: none; }
+  .hero-photo {
+    max-width: 280px;
+    margin-inline: auto;
+  }
 
-  /* Sobre */
-  .sobre { grid-template-columns: 1fr; }
-
-  /* Sticker */
-  .sticker { transform: rotate(-4deg); }
+  .hero-title {
+    white-space: normal;
+  }
 }
 
-/* ── Movimento reduzido (acessibilidade) ──────────────────── */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .lang-toggle {
+    display: none;
+  }
+
+  .nav-name {
+    font-size: .95rem;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat {
+    border-inline-end: none;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .stat:last-child {
+    border-bottom: none;
+  }
+
+  .sobre {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding-block: var(--sp-6);
+  }
+
+  .hero {
+    padding-block: var(--sp-4);
+  }
+
+  .hero-copy {
+    gap: 1.5rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-title .slice { animation: none; transform: none; }
-  .marquee-track { animation: none; }
-  .reveal { opacity: 1; transform: none; filter: none; transition: none; }
-  html { scroll-behavior: auto; }
+  .hero-title .reveal-line {
+    transform: none;
+  }
+
+  .hero-cursor {
+    animation: none;
+  }
+
+  .marquee-track {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .hero-photo {
+    transition: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn:hover:not(:disabled),
+  .project:hover,
+  .hero-btn:hover,
+  .social-link:hover {
+    transform: none;
+  }
 }

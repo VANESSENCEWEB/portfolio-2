@@ -1,24 +1,90 @@
 /* ═══════════════════════════════════════════════════════════
-   VARIABLES — cores, fontes, espaçamentos
+   VARIABLES — Vanessa Lima Design System tokens
+   Apple-clean neutrals + aurora accents + neon hero accents
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-  /* Paleta */
-  --papel:    #F5EFE4;
-  --tinta:    #16110B;
-  --laranja:  #FF531A;
-  --amarelo:  #FFD400;
-  --azul:     #1D3FBF;
+  /* Ink neutrals */
+  --ink-900: #0a0a0b;
+  --ink-700: #1d1d1f;
+  --ink-500: #6e6e76;
+  --ink-300: #a8a8b0;
+  --ink-100: #e4e4e8;
 
-  /* Tipografia */
-  --f-display: 'Archivo Black', sans-serif;
-  --f-body:    'Space Grotesk', sans-serif;
-  --f-mono:    'JetBrains Mono', monospace;
+  /* Surfaces */
+  --surface-0: #ffffff;
+  --surface-50: #f8f8fa;
+  --surface-100: #eef0f3;
 
-  /* Espaçamento */
+  /* Accents */
+  --accent-blue: #3d7bff;
+  --accent-violet: #9b6bff;
+  --accent-coral: #ff6b5e;
+  --accent-amber: #ffd400;
+  --accent-pink: #ff2ea6;
+  --accent-green: #39ff88;
+
+  /* Gradients */
+  --gradient-aurora: linear-gradient(120deg, #3d7bff 0%, #9b6bff 45%, #ff6b5e 100%);
+  --gradient-aurora-soft: linear-gradient(120deg, #c3d6ff 0%, #dcd0ff 50%, #ffd3cd 100%);
+
+  /* Semantic */
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--ink-500);
+  --text-tertiary: var(--ink-300);
+  --text-inverse: var(--surface-0);
+  --surface-page: var(--surface-0);
+  --surface-card: var(--surface-50);
+  --surface-elevated: var(--surface-0);
+  --surface-inverse: var(--ink-900);
+  --border-subtle: var(--ink-100);
+  --border-strong: var(--ink-900);
+  --accent-primary: var(--accent-blue);
+
+  /* Typography */
+  --f-display: 'Space Grotesk', 'Inter', sans-serif;
+  --f-body: 'Inter', sans-serif;
+  --f-mono: 'JetBrains Mono', monospace;
+
+  --text-display-xl: 700 clamp(2.75rem, 7vw, 6.5rem) / 0.98 var(--f-display);
+  --text-display-lg: 700 clamp(2.25rem, 5vw, 4rem) / 1.02 var(--f-display);
+  --text-display-md: 600 clamp(1.5rem, 3vw, 2.25rem) / 1.1 var(--f-display);
+  --text-body-lg: 400 1.15rem / 1.6 var(--f-body);
+  --text-body-md: 400 1rem / 1.6 var(--f-body);
+  --text-body-sm: 400 0.875rem / 1.5 var(--f-body);
+  --text-mono-sm: 500 0.75rem / 1.4 var(--f-mono);
+
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.08em;
+
+  /* Spacing */
   --sp-1: .5rem;
   --sp-2: 1rem;
-  --sp-3: 2rem;
-  --sp-4: 4rem;
-  --sp-5: 7rem;
+  --sp-3: 1.5rem;
+  --sp-4: 2.5rem;
+  --sp-5: 4rem;
+  --sp-6: 6rem;
+  --sp-7: 9rem;
+
+  /* Effects */
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(10, 10, 11, .06);
+  --shadow-md: 0 8px 24px rgba(10, 10, 11, .08);
+  --shadow-lg: 0 24px 64px rgba(10, 10, 11, .12);
+  --shadow-glow: 0 0 0 1px rgba(10, 10, 11, .04), 0 20px 60px rgba(61, 123, 255, .22);
+
+  --blur-nav: saturate(180%) blur(20px);
+
+  /* Motion */
+  --ease-out-quart: cubic-bezier(.25, 1, .5, 1);
+  --ease-in-out-soft: cubic-bezier(.65, 0, .35, 1);
+  --ease-spring: cubic-bezier(.16, 1, .3, 1);
+  --dur-fast: 150ms;
+  --dur-base: 300ms;
+  --dur-slow: 600ms;
+  --dur-reveal: 900ms;
 }
