@@ -1,0 +1,117 @@
+/* ═══════════════════════════════════════════════════════════
+   NOTEBOOK 3D — abre com o scroll + terminal digita
+   ═══════════════════════════════════════════════════════════ */
+
+.pin {
+  height: 220vh;
+  position: relative;
+  background: var(--surface-50);
+  border-block: 1px solid var(--border-subtle);
+}
+
+.pin-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  overflow: hidden;
+}
+
+.laptop {
+  width: min(600px, 88vw);
+  perspective: 1300px;
+}
+
+.laptop-lid {
+  aspect-ratio: 16 / 10;
+  background: var(--ink-900);
+  border: 1px solid var(--ink-700);
+  border-radius: 14px 14px 3px 3px;
+  padding: clamp(7px, 1.4vw, 11px);
+  transform-origin: bottom center;
+  transform: rotateX(-78deg);
+  will-change: transform;
+  box-shadow: var(--shadow-lg);
+}
+
+.laptop-base {
+  width: 106%;
+  margin-inline-start: -3%;
+  height: clamp(9px, 1.8vw, 14px);
+  background: var(--ink-900);
+  border-radius: 2px 2px 12px 12px;
+}
+
+.laptop-screen {
+  height: 100%;
+  border-radius: 8px;
+  background: #0c0a07;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(9px, 1.9vw, 14px);
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+  padding: .7em 1em;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  color: rgba(255, 255, 255, .45);
+}
+
+.term-bar i {
+  width: .8em;
+  height: .8em;
+  border-radius: 50%;
+  background: var(--accent-coral);
+}
+
+.term-bar i:nth-child(2) {
+  background: var(--accent-amber);
+}
+
+.term-bar i:nth-child(3) {
+  background: var(--accent-green);
+}
+
+.term {
+  flex: 1;
+  margin: 0;
+  padding: 1.2em 1.4em;
+  font-family: var(--f-mono);
+  color: var(--surface-50);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.term .cmd {
+  color: var(--accent-green);
+}
+
+.term .cursor {
+  display: inline-block;
+  width: .55em;
+  height: 1.1em;
+  background: var(--accent-amber);
+  vertical-align: -.15em;
+  animation: term-pisca 1s steps(1) infinite;
+}
+
+@keyframes term-pisca {
+  50% { opacity: 0; }
+}
+
+.pin-hint {
+  color: var(--ink-500);
+  transition: opacity var(--dur-base) var(--ease-out-quart);
+}
+
+.pin-hint.some {
+  opacity: 0;
+}
