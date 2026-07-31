@@ -182,3 +182,65 @@ document.querySelectorAll('.lang-btn').forEach((btn) => {
     btn.classList.add('lang-active');
   });
 });
+
+/* ── 7. NOTEBOOK 3D + TERMINAL (abre com o scroll) ───────── */
+const LINHAS = [
+  { cmd: 'whoami', out: 'Vanessa Lima — front-end developer' },
+  { cmd: 'cat stack.txt', out: 'HTML · CSS · JavaScript · Python · SQL' },
+  { cmd: 'echo $BASE', out: 'Recife, BR ⟶ London, UK' },
+  { cmd: 'status', out: 'disponível para estágio ✦' },
+];
+
+const pin = document.getElementById('demo');
+if (pin) {
+  const lid = document.getElementById('lid');
+  const term = document.getElementById('term');
+  const hint = document.getElementById('pinHint');
+
+  const chars = [];
+  LINHAS.forEach((l) => {
+    [...('$ ' + l.cmd + '\n')].forEach((ch) => chars.push({ ch, cmd: true }));
+    [...(l.out + '\n')].forEach((ch) => chars.push({ ch, cmd: false }));
+  });
+
+  function renderTerm(qtd) {
+    let html = '';
+    let aberto = null;
+    for (let i = 0; i < qtd; i += 1) {
+      const c = chars[i];
+      if (c.cmd !== aberto) {
+        if (aberto !== null) html += '</span>';
+        html += c.cmd ? '<span class="cmd">' : '<span>';
+        aberto = c.cmd;
+      }
+      html += c.ch;
+    }
+    if (aberto !== null) html += '</span>';
+    term.innerHTML = html + '<span class="cursor"></span>';
+  }
+
+  let aguardando = false;
+  function atualizaPin() {
+    const r = pin.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
+    if (!reduz) {
+      lid.style.transform = `rotateX(${-78 + 78 * Math.min(1, p / 0.5)}deg)`;
+    }
+    const tp = reduz ? 1 : Math.min(1, Math.max(0, (p - 0.45) / 0.5));
+    renderTerm(Math.round(chars.length * tp));
+    hint.classList.toggle('some', p > 0.1);
+    aguardando = false;
+  }
+
+  addEventListener(
+    'scroll',
+    () => {
+      if (!aguardando) {
+        requestAnimationFrame(atualizaPin);
+        aguardando = true;
+      }
+    },
+    { passive: true }
+  );
+  atualizaPin();
+}
