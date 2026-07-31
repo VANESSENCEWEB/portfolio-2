@@ -51,6 +51,26 @@
   align-items: center;
 }
 
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .35rem .75rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(57, 255, 136, .35);
+  color: var(--accent-green);
+  background: rgba(57, 255, 136, .08);
+}
+
+.hero-status::before {
+  content: '';
+  width: .45rem;
+  height: .45rem;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 0 4px rgba(57, 255, 136, .15);
+}
+
 .hero-eyebrow .arrow {
   color: var(--accent-pink);
 }

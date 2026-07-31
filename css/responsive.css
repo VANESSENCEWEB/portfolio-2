@@ -47,6 +47,10 @@
     grid-template-columns: 1fr;
   }
 
+  .case-grid {
+    grid-template-columns: 1fr;
+  }
+
   .section {
     padding-block: var(--sp-6);
   }

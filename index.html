@@ -8,8 +8,8 @@
   -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vanessa Lima — Front-end Developer</title>
-  <meta name="description" content="Front-end developer em Recife. 87+ certificações. Fundadora da Vanessenceweb. HTML, CSS, JavaScript, Python e SQL." />
+  <title>Vanessa Lima — Front-end · Disponível para estágio</title>
+  <meta name="description" content="Front-end em formação na UNICAP (Recife). Disponível para estágio. Projetos reais em produção — Vanessenceweb." />
 
   <link rel="stylesheet" href="css/variables.css" />
   <link rel="stylesheet" href="css/base.css" />
@@ -34,12 +34,12 @@
     </a>
     <nav class="nav-links" aria-label="Navegação principal">
       <a href="#topo" aria-current="page">Home</a>
-      <a href="#sobre">Sobre Mim</a>
       <a href="#projetos">Projetos</a>
-      <a href="#skills">Skills</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#curriculo">Currículo</a>
     </nav>
     <div class="nav-right">
-      <a class="btn btn-solid btn-nav" href="#contato">Contato</a>
+      <a class="btn btn-solid btn-nav" href="#contato">Estágio</a>
       <div class="lang-toggle" role="group" aria-label="Idioma">
         <button class="lang-btn" type="button" data-lang="en">EN</button>
         <button class="lang-btn lang-active" type="button" data-lang="pt">PT</button>
@@ -56,9 +56,8 @@
       <div class="hero-grid">
         <div class="hero-copy">
           <p class="hero-eyebrow">
+            <span class="hero-status">Disponível para estágio</span>
             <span>LAT 8°03'S · RECIFE, BR</span>
-            <span class="arrow" aria-hidden="true">⟶</span>
-            <span>LON 0°07'W · LONDON, UK</span>
           </p>
 
           <h1 class="hero-title" aria-label="Vanessa Lima">
@@ -71,14 +70,14 @@
           </p>
 
           <p class="hero-sub">
-            Construo sites, interfaces e sistemas em <strong>HTML, CSS e JavaScript</strong>
-            — estudante de Sistemas para Internet na UNICAP e fundadora da
-            <strong>Vanessenceweb</strong>.
+            Front-end em formação na <strong>UNICAP</strong> (3º período).
+            Construo sites e sistemas em <strong>HTML, CSS e JavaScript</strong>
+            — com projetos reais em produção. Fundadora da <strong>Vanessenceweb</strong>.
           </p>
 
           <div class="hero-ctas">
-            <a class="hero-btn hero-btn-solid" href="#projetos">Ver projetos ↓</a>
-            <a class="hero-btn hero-btn-ghost" href="https://github.com/VANESSENCEWEB" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="hero-btn hero-btn-solid" href="mailto:vanessalimaunicap@gmail.com?subject=Est%C3%A1gio%20front-end%20%E2%80%94%20Vanessa%20Lima">Falar sobre estágio</a>
+            <a class="hero-btn hero-btn-ghost" href="#projetos">Ver projetos ↓</a>
           </div>
         </div>
 
@@ -126,26 +125,47 @@
     <section class="section" id="projetos">
       <div class="section-heading reveal">
         <p class="section-eyebrow">Work</p>
-        <h2 class="section-title">Projetos reais e no ar</h2>
+        <h2 class="section-title">Projetos que mostram o que eu sei fazer</h2>
+        <p class="section-desc">Case em destaque primeiro — o resto são projetos no ar com link.</p>
       </div>
 
       <div class="projects">
 
-        <div class="project project-destaque reveal">
+        <article class="project project-destaque case-study reveal">
           <div class="project-cover cover-b"><span>SISTEMA FLATS</span></div>
           <div class="project-info">
+            <p class="mono case-label">Case em destaque · negócio real</p>
             <h3>Recife Flats — Sistema de Hospedagem</h3>
-            <p>Sistema completo de gestão para apartamentos de temporada (negócio real, 4 unidades):
-               da landing page pública ao painel interno com autenticação e banco de dados no Supabase.</p>
+            <p class="case-lead">
+              Sistema completo de gestão para 4 apartamentos de temporada em Recife:
+              da landing pública ao painel interno com autenticação e banco no Supabase.
+            </p>
+
+            <div class="case-grid">
+              <div>
+                <p class="mono case-k">Problema</p>
+                <p>Operação manual de reservas, contratos e check-in — sem painel único.</p>
+              </div>
+              <div>
+                <p class="mono case-k">Meu papel</p>
+                <p>Produto + front-end + integração com Supabase, do zero à produção.</p>
+              </div>
+              <div>
+                <p class="mono case-k">Resultado</p>
+                <p>Sistema em uso real: auth, diárias, PDF, welcome book e relatórios.</p>
+              </div>
+            </div>
+
             <div class="feats">
               <span>autenticação</span><span>dashboard</span><span>cálculo de diárias</span>
-              <span>contratos em PDF</span><span>welcome book automático</span>
-              <span>check-in/check-out</span><span>relatórios</span>
+              <span>contratos em PDF</span><span>welcome book</span>
+              <span>check-in/out</span><span>relatórios</span>
             </div>
-            <p class="project-tags mono">JS · Supabase · GitHub Pages</p>
-            <p class="mono project-lock">🔒 sistema em produção — demonstração sob solicitação</p>
+            <p class="project-tags mono">JavaScript · Supabase · GitHub Pages</p>
+            <p class="mono project-lock">🔒 em produção — demo sob solicitação (dados sensíveis)</p>
+            <a class="btn btn-subtle btn-sm case-cta" href="mailto:vanessalimaunicap@gmail.com?subject=Demo%20Recife%20Flats">Pedir demonstração</a>
           </div>
-        </div>
+        </article>
 
         <a class="project reveal" href="https://nasa-explorer-nine-rho.vercel.app/" target="_blank" rel="noopener">
           <div class="project-cover cover-img">
@@ -204,31 +224,31 @@
       <div class="sobre-texto reveal">
         <div class="section-heading">
           <p class="section-eyebrow">About</p>
-          <h2 class="section-title">Building real things, end to end</h2>
+          <h2 class="section-title">Buscando estágio em front-end</h2>
         </div>
         <p>
-          Sou desenvolvedora front-end em formação, cursando Sistemas para
-          Internet na UNICAP (Recife/PE). Combino a faculdade com prática real:
-          projetos próprios e mais de 87 certificações em desenvolvimento e
-          design — DIO Campus Expert (Turma 15), Origamid (72h Front End &amp; UX/UI),
-          Rocketseat e UNICAP RiseUp.
+          Sou desenvolvedora front-end em formação, cursando
+          <strong>Sistemas para Internet na UNICAP</strong> (Recife/PE) — entrando no
+          <strong>3º período</strong>. Quero um estágio para aprender em time e
+          entregar produto de verdade.
         </p>
         <p>
-          Fundadora da <strong>Vanessenceweb</strong>, com foco em desenvolvimento
-          web moderno. Participei da Residência Tecnológica do Porto Digital
-          (RiseUp 2026.1), com projeto selecionado para apresentar no CoDay —
-          evento de encerramento do programa, no Porto Digital.
+          Já combino a faculdade com prática: projetos próprios, mais de 87
+          certificações (DIO Campus Expert, Origamid, Rocketseat, RiseUp) e a
+          <strong>Vanessenceweb</strong>. Participei da Residência Tecnológica do
+          Porto Digital (RiseUp 2026.1), com projeto selecionado para o CoDay.
         </p>
         <p>
-          Construí do zero um sistema completo de hospedagem com autenticação,
-          banco de dados, geração de documentos e relatórios — pra um negócio
-          real com 4 apartamentos em Recife. Também criei um painel conectado
-          às APIs da NASA com visualização 3D e uma API REST com 40 testes
-          automatizados e CI/CD.
+          Construí do zero um sistema de hospedagem em produção (auth, banco,
+          documentos e relatórios) e um painel NASA com Three.js — além de uma
+          API REST com 40 testes e CI/CD.
         </p>
-        <a class="badge badge-outline" href="https://find-and-update.company-information.service.gov.uk/company/16679666" target="_blank" rel="noopener">
-          ✓ UK Companies House #16679666
-        </a>
+        <div class="sobre-actions">
+          <a class="badge badge-outline" href="https://find-and-update.company-information.service.gov.uk/company/16679666" target="_blank" rel="noopener">
+            ✓ UK Companies House #16679666
+          </a>
+          <a class="badge badge-accent" href="#curriculo">Currículo ↓</a>
+        </div>
       </div>
     </section>
 
@@ -258,12 +278,39 @@
       </div>
     </section>
 
+    <!-- ══════════════ CURRÍCULO ══════════════ -->
+    <section class="section curriculo" id="curriculo">
+      <div class="curriculo-card reveal">
+        <div class="section-heading">
+          <p class="section-eyebrow">Resume</p>
+          <h2 class="section-title">Currículo em 1 página</h2>
+          <p class="section-desc">
+            Formação, stack e os projetos que mais importam para estágio —
+            sem enrolação.
+          </p>
+        </div>
+        <ul class="curriculo-points">
+          <li>UNICAP · Sistemas para Internet · 3º período</li>
+          <li>Disponível para estágio em front-end · Recife (presencial/híbrido)</li>
+          <li>Case: Recife Flats em produção · NASA Explorer · API REST com CI</li>
+        </ul>
+        <div class="curriculo-actions">
+          <a class="btn btn-solid" href="cv/vanessa-lima.pdf" download>Baixar PDF</a>
+          <a class="btn btn-ghost" href="mailto:vanessalimaunicap@gmail.com?subject=Pedido%20de%20curr%C3%ADculo%20%E2%80%94%20Vanessa%20Lima">Pedir por e-mail</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/vanessa-lima-dev" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+    </section>
+
     <!-- ══════════════ CONTATO ══════════════ -->
     <section class="section contato" id="contato">
       <h2 class="contato-title reveal">
         <span class="line">Bora</span>
-        <span class="line"><span class="contato-accent">trabalhar juntas?</span></span>
+        <span class="line"><span class="contato-accent">conversar sobre estágio?</span></span>
       </h2>
+      <p class="contato-sub reveal">
+        Recife · front-end · disponível para começar. Me chama no e-mail ou LinkedIn.
+      </p>
 
       <div class="social reveal">
         <a class="social-link" href="https://github.com/VANESSENCEWEB" target="_blank" rel="noopener" aria-label="GitHub">
@@ -272,7 +319,7 @@
         <a class="social-link" href="https://www.linkedin.com/in/vanessa-lima-dev" target="_blank" rel="noopener" aria-label="LinkedIn">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8.09h4.56V23H.22V8.09zM8.34 8.09h4.37v2.04h.06c.61-1.15 2.1-2.37 4.32-2.37 4.62 0 5.47 3.04 5.47 7v8.24h-4.55v-7.3c0-1.74-.03-3.99-2.43-3.99-2.44 0-2.81 1.9-2.81 3.86V23H8.34V8.09z"/></svg>
         </a>
-        <a class="social-link" href="mailto:vanessalimaunicap@gmail.com" aria-label="Email">
+        <a class="social-link" href="mailto:vanessalimaunicap@gmail.com?subject=Est%C3%A1gio%20front-end%20%E2%80%94%20Vanessa%20Lima" aria-label="Email">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7L22 7"/></svg>
         </a>
       </div>

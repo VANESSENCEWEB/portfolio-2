@@ -35,7 +35,44 @@
 }
 
 .project-destaque .project-info {
-  max-width: 46rem;
+  max-width: 52rem;
+}
+
+.case-label {
+  color: var(--accent-blue);
+  margin-bottom: .25rem;
+}
+
+.case-lead {
+  font: var(--text-body-md) !important;
+  color: var(--ink-700) !important;
+  max-width: 40rem;
+}
+
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: .75rem 0 .25rem;
+  padding: 1.25rem 0;
+  border-block: 1px solid var(--border-subtle);
+}
+
+.case-k {
+  color: var(--accent-blue);
+  margin-bottom: .4rem;
+}
+
+.case-grid p:not(.case-k) {
+  font: var(--text-body-sm);
+  color: var(--ink-700);
+  margin: 0;
+}
+
+.case-cta {
+  justify-self: start;
+  margin-top: .75rem;
+  width: fit-content;
 }
 
 .feats {
