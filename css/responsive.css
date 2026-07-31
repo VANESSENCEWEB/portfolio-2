@@ -77,6 +77,14 @@
     animation: none;
   }
 
+  .laptop-lid {
+    transform: rotateX(0deg);
+  }
+
+  .term .cursor {
+    animation: none;
+  }
+
   .reveal {
     opacity: 1;
     transform: none;

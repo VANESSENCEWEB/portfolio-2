@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/header.css" />
   <link rel="stylesheet" href="css/hero.css" />
   <link rel="stylesheet" href="css/projects.css" />
+  <link rel="stylesheet" href="css/notebook.css" />
   <link rel="stylesheet" href="css/sections.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 
@@ -104,6 +105,26 @@
         <span>GSAP</span><i>✦</i><span>THREE.JS</span><i>✦</i>
       </div>
     </div>
+
+    <!-- ══════════════ NOTEBOOK QUE ABRE COM O SCROLL ══════════════
+         Seção alta (220vh) + palco sticky; o JS mapeia o scroll 0→1. -->
+    <section class="pin" id="demo" aria-label="Notebook interativo">
+      <div class="pin-stage">
+        <div class="laptop">
+          <div class="laptop-lid" id="lid">
+            <div class="laptop-screen">
+              <div class="term-bar">
+                <i></i><i></i><i></i>
+                <span class="mono">vanessa@recife — zsh</span>
+              </div>
+              <pre class="term" id="term"></pre>
+            </div>
+          </div>
+          <div class="laptop-base"></div>
+        </div>
+        <p class="pin-hint mono" id="pinHint">continua rolando…</p>
+      </div>
+    </section>
 
     <!-- ══════════════ STATS ══════════════ -->
     <section class="stats reveal" aria-label="Números">
