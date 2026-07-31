@@ -1,72 +1,172 @@
 /* ═══════════════════════════════════════════════════════════
-   BASE — reset, body, utilitários globais, botões, reveal
+   BASE — reset, body, buttons, section headings, reveal
    ═══════════════════════════════════════════════════════════ */
 
-/* ── Reset ────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 html { scroll-behavior: smooth; }
+
 body {
   font-family: var(--f-body);
-  background: var(--papel);
-  color: var(--tinta);
+  background: var(--surface-page);
+  color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
+
 img { max-width: 100%; display: block; }
-a { color: inherit; }
+a { color: inherit; text-decoration: none; }
 
-/* ── Utilitários ──────────────────────────────────────────── */
-.mono { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
-:focus-visible { outline: 3px solid var(--laranja); outline-offset: 3px; }
+.mono {
+  font-family: var(--f-mono);
+  font-size: .72rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
 
-/* ── Stickers (pílulas rotacionadas) ──────────────────────── */
-.sticker {
+:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 3px;
+}
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .8rem 1.6rem;
+  font-family: var(--f-body);
+  font-weight: 600;
+  font-size: .9rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  overflow: hidden;
+  transition:
+    transform var(--dur-base) var(--ease-out-quart),
+    box-shadow var(--dur-base) var(--ease-out-quart),
+    border-color var(--dur-base),
+    color var(--dur-base),
+    background var(--dur-base);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-solid {
+  background: var(--ink-900);
+  color: var(--surface-0);
+}
+
+.btn-gradient {
+  background-image: var(--gradient-aurora);
+  color: #fff;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-900);
+  border-color: var(--border-subtle);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--ink-900);
+  color: var(--surface-0);
+  border-color: var(--ink-900);
+}
+
+.btn-subtle {
+  background: var(--surface-100);
+  color: var(--ink-900);
+}
+
+.btn-sm { padding: .5rem 1rem; font-size: .8rem; }
+.btn-lg { padding: 1rem 2rem; font-size: 1rem; }
+
+/* ── Section primitives ───────────────────────────────────── */
+.section {
+  padding: var(--sp-7) 5vw;
+}
+
+.section-heading {
+  display: grid;
+  gap: .75rem;
+  max-width: 40rem;
+  margin-bottom: var(--sp-5);
+}
+
+.section-eyebrow {
+  font-family: var(--f-mono);
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--accent-blue);
+}
+
+.section-title {
+  font: var(--text-display-lg);
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink-900);
+  text-wrap: balance;
+}
+
+.section-desc {
+  font: var(--text-body-md);
+  color: var(--text-secondary);
+}
+
+/* ── Badge ────────────────────────────────────────────────── */
+.badge {
   display: inline-block;
   font-family: var(--f-mono);
-  font-size: clamp(.7rem, 1.6vw, 1.1rem);
-  letter-spacing: .05em;
-  padding: .35em .9em;
-  border: 2px solid var(--tinta);
-  border-radius: 999px;
-  transform: rotate(-6deg) translateY(-1.2em);
-  vertical-align: middle;
-  white-space: nowrap;
-}
-.sticker-amarelo { background: var(--amarelo); }
-.sticker-laranja { background: var(--laranja); color: var(--papel); border-color: var(--laranja); }
-
-/* ── Botões ───────────────────────────────────────────────── */
-.btn {
-  display: inline-block;
-  padding: .7rem 1.5rem;
-  font-weight: 700; font-size: .85rem;
-  text-decoration: none;
-  border: 2px solid var(--tinta);
-  transition: transform .15s, box-shadow .15s;
-}
-.btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--tinta); }
-.btn-solid { background: var(--tinta); color: var(--papel); position: relative; overflow: hidden; }
-.btn-ghost { background: transparent; color: var(--tinta); }
-
-/* Shimmer nos botões sólidos */
-.btn-solid::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
-  transform: translateX(-100%) skewX(-15deg);
-}
-.btn-solid:hover::after { animation: shimmer .7s ease; }
-@keyframes shimmer { to { transform: translateX(200%) skewX(-15deg); } }
-
-/* ── Seções (padrão compartilhado) ────────────────────────── */
-.section { padding: var(--sp-5) 5vw; }
-.section-title {
-  font-family: var(--f-display);
-  font-size: clamp(2rem, 6vw, 4rem);
+  font-size: .7rem;
+  letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  margin-bottom: var(--sp-4);
+  padding: .3rem .8rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
 }
 
-/* ── Reveal ao rolar ──────────────────────────────────────── */
-.reveal { opacity: 0; transform: translateY(24px); filter: blur(8px); transition: opacity .6s, transform .6s, filter .6s; }
-.reveal.visivel { opacity: 1; transform: translateY(0); filter: blur(0); }
+.badge-neutral {
+  background: var(--surface-100);
+  color: var(--ink-700);
+}
+
+.badge-accent {
+  background: var(--accent-blue);
+  color: #fff;
+}
+
+.badge-outline {
+  background: transparent;
+  color: var(--ink-700);
+  border: 1px solid var(--border-subtle);
+  transition: border-color var(--dur-base), background var(--dur-base);
+}
+
+.badge-outline:hover {
+  border-color: var(--accent-blue);
+  background: var(--surface-50);
+}
+
+/* ── Reveal ───────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(6px);
+  transition:
+    opacity var(--dur-reveal) var(--ease-out-quart),
+    transform var(--dur-reveal) var(--ease-out-quart),
+    filter var(--dur-reveal) var(--ease-out-quart);
+}
+
+.reveal.visivel {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
