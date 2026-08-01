@@ -50,44 +50,44 @@
 
   <main id="topo">
 
-    <!-- ══════════════ HERO ══════════════ -->
-    <section class="hero" aria-label="Introdução">
-      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <!-- ══════════════ HERO + NOTEBOOK 3D ══════════════ -->
+    <section class="hero hero-pin" id="demo" aria-label="Introdução">
+      <div class="hero-pin-stage">
+        <canvas class="hero-canvas" aria-hidden="true"></canvas>
 
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="hero-eyebrow">
-            <span class="hero-status">Disponível para estágio</span>
-            <span>LAT 8°03'S · RECIFE, BR</span>
-          </p>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="hero-eyebrow">
+              <span class="hero-status">Disponível para estágio</span>
+              <span>LAT 8°03'S · RECIFE, BR</span>
+            </p>
 
-          <h1 class="hero-title" aria-label="Vanessa Lima">
-            <span class="line"><span class="reveal-line">Vanessa</span></span>
-            <span class="line"><span class="reveal-line">Lima</span></span>
-          </h1>
+            <h1 class="hero-title" aria-label="Vanessa Lima">
+              <span class="line"><span class="reveal-line">Vanessa</span></span>
+              <span class="line"><span class="reveal-line">Lima</span></span>
+            </h1>
 
-          <p class="hero-typed-wrap">
-            &gt; <span class="hero-typed" aria-live="polite"></span><span class="hero-cursor" aria-hidden="true"></span>
-          </p>
+            <p class="hero-typed-wrap">
+              &gt; <span class="hero-typed" aria-live="polite"></span><span class="hero-cursor" aria-hidden="true"></span>
+            </p>
 
-          <p class="hero-sub">
-            Front-end em formação na <strong>UNICAP</strong> (3º período).
-            Construo sites e sistemas em <strong>HTML, CSS e JavaScript</strong>
-            — com projetos reais em produção. Fundadora da <strong>Vanessenceweb</strong>.
-          </p>
+            <p class="hero-sub">
+              Front-end em formação na <strong>UNICAP</strong> (3º período).
+              Construo sites e sistemas em <strong>HTML, CSS e JavaScript</strong>
+              — com projetos reais em produção. Fundadora da <strong>Vanessenceweb</strong>.
+            </p>
 
-          <div class="hero-ctas">
-            <a class="hero-btn hero-btn-solid" href="mailto:vanessalimaunicap@gmail.com?subject=Est%C3%A1gio%20front-end%20%E2%80%94%20Vanessa%20Lima">Falar sobre estágio</a>
-            <a class="hero-btn hero-btn-ghost" href="#projetos">Ver projetos ↓</a>
+            <div class="hero-ctas">
+              <a class="hero-btn hero-btn-solid" href="mailto:vanessalimaunicap@gmail.com?subject=Est%C3%A1gio%20front-end%20%E2%80%94%20Vanessa%20Lima">Falar sobre estágio</a>
+              <a class="hero-btn hero-btn-ghost" href="#projetos">Ver projetos ↓</a>
+            </div>
           </div>
-        </div>
 
-        <div class="hero-photo">
-          <div class="hero-photo-glow" aria-hidden="true"></div>
-          <div class="hero-photo-inner">
-            <img src="img/vanessa.jpg" alt="Foto de Vanessa Lima" onerror="this.parentElement.classList.add('sem-foto'); this.remove()" />
+          <div class="hero-notebook" aria-label="Notebook interativo em 3D">
+            <div class="notebook-glow" aria-hidden="true"></div>
+            <canvas id="notebook-canvas" aria-hidden="true"></canvas>
+            <p class="pin-hint mono" id="pinHint">scroll to open</p>
           </div>
-          <span class="hero-photo-badge">recife, pe</span>
         </div>
       </div>
     </section>
@@ -105,15 +105,6 @@
         <span>GSAP</span><i>✦</i><span>THREE.JS</span><i>✦</i>
       </div>
     </div>
-
-    <!-- ══════════════ NOTEBOOK 3D (Three.js + GSAP) ══════════════ -->
-    <section class="pin" id="demo" aria-label="Notebook interativo em 3D">
-      <div class="pin-stage">
-        <div class="notebook-glow" aria-hidden="true"></div>
-        <canvas id="notebook-canvas" aria-hidden="true"></canvas>
-        <p class="pin-hint mono" id="pinHint">scroll to open</p>
-      </div>
-    </section>
 
     <!-- ══════════════ STATS ══════════════ -->
     <section class="stats reveal" aria-label="Números">

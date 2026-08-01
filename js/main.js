@@ -49,9 +49,9 @@ function runHeroIntro() {
     { opacity: 1, y: 0, duration: 0.8, delay: 0.5, ease: 'power2.out' }
   );
   window.gsap.fromTo(
-    '.hero-photo',
-    { opacity: 0, scale: 0.92 },
-    { opacity: 1, scale: 1, duration: 1, delay: 0.3, ease: 'power3.out' }
+    '.hero-notebook',
+    { opacity: 0, scale: 0.94 },
+    { opacity: 1, scale: 1, duration: 1, delay: 0.25, ease: 'power3.out' }
   );
 }
 
@@ -156,24 +156,7 @@ if (canvas && hero && !reduz) {
   heroObserver.observe(hero);
 }
 
-/* ── 5. HERO PHOTO PARALLAX ──────────────────────────────── */
-const photo = document.querySelector('.hero-photo');
-if (hero && photo && !reduz && !matchMedia('(pointer: coarse)').matches) {
-  hero.addEventListener(
-    'mousemove',
-    (e) => {
-      const r = hero.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width - 0.5;
-      const py = (e.clientY - r.top) / r.height - 0.5;
-      photo.style.transform =
-        `perspective(800px) rotateY(${px * 10}deg) rotateX(${-py * 10}deg) translate(${px * 14}px, ${py * 14}px)`;
-    },
-    { passive: true }
-  );
-  hero.addEventListener('mouseleave', () => {
-    photo.style.transform = '';
-  });
-}
+/* ── 5. (photo parallax removed — notebook lives in hero now) ─ */
 
 /* ── 6. LANG TOGGLE (visual state only — content is pt-BR) ─ */
 document.querySelectorAll('.lang-btn').forEach((btn) => {

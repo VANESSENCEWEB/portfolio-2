@@ -161,9 +161,10 @@ function initNotebook() {
   renderer.toneMappingExposure = 1.15;
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 50);
-  camera.position.set(0.15, 1.55, 5.2);
-  camera.lookAt(0, 0.35, 0);
+  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 50);
+  // Framed so closed + open lid stay fully visible in the canvas
+  camera.position.set(1.35, 2.65, 6.4);
+  camera.lookAt(0, 0.55, 0);
 
   // Lights — neon pink/cyan
   scene.add(new THREE.AmbientLight(0xffffff, 0.55));
@@ -227,7 +228,8 @@ function initNotebook() {
   lidPivot.position.set(0, T, -D / 2 + 0.02);
   laptop.add(lidPivot);
 
-  const lid = new THREE.Mesh(new RoundedBoxGeometry(W, T * 0.9, D, 4, 0.06), bodyMat.clone());
+  const lidMat = bodyMat.clone();
+  const lid = new THREE.Mesh(new RoundedBoxGeometry(W, T * 0.9, D, 4, 0.06), lidMat);
   // lid mesh centered so bottom edge sits on hinge: move forward by D/2
   lid.position.set(0, 0, D / 2);
   lidPivot.add(lid);
@@ -262,10 +264,11 @@ function initNotebook() {
   const OPEN = -Math.PI * 0.58; // ~104°
   lidPivot.rotation.x = reduz ? OPEN : CLOSED;
 
-  // Slight presentational tilt of whole laptop
-  laptop.rotation.y = -0.28;
-  laptop.rotation.x = 0.18;
-  laptop.position.y = 0.05;
+  // Presentational framing — scaled so open lid fits the canvas
+  laptop.rotation.y = -0.42;
+  laptop.rotation.x = 0.22;
+  laptop.position.set(0.05, -0.15, 0);
+  laptop.scale.setScalar(0.92);
 
   // State driven by scroll
   const state = { open: reduz ? 1 : 0, type: reduz ? 1 : 0, neon: 0.2 };
@@ -275,6 +278,7 @@ function initNotebook() {
     hingeGlow.intensity = 0.15 + state.open * 3.2;
     rim.intensity = 1.2 + state.open * 2.4;
     bodyMat.emissiveIntensity = 0.06 + state.open * 0.18;
+    lidMat.emissiveIntensity = bodyMat.emissiveIntensity;
     // Swap screen material when mostly open
     if (state.open > 0.35) {
       if (screen.material !== screenMat) screen.material = screenMat;
@@ -317,20 +321,52 @@ function initNotebook() {
       onProgress(1);
       return;
     }
+
+    const compact = matchMedia('(max-width: 900px)').matches;
+
+    // Mobile / short screens: play open when hero is in view (no tall pin)
+    if (compact) {
+      const play = () => {
+        if (!window.gsap) {
+          onProgress(1);
+          return;
+        }
+        const proxy = { p: 0 };
+        window.gsap.to(proxy, {
+          p: 1,
+          duration: 2.4,
+          ease: 'power2.inOut',
+          onUpdate: () => onProgress(proxy.p),
+        });
+      };
+      const once = new IntersectionObserver(
+        ([e]) => {
+          if (e.isIntersecting) {
+            play();
+            once.disconnect();
+          }
+        },
+        { threshold: 0.35 }
+      );
+      once.observe(section);
+      return;
+    }
+
     if (window.gsap && window.ScrollTrigger) {
       window.gsap.registerPlugin(window.ScrollTrigger);
       window.ScrollTrigger.create({
         trigger: section,
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 0.45,
+        scrub: 0.55,
         onUpdate: (self) => onProgress(self.progress),
       });
     } else {
       let ticking = false;
       const update = () => {
         const r = section.getBoundingClientRect();
-        const p = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
+        const span = Math.max(r.height - innerHeight, 1);
+        const p = Math.min(1, Math.max(0, -r.top / span));
         onProgress(p);
         ticking = false;
       };
@@ -373,7 +409,7 @@ function initNotebook() {
     raf = requestAnimationFrame(frame);
     const t = (now - t0) / 1000;
     // gentle float + neon pulse
-    laptop.position.y = 0.05 + Math.sin(t * 0.7) * 0.03;
+    laptop.position.y = -0.15 + Math.sin(t * 0.7) * 0.025;
     rim.intensity = 1.2 + state.open * 2.4 + Math.sin(t * 2.2) * 0.25;
     renderer.render(scene, camera);
   }

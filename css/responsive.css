@@ -3,13 +3,30 @@
    ═══════════════════════════════════════════════════════════ */
 
 @media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
+  .hero {
+    height: auto;
+    min-height: 0;
   }
 
-  .hero-photo {
-    max-width: 280px;
-    margin-inline: auto;
+  .hero-pin-stage {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+    padding-block: var(--sp-4);
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .hero-notebook {
+    order: -1;
+    min-height: 280px;
+  }
+
+  #notebook-canvas {
+    height: min(360px, 48vh);
   }
 
   .hero-title {
@@ -55,16 +72,26 @@
     padding-block: var(--sp-6);
   }
 
-  .hero {
-    padding-block: var(--sp-4);
+  .hero-copy {
+    gap: 1.25rem;
   }
 
-  .hero-copy {
-    gap: 1.5rem;
+  .pin-hint {
+    display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero {
+    height: auto;
+  }
+
+  .hero-pin-stage {
+    position: relative;
+    height: auto;
+    min-height: calc(100vh - 78px);
+  }
+
   .hero-title .reveal-line {
     transform: none;
   }
@@ -81,10 +108,6 @@
     opacity: 1;
     transform: none;
     filter: none;
-    transition: none;
-  }
-
-  .hero-photo {
     transition: none;
   }
 
