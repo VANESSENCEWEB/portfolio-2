@@ -224,7 +224,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  height: min(520px, 70vh);
+  height: min(560px, 74vh);
   display: block;
 }
 

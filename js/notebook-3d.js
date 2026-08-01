@@ -31,7 +31,7 @@ function initNotebook() {
   const screenTexture = new THREE.CanvasTexture(screenCanvas);
   screenTexture.colorSpace = THREE.SRGBColorSpace;
   let typed = '';
-  const TYPE_TEXT = 'Vanessenceweb';
+  const TYPE_TEXT = 'do zero à produção';
   let blink = true;
 
   function paintScreen(progress) {
@@ -56,24 +56,25 @@ function initNotebook() {
     sctx.fill();
     sctx.fillStyle = '#8a8a96';
     sctx.font = '500 18px Inter, system-ui, sans-serif';
-    sctx.fillText('vanessenceweb.com', 160, 42);
+    sctx.fillText('portfolio', 160, 42);
 
-    // Typed brand
+    // Typed line — motto (not the brand name)
     const chars = Math.floor(TYPE_TEXT.length * progress);
     typed = TYPE_TEXT.slice(0, chars);
     sctx.fillStyle = '#0a0a0b';
-    sctx.font = '700 92px "Space Grotesk", Inter, sans-serif';
+    sctx.font = '700 68px "Space Grotesk", Inter, sans-serif';
     sctx.textAlign = 'center';
     sctx.textBaseline = 'middle';
-    const label = typed + (blink && progress > 0 && progress < 1 ? '|' : progress >= 1 && blink ? '|' : '');
-    sctx.fillText(label || (progress <= 0 ? '' : '|'), w / 2, h * 0.58);
+    const showCursor = blink && progress > 0;
+    const label = typed + (showCursor ? '|' : '');
+    sctx.fillText(label || (progress <= 0 ? '' : '|'), w / 2, h * 0.55);
 
-    // Subtitle fades in late
+    // Supporting line fades in late
     if (progress > 0.85) {
       sctx.globalAlpha = Math.min(1, (progress - 0.85) / 0.15);
       sctx.fillStyle = '#6e6e76';
-      sctx.font = '500 28px Inter, system-ui, sans-serif';
-      sctx.fillText('front-end · disponível para estágio', w / 2, h * 0.72);
+      sctx.font = '500 26px Inter, system-ui, sans-serif';
+      sctx.fillText('projetos reais · Recife', w / 2, h * 0.7);
       sctx.globalAlpha = 1;
     }
 
@@ -161,10 +162,10 @@ function initNotebook() {
   renderer.toneMappingExposure = 1.15;
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 50);
-  // Framed so closed + open lid stay fully visible in the canvas
-  camera.position.set(1.35, 2.65, 6.4);
-  camera.lookAt(0, 0.55, 0);
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 50);
+  // Pulled back + slightly higher so open lid tips stay inside the frame
+  camera.position.set(1.55, 3.05, 7.35);
+  camera.lookAt(0, 0.45, 0);
 
   // Lights — neon pink/cyan
   scene.add(new THREE.AmbientLight(0xffffff, 0.55));
@@ -264,11 +265,11 @@ function initNotebook() {
   const OPEN = -Math.PI * 0.58; // ~104°
   lidPivot.rotation.x = reduz ? OPEN : CLOSED;
 
-  // Presentational framing — scaled so open lid fits the canvas
-  laptop.rotation.y = -0.42;
-  laptop.rotation.x = 0.22;
-  laptop.position.set(0.05, -0.15, 0);
-  laptop.scale.setScalar(0.92);
+  // Presentational framing — smaller so corners never clip
+  laptop.rotation.y = -0.38;
+  laptop.rotation.x = 0.18;
+  laptop.position.set(0.05, -0.28, 0);
+  laptop.scale.setScalar(0.82);
 
   // State driven by scroll
   const state = { open: reduz ? 1 : 0, type: reduz ? 1 : 0, neon: 0.2 };
@@ -409,7 +410,7 @@ function initNotebook() {
     raf = requestAnimationFrame(frame);
     const t = (now - t0) / 1000;
     // gentle float + neon pulse
-    laptop.position.y = -0.15 + Math.sin(t * 0.7) * 0.025;
+    laptop.position.y = -0.28 + Math.sin(t * 0.7) * 0.02;
     rim.intensity = 1.2 + state.open * 2.4 + Math.sin(t * 2.2) * 0.25;
     renderer.render(scene, camera);
   }
