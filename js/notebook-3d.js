@@ -310,9 +310,10 @@ function initNotebook() {
 
   // —— Scroll progress (GSAP ScrollTrigger if available, else manual) ——
   function onProgress(p) {
-    // 0→0.55 open, 0.4→1 type
+    // Finish open + type early so the page doesn't feel "stuck"
+    // 0→0.55 scroll progress = fully open, 0.2→0.75 = typing
     state.open = Math.min(1, Math.max(0, p / 0.55));
-    state.type = Math.min(1, Math.max(0, (p - 0.4) / 0.55));
+    state.type = Math.min(1, Math.max(0, (p - 0.2) / 0.55));
     state.neon = state.open;
     applyState();
   }
@@ -335,8 +336,8 @@ function initNotebook() {
         const proxy = { p: 0 };
         window.gsap.to(proxy, {
           p: 1,
-          duration: 2.4,
-          ease: 'power2.inOut',
+          duration: 1.6,
+          ease: 'power2.out',
           onUpdate: () => onProgress(proxy.p),
         });
       };
@@ -358,8 +359,8 @@ function initNotebook() {
       window.ScrollTrigger.create({
         trigger: section,
         start: 'top top',
-        end: 'bottom bottom',
-        scrub: 0.55,
+        end: 'bottom top+=35%',
+        scrub: 0.2,
         onUpdate: (self) => onProgress(self.progress),
       });
     } else {

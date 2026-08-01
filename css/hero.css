@@ -4,8 +4,8 @@
 
 .hero {
   position: relative;
-  /* Tall scroll runway — sticky stage keeps copy + notebook in view */
-  height: 220vh;
+  /* Short runway: open finishes quick, then page continues */
+  height: 145vh;
   padding: 0;
   overflow: visible;
   background: var(--ink-900);
@@ -201,7 +201,7 @@
 .hero-notebook {
   position: relative;
   width: 100%;
-  min-height: min(520px, 70vh);
+  min-height: min(560px, 74vh);
   display: grid;
   place-items: center;
 }
