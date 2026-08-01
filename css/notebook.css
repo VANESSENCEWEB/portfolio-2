@@ -1,11 +1,14 @@
 /* ═══════════════════════════════════════════════════════════
-   NOTEBOOK 3D — abre com o scroll + terminal digita
+   NOTEBOOK 3D — sticky stage + neon glow for Three.js canvas
    ═══════════════════════════════════════════════════════════ */
 
 .pin {
-  height: 220vh;
+  height: 240vh;
   position: relative;
-  background: var(--surface-50);
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 45%, rgba(255, 46, 166, 0.08), transparent 60%),
+    radial-gradient(ellipse 70% 45% at 60% 55%, rgba(92, 225, 255, 0.07), transparent 55%),
+    var(--surface-0);
   border-block: 1px solid var(--border-subtle);
 }
 
@@ -13,102 +16,40 @@
   position: sticky;
   top: 0;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--sp-3);
+  display: grid;
+  place-items: center;
   overflow: hidden;
 }
 
-.laptop {
-  width: min(600px, 88vw);
-  perspective: 1300px;
-}
-
-.laptop-lid {
-  aspect-ratio: 16 / 10;
-  background: var(--ink-900);
-  border: 1px solid var(--ink-700);
-  border-radius: 14px 14px 3px 3px;
-  padding: clamp(7px, 1.4vw, 11px);
-  transform-origin: bottom center;
-  transform: rotateX(-78deg);
-  will-change: transform;
-  box-shadow: var(--shadow-lg);
-}
-
-.laptop-base {
-  width: 106%;
-  margin-inline-start: -3%;
-  height: clamp(9px, 1.8vw, 14px);
-  background: var(--ink-900);
-  border-radius: 2px 2px 12px 12px;
-}
-
-.laptop-screen {
-  height: 100%;
-  border-radius: 8px;
-  background: #0c0a07;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  font-size: clamp(9px, 1.9vw, 14px);
-}
-
-.term-bar {
-  display: flex;
-  align-items: center;
-  gap: .5em;
-  padding: .7em 1em;
-  border-bottom: 1px solid rgba(255, 255, 255, .1);
-  color: rgba(255, 255, 255, .45);
-}
-
-.term-bar i {
-  width: .8em;
-  height: .8em;
+.notebook-glow {
+  position: absolute;
+  width: min(720px, 90vw);
+  height: min(420px, 55vh);
   border-radius: 50%;
-  background: var(--accent-coral);
+  background:
+    radial-gradient(circle, rgba(255, 46, 166, 0.45) 0%, rgba(155, 107, 255, 0.25) 40%, transparent 70%);
+  filter: blur(40px);
+  opacity: 0.3;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 0;
 }
 
-.term-bar i:nth-child(2) {
-  background: var(--accent-amber);
-}
-
-.term-bar i:nth-child(3) {
-  background: var(--accent-green);
-}
-
-.term {
-  flex: 1;
-  margin: 0;
-  padding: 1.2em 1.4em;
-  font-family: var(--f-mono);
-  color: var(--surface-50);
-  line-height: 1.8;
-  white-space: pre-wrap;
-}
-
-.term .cmd {
-  color: var(--accent-green);
-}
-
-.term .cursor {
-  display: inline-block;
-  width: .55em;
-  height: 1.1em;
-  background: var(--accent-amber);
-  vertical-align: -.15em;
-  animation: term-pisca 1s steps(1) infinite;
-}
-
-@keyframes term-pisca {
-  50% { opacity: 0; }
+#notebook-canvas {
+  position: relative;
+  z-index: 1;
+  width: min(920px, 96vw);
+  height: min(620px, 78vh);
+  display: block;
 }
 
 .pin-hint {
+  position: absolute;
+  bottom: 8vh;
+  z-index: 2;
   color: var(--ink-500);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
   transition: opacity var(--dur-base) var(--ease-out-quart);
 }
 

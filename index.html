@@ -106,23 +106,12 @@
       </div>
     </div>
 
-    <!-- ══════════════ NOTEBOOK QUE ABRE COM O SCROLL ══════════════
-         Seção alta (220vh) + palco sticky; o JS mapeia o scroll 0→1. -->
-    <section class="pin" id="demo" aria-label="Notebook interativo">
+    <!-- ══════════════ NOTEBOOK 3D (Three.js + GSAP) ══════════════ -->
+    <section class="pin" id="demo" aria-label="Notebook interativo em 3D">
       <div class="pin-stage">
-        <div class="laptop">
-          <div class="laptop-lid" id="lid">
-            <div class="laptop-screen">
-              <div class="term-bar">
-                <i></i><i></i><i></i>
-                <span class="mono">vanessa@recife — zsh</span>
-              </div>
-              <pre class="term" id="term"></pre>
-            </div>
-          </div>
-          <div class="laptop-base"></div>
-        </div>
-        <p class="pin-hint mono" id="pinHint">continua rolando…</p>
+        <div class="notebook-glow" aria-hidden="true"></div>
+        <canvas id="notebook-canvas" aria-hidden="true"></canvas>
+        <p class="pin-hint mono" id="pinHint">scroll to open</p>
       </div>
     </section>
 
@@ -352,7 +341,17 @@
     <span>8°03'S ⟶ 51°30'N</span>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="js/notebook-3d.js"></script>
   <script src="js/main.js" defer></script>
 </body>
 </html>
