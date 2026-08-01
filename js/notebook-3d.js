@@ -310,10 +310,12 @@ function initNotebook() {
 
   // —— Scroll progress (GSAP ScrollTrigger if available, else manual) ——
   function onProgress(p) {
-    // Finish open + type early so the page doesn't feel "stuck"
-    // 0→0.55 scroll progress = fully open, 0.2→0.75 = typing
-    state.open = Math.min(1, Math.max(0, p / 0.55));
-    state.type = Math.min(1, Math.max(0, (p - 0.2) / 0.55));
+    // Slow curve: stay closed a beat, open through mid-scroll, type near the end
+    // 0→0.12 hold closed, 0.12→0.72 open, 0.45→0.95 type
+    const openP = Math.min(1, Math.max(0, (p - 0.12) / 0.6));
+    const typeP = Math.min(1, Math.max(0, (p - 0.45) / 0.5));
+    state.open = openP;
+    state.type = typeP;
     state.neon = state.open;
     applyState();
   }
@@ -326,7 +328,7 @@ function initNotebook() {
 
     const compact = matchMedia('(max-width: 900px)').matches;
 
-    // Mobile / short screens: play open when hero is in view (no tall pin)
+    // Mobile: slower staged play so the open is visible
     if (compact) {
       const play = () => {
         if (!window.gsap) {
@@ -336,8 +338,8 @@ function initNotebook() {
         const proxy = { p: 0 };
         window.gsap.to(proxy, {
           p: 1,
-          duration: 1.6,
-          ease: 'power2.out',
+          duration: 3.2,
+          ease: 'power1.inOut',
           onUpdate: () => onProgress(proxy.p),
         });
       };
@@ -359,8 +361,8 @@ function initNotebook() {
       window.ScrollTrigger.create({
         trigger: section,
         start: 'top top',
-        end: 'bottom top+=35%',
-        scrub: 0.2,
+        end: 'bottom bottom',
+        scrub: 0.85,
         onUpdate: (self) => onProgress(self.progress),
       });
     } else {
