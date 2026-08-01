@@ -274,8 +274,37 @@
   font-style: normal;
 }
 
+.marquee-status {
+  background: var(--ink-900);
+  color: #fff;
+  border-block: none;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.marquee-status .marquee-track {
+  animation-duration: 32s;
+  font-size: clamp(.85rem, 2vw, 1.15rem);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  font-family: var(--f-mono);
+  font-weight: 500;
+}
+
+.marquee-status .marquee-track i {
+  color: var(--accent-green);
+}
+
+.marquee-track-reverse {
+  animation-name: desliza-reverse;
+}
+
 @keyframes desliza {
   to { transform: translateX(-50%); }
+}
+
+@keyframes desliza-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
 }
 
 /* ── Stats ────────────────────────────────────────────────── */

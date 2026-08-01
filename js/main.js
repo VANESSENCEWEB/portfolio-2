@@ -165,3 +165,112 @@ document.querySelectorAll('.lang-btn').forEach((btn) => {
     btn.classList.add('lang-active');
   });
 });
+
+/* ── 7. SPLIT TITLES (agency-style word reveal) ───────────── */
+function splitTitleWords(el) {
+  if (el.dataset.split === '1') return;
+  const text = el.textContent.trim();
+  const words = text.split(/\s+/);
+  el.setAttribute('aria-label', text);
+  el.textContent = '';
+  words.forEach((word) => {
+    const wrap = document.createElement('span');
+    wrap.className = 'split-word';
+    wrap.setAttribute('aria-hidden', 'true');
+    const inner = document.createElement('span');
+    inner.textContent = word;
+    wrap.appendChild(inner);
+    el.appendChild(wrap);
+  });
+  el.dataset.split = '1';
+}
+
+function runSplitTitles() {
+  const titles = document.querySelectorAll('.js-split');
+  if (!titles.length) return;
+
+  titles.forEach(splitTitleWords);
+
+  if (reduz) {
+    titles.forEach((el) => {
+      el.querySelectorAll('.split-word > span').forEach((s) => {
+        s.style.transform = 'none';
+      });
+    });
+    return;
+  }
+
+  const animate = (el) => {
+    const inners = el.querySelectorAll('.split-word > span');
+    if (window.gsap) {
+      window.gsap.fromTo(
+        inners,
+        { y: '110%' },
+        {
+          y: '0%',
+          duration: 0.85,
+          ease: 'power4.out',
+          stagger: 0.045,
+          overwrite: true,
+        }
+      );
+      const heading = el.closest('.section-heading');
+      if (heading) {
+        const extras = heading.querySelectorAll('.section-eyebrow, .section-desc');
+        window.gsap.fromTo(
+          extras,
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.6, delay: 0.15, ease: 'power2.out', overwrite: true }
+        );
+      }
+    } else {
+      inners.forEach((s) => {
+        s.style.transform = 'none';
+      });
+    }
+  };
+
+  // Hide inners until animated (avoid flash of full text)
+  if (window.gsap) {
+    titles.forEach((el) => {
+      window.gsap.set(el.querySelectorAll('.split-word > span'), { y: '110%' });
+      const heading = el.closest('.section-heading');
+      if (heading) {
+        window.gsap.set(heading.querySelectorAll('.section-eyebrow, .section-desc'), { opacity: 0 });
+      }
+    });
+  }
+
+  if (window.gsap && window.ScrollTrigger) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+    titles.forEach((el) => {
+      window.ScrollTrigger.create({
+        trigger: el,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => animate(el),
+      });
+    });
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(entry.target);
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    titles.forEach((el) => io.observe(el));
+  }
+}
+
+(function waitSplit(attempts) {
+  if (reduz || window.gsap || attempts <= 0) {
+    runSplitTitles();
+    return;
+  }
+  setTimeout(() => waitSplit(attempts - 1), 50);
+})(40);

@@ -104,6 +104,20 @@
     animation: none;
   }
 
+  .marquee-track-reverse {
+    animation: none;
+    transform: none;
+  }
+
+  .project:hover .cover-img img,
+  .project:hover .project-cover span {
+    transform: none;
+  }
+
+  .section-title .split-word > span {
+    transform: none !important;
+  }
+
   .reveal {
     opacity: 1;
     transform: none;
