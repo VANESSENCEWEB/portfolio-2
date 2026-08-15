@@ -10,16 +10,16 @@
 
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
-    text-align: center;
+    gap: 2.25rem;
   }
 
   .hero-copy {
     align-items: center;
+    text-align: center;
   }
 
   .hero-greeting,
-  .hero-eyebrow {
+  .hero-ctas {
     justify-content: center;
   }
 
@@ -27,16 +27,12 @@
     margin-inline: auto;
   }
 
-  .hero-ctas {
-    justify-content: center;
-  }
-
   .hero-photo {
     order: -1;
   }
 
-  .hero-photo-wrap {
-    width: min(240px, 68vw);
+  .hero-photo-stage {
+    width: min(300px, 78vw);
   }
 
   .hero-title {
@@ -132,8 +128,13 @@
   .hero-cursor,
   .hero-wave,
   .hero-photo-ring,
-  .hero-photo-ring-soft {
+  .hero-photo-ring-soft,
+  .hero-status::before {
     animation: none;
+  }
+
+  .hero-photo-stage {
+    transition: none;
   }
 
   .marquee-track {

@@ -88,9 +88,20 @@ a { color: inherit; text-decoration: none; }
 .btn-sm { padding: .5rem 1rem; font-size: .8rem; }
 .btn-lg { padding: 1rem 2rem; font-size: 1rem; }
 
+/* ── Shared page shell (centered, equal L/R gutters) ──────── */
+.shell {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
 /* ── Section primitives ───────────────────────────────────── */
 .section {
-  padding: var(--sp-7) 5vw;
+  padding-block: var(--sp-7);
+  padding-inline: var(--page-gutter);
+  max-width: var(--page-max);
+  margin-inline: auto;
 }
 
 .section-heading {

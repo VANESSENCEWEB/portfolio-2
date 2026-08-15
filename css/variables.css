@@ -36,9 +36,14 @@
   --accent-pink: var(--color-pink);
   --accent-green: var(--color-green);
 
-  /* Active accent (neon green — matches portfolio) */
+  /* Active accent (switched via data-color on <html>) */
   --accent: var(--color-green);
   --accent-glow: var(--color-green-glow);
+  --accent-green: var(--accent);
+
+  /* Page layout — shared gutters so nav / hero / sections align */
+  --page-max: 1200px;
+  --page-gutter: clamp(1.25rem, 5vw, 3.5rem);
 
   /* Platform brand colors */
   --brand-linkedin: #0a66c2;
@@ -114,4 +119,26 @@
   --dur-slow: 600ms;
   --dur-reveal: 900ms;
   --transition: 0.3s ease;
+}
+
+/* Accent color system (from dificil) */
+[data-color="green"] {
+  --accent: var(--color-green);
+  --accent-glow: var(--color-green-glow);
+}
+[data-color="cyan"] {
+  --accent: var(--color-cyan);
+  --accent-glow: var(--color-cyan-glow);
+}
+[data-color="pink"] {
+  --accent: var(--color-pink);
+  --accent-glow: var(--color-pink-glow);
+}
+[data-color="purple"] {
+  --accent: var(--color-purple);
+  --accent-glow: var(--color-purple-glow);
+}
+[data-color="orange"] {
+  --accent: var(--color-orange);
+  --accent-glow: var(--color-orange-glow);
 }

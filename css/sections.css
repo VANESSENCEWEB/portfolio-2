@@ -363,9 +363,9 @@
 .form-success {
   text-align: center;
   font: var(--text-body-sm);
-  color: var(--accent-green);
-  border: 1px solid rgba(57, 255, 136, .25);
-  background: rgba(57, 255, 136, .08);
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
   padding: .85rem 1rem;
   border-radius: var(--radius-sm);
 }
@@ -381,8 +381,8 @@
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr);
   gap: 3rem;
-  padding: 3.5rem 5vw 2.5rem;
-  max-width: 1200px;
+  padding: 3.5rem var(--page-gutter) 2.5rem;
+  max-width: var(--page-max);
   margin-inline: auto;
   border-bottom: 1px dashed rgba(255, 255, 255, .12);
 }
@@ -449,7 +449,7 @@
 
 .footer-wordmark {
   margin: 0;
-  padding: 1.5rem 5vw;
+  padding: 1.5rem var(--page-gutter);
   text-align: center;
   font-family: var(--f-display);
   font-weight: 700;
@@ -467,8 +467,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: var(--sp-2);
-  padding: 1.25rem 5vw;
-  max-width: 1200px;
+  padding: 1.25rem var(--page-gutter);
+  max-width: var(--page-max);
   margin-inline: auto;
   font-family: var(--f-mono);
   font-size: .68rem;

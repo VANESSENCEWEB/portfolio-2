@@ -44,13 +44,13 @@ function runHeroIntro() {
     { y: '0%', duration: 1, ease: 'power4.out', stagger: 0.12 }
   );
   window.gsap.fromTo(
-    '.hero-greeting, .hero-role, .hero-sub, .hero-ctas, .hero-typed-wrap, .hero-eyebrow',
+    '.hero-greeting, .hero-status, .hero-sub, .hero-ctas, .hero-typed-wrap',
     { opacity: 0, y: 16 },
     { opacity: 1, y: 0, duration: 0.8, delay: 0.45, ease: 'power2.out', stagger: 0.06 }
   );
   window.gsap.fromTo(
-    '.hero-photo-wrap',
-    { opacity: 0, scale: 0.9 },
+    '.hero-photo-stage',
+    { opacity: 0, scale: 0.88 },
     { opacity: 1, scale: 1, duration: 1, delay: 0.2, ease: 'power3.out' }
   );
 }
@@ -124,8 +124,18 @@ if (canvas && hero && !reduz) {
     for (let i = 0; i < cols; i += 1) {
       const ch = glyphs[Math.floor(Math.random() * glyphs.length)];
       const y = drops[i] * 20;
-      const neon = Math.random() > 0.5 ? '57,255,136' : '255,46,166';
-      ctx.fillStyle = Math.random() > 0.92 ? `rgba(${neon},0.9)` : `rgba(${neon},0.18)`;
+      const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#39ff88';
+      // Convert #rrggbb → r,g,b for canvas neon drops
+      let neon = '57,255,136';
+      if (accent.startsWith('#') && accent.length >= 7) {
+        const r = parseInt(accent.slice(1, 3), 16);
+        const g = parseInt(accent.slice(3, 5), 16);
+        const b = parseInt(accent.slice(5, 7), 16);
+        if (![r, g, b].some(Number.isNaN)) neon = `${r},${g},${b}`;
+      }
+      const alt = '255,46,166';
+      const pick = Math.random() > 0.55 ? neon : alt;
+      ctx.fillStyle = Math.random() > 0.92 ? `rgba(${pick},0.9)` : `rgba(${pick},0.18)`;
       ctx.fillText(ch, i * 20, y);
       if (y > h && Math.random() > 0.985) drops[i] = 0;
       else drops[i] += 1;
@@ -156,7 +166,109 @@ if (canvas && hero && !reduz) {
   heroObserver.observe(hero);
 }
 
-/* ── 5. LANG TOGGLE (visual state only — content is pt-BR) ─ */
+/* ── 5. COLOR SYSTEM (dificil-style accent picker) ───────── */
+(function initColorSystem() {
+  const html = document.documentElement;
+  const colorToggle = document.getElementById('colorToggle');
+  const colorOptions = document.getElementById('colorOptions');
+  const colorOptionBtns = document.querySelectorAll('.color-option');
+  const allowed = ['green', 'cyan', 'pink', 'purple', 'orange'];
+  let currentColor = localStorage.getItem('portfolio-color') || 'green';
+  if (!allowed.includes(currentColor)) currentColor = 'green';
+
+  function applyColor() {
+    html.setAttribute('data-color', currentColor);
+    colorOptionBtns.forEach((btn) => {
+      btn.classList.toggle('is-active', btn.dataset.color === currentColor);
+    });
+    localStorage.setItem('portfolio-color', currentColor);
+  }
+
+  applyColor();
+
+  if (!colorToggle || !colorOptions) return;
+
+  colorToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = colorOptions.classList.toggle('is-open');
+    colorToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  colorOptionBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentColor = btn.dataset.color;
+      applyColor();
+      colorOptions.classList.remove('is-open');
+      colorToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!colorToggle.contains(e.target) && !colorOptions.contains(e.target)) {
+      colorOptions.classList.remove('is-open');
+      colorToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+
+/* ── 6. HERO PHOTO PARALLAX (3D tilt) ────────────────────── */
+(function initPhotoParallax() {
+  const stage = document.getElementById('heroPhotoStage');
+  const heroEl = document.querySelector('.hero');
+  if (!stage || !heroEl || reduz) return;
+
+  let targetX = 0;
+  let targetY = 0;
+  let curX = 0;
+  let curY = 0;
+  let scrollY = 0;
+  let rafId = 0;
+
+  const tick = () => {
+    curX += (targetX - curX) * 0.08;
+    curY += (targetY - curY) * 0.08;
+    stage.style.transform =
+      `translate3d(0, ${scrollY}px, 0) rotateY(${curX}deg) rotateX(${curY}deg)`;
+    rafId = requestAnimationFrame(tick);
+  };
+  rafId = requestAnimationFrame(tick);
+
+  heroEl.addEventListener(
+    'pointermove',
+    (e) => {
+      const rect = heroEl.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      targetX = px * 16;
+      targetY = py * -12;
+    },
+    { passive: true }
+  );
+
+  heroEl.addEventListener(
+    'pointerleave',
+    () => {
+      targetX = 0;
+      targetY = 0;
+    },
+    { passive: true }
+  );
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      const rect = heroEl.getBoundingClientRect();
+      const progress = Math.min(1, Math.max(0, -rect.top / (rect.height || 1)));
+      scrollY = progress * 40;
+    },
+    { passive: true }
+  );
+
+  window.addEventListener('beforeunload', () => cancelAnimationFrame(rafId));
+})();
+
+/* ── 7. LANG TOGGLE (visual state only — content is pt-BR) ─ */
 document.querySelectorAll('.lang-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.lang-btn').forEach((b) => b.classList.remove('lang-active'));
@@ -164,7 +276,7 @@ document.querySelectorAll('.lang-btn').forEach((btn) => {
   });
 });
 
-/* ── 6. SPLIT TITLES (agency-style word reveal) ───────────── */
+/* ── 8. SPLIT TITLES (agency-style word reveal) ───────────── */
 function splitTitleWords(el) {
   if (el.dataset.split === '1') return;
   const text = el.textContent.trim();
@@ -273,7 +385,7 @@ function runSplitTitles() {
   setTimeout(() => waitSplit(attempts - 1), 50);
 })(40);
 
-/* ── 7. NAV SCROLL SPY (numbered active underline) ───────── */
+/* ── 9. NAV SCROLL SPY (numbered active underline) ───────── */
 (function navSpy() {
   const links = [...document.querySelectorAll('.nav-links a[data-section]')];
   if (!links.length) return;
@@ -319,7 +431,7 @@ function runSplitTitles() {
   update();
 })();
 
-/* ── 8. CONTACT FORM → mailto (no backend required) ──────── */
+/* ── 10. CONTACT FORM → mailto (no backend required) ──────── */
 (function contactForm() {
   const form = document.getElementById('contact-form');
   const success = document.getElementById('form-success');
