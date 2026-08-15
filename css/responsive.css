@@ -68,6 +68,23 @@
     grid-template-columns: 1fr;
   }
 
+  .contato-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-cols {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .section {
     padding-block: var(--sp-6);
   }
@@ -132,7 +149,7 @@
   .btn:hover:not(:disabled),
   .project:hover,
   .hero-btn:hover,
-  .social-link:hover {
+  .form-submit:hover {
     transform: none;
   }
 }

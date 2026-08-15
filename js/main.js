@@ -320,3 +320,31 @@ function runSplitTitles() {
   );
   update();
 })();
+
+/* ── 9. CONTACT FORM → mailto (no backend required) ──────── */
+(function contactForm() {
+  const form = document.getElementById('contact-form');
+  const success = document.getElementById('form-success');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const nome = String(data.get('nome') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const assunto = String(data.get('assunto') || 'contato');
+    const mensagem = String(data.get('mensagem') || '').trim();
+    if (!nome || !email || !mensagem) {
+      form.reportValidity();
+      return;
+    }
+    const subject = encodeURIComponent(`Portfolio — ${assunto} — ${nome}`);
+    const body = encodeURIComponent(
+      `Nome: ${nome}\nEmail: ${email}\nAssunto: ${assunto}\n\n${mensagem}`
+    );
+    window.location.href = `mailto:vanessalimaunicap@gmail.com?subject=${subject}&body=${body}`;
+    if (success) {
+      success.hidden = false;
+    }
+  });
+})();
