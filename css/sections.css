@@ -404,29 +404,19 @@
 
 .footer-social {
   display: flex;
-  gap: .6rem;
+  gap: .75rem;
+  flex-wrap: wrap;
 }
 
-.footer-social a {
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
-  border: 1px dashed rgba(255, 255, 255, .2);
-  font-family: var(--f-mono);
-  font-size: .65rem;
-  color: var(--ink-300);
-  text-decoration: none;
-  transition:
-    border-color var(--dur-base),
-    color var(--dur-base),
-    background var(--dur-base);
+.footer-social .social-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
 }
 
-.footer-social a:hover {
-  border-color: var(--accent-coral);
-  color: var(--accent-coral);
-  background: rgba(255, 107, 94, .08);
+.footer-social .social-icon svg {
+  width: 18px;
+  height: 18px;
 }
 
 .footer-cols {

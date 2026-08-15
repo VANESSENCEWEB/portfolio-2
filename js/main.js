@@ -44,14 +44,14 @@ function runHeroIntro() {
     { y: '0%', duration: 1, ease: 'power4.out', stagger: 0.12 }
   );
   window.gsap.fromTo(
-    '.hero-sub, .hero-ctas, .hero-typed-wrap',
+    '.hero-greeting, .hero-role, .hero-sub, .hero-ctas, .hero-typed-wrap, .hero-eyebrow',
     { opacity: 0, y: 16 },
-    { opacity: 1, y: 0, duration: 0.8, delay: 0.5, ease: 'power2.out' }
+    { opacity: 1, y: 0, duration: 0.8, delay: 0.45, ease: 'power2.out', stagger: 0.06 }
   );
   window.gsap.fromTo(
-    '.hero-notebook',
-    { opacity: 0, scale: 0.94 },
-    { opacity: 1, scale: 1, duration: 1, delay: 0.25, ease: 'power3.out' }
+    '.hero-photo-wrap',
+    { opacity: 0, scale: 0.9 },
+    { opacity: 1, scale: 1, duration: 1, delay: 0.2, ease: 'power3.out' }
   );
 }
 
@@ -156,9 +156,7 @@ if (canvas && hero && !reduz) {
   heroObserver.observe(hero);
 }
 
-/* ── 5. (photo parallax removed — notebook lives in hero now) ─ */
-
-/* ── 6. LANG TOGGLE (visual state only — content is pt-BR) ─ */
+/* ── 5. LANG TOGGLE (visual state only — content is pt-BR) ─ */
 document.querySelectorAll('.lang-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.lang-btn').forEach((b) => b.classList.remove('lang-active'));
@@ -166,7 +164,7 @@ document.querySelectorAll('.lang-btn').forEach((btn) => {
   });
 });
 
-/* ── 7. SPLIT TITLES (agency-style word reveal) ───────────── */
+/* ── 6. SPLIT TITLES (agency-style word reveal) ───────────── */
 function splitTitleWords(el) {
   if (el.dataset.split === '1') return;
   const text = el.textContent.trim();
@@ -275,7 +273,7 @@ function runSplitTitles() {
   setTimeout(() => waitSplit(attempts - 1), 50);
 })(40);
 
-/* ── 8. NAV SCROLL SPY (numbered active underline) ───────── */
+/* ── 7. NAV SCROLL SPY (numbered active underline) ───────── */
 (function navSpy() {
   const links = [...document.querySelectorAll('.nav-links a[data-section]')];
   if (!links.length) return;
@@ -321,7 +319,7 @@ function runSplitTitles() {
   update();
 })();
 
-/* ── 9. CONTACT FORM → mailto (no backend required) ──────── */
+/* ── 8. CONTACT FORM → mailto (no backend required) ──────── */
 (function contactForm() {
   const form = document.getElementById('contact-form');
   const success = document.getElementById('form-success');

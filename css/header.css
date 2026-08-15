@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   HEADER — numbered nav + sticky blur + lang toggle
+   HEADER — numbered nav + sticky blur + avatar brand
    ═══════════════════════════════════════════════════════════ */
 
 .nav {
@@ -19,11 +19,45 @@
 
 .nav-brand {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
   line-height: 1.15;
   white-space: nowrap;
   text-decoration: none;
   flex-shrink: 0;
+}
+
+.nav-brand-photo {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+.nav-brand-photo img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-green);
+  display: block;
+}
+
+.nav-status {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  border: 2px solid var(--surface-0);
+  box-shadow: 0 0 10px var(--color-green-glow);
+}
+
+.nav-brand-text {
+  display: flex;
+  flex-direction: column;
 }
 
 .nav-name {
@@ -35,7 +69,7 @@
 .nav-role {
   font-family: var(--f-mono);
   font-size: .62rem;
-  color: var(--accent-blue);
+  color: var(--accent-green);
   letter-spacing: var(--tracking-wide);
 }
 
