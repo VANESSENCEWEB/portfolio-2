@@ -274,3 +274,49 @@ function runSplitTitles() {
   }
   setTimeout(() => waitSplit(attempts - 1), 50);
 })(40);
+
+/* ── 8. NAV SCROLL SPY (numbered active underline) ───────── */
+(function navSpy() {
+  const links = [...document.querySelectorAll('.nav-links a[data-section]')];
+  if (!links.length) return;
+
+  const sections = links.map((link) => {
+    const id = link.dataset.section;
+    const el =
+      id === 'topo'
+        ? document.getElementById('demo') || document.querySelector('.hero') || document.getElementById('topo')
+        : document.getElementById(id);
+    return { id, el, link };
+  }).filter((s) => s.el);
+
+  function setActive(id) {
+    links.forEach((link) => {
+      if (link.dataset.section === id) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+  }
+
+  let ticking = false;
+  function update() {
+    const marker = window.scrollY + Math.min(160, window.innerHeight * 0.25);
+    let current = sections[0]?.id || 'topo';
+    for (const s of sections) {
+      const top = s.el.getBoundingClientRect().top + window.scrollY;
+      if (top <= marker) current = s.id;
+    }
+    setActive(current);
+    ticking = false;
+  }
+
+  addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+  update();
+})();
