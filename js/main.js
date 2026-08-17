@@ -173,8 +173,8 @@ if (canvas && hero && !reduz) {
   const colorOptions = document.getElementById('colorOptions');
   const colorOptionBtns = document.querySelectorAll('.color-option');
   const allowed = ['green', 'cyan', 'pink', 'purple', 'orange'];
-  let currentColor = localStorage.getItem('portfolio-color') || 'green';
-  if (!allowed.includes(currentColor)) currentColor = 'green';
+  let currentColor = localStorage.getItem('portfolio-color') || 'pink';
+  if (!allowed.includes(currentColor)) currentColor = 'pink';
 
   function applyColor() {
     html.setAttribute('data-color', currentColor);
@@ -220,7 +220,6 @@ if (canvas && hero && !reduz) {
 
   const glow = stage.querySelector('.hero-photo-glow');
   const pop = stage.querySelector('.hero-photo-pop');
-  const ring = stage.querySelector('.hero-photo-ring');
 
   let targetX = 0;
   let targetY = 0;
@@ -238,15 +237,12 @@ if (canvas && hero && !reduz) {
 
     if (glow) {
       glow.style.transform =
-        `translate3d(${curX * -1.2}px, ${curY * 1.4}px, -40px) scale(1.05)`;
-    }
-    if (ring) {
-      ring.style.transform =
-        `translate3d(${curX * 0.35}px, ${curY * -0.25}px, 12px)`;
+        `translate3d(${curX * -1.1}px, ${curY * 1.2}px, 0)`;
     }
     if (pop) {
+      // keep centered geometry; only nudge in Z/XY for depth
       pop.style.transform =
-        `translateX(-50%) translate3d(${curX * 0.9}px, ${curY * -1.1}px, 48px)`;
+        `translate(calc(-50% + ${curX * 0.55}px), calc(-50% + ${curY * -0.7}px)) translateZ(48px)`;
     }
 
     rafId = requestAnimationFrame(tick);
@@ -259,8 +255,8 @@ if (canvas && hero && !reduz) {
       const rect = heroEl.getBoundingClientRect();
       const px = (e.clientX - rect.left) / rect.width - 0.5;
       const py = (e.clientY - rect.top) / rect.height - 0.5;
-      targetX = px * 18;
-      targetY = py * -14;
+      targetX = px * 14;
+      targetY = py * -11;
     },
     { passive: true }
   );
@@ -279,7 +275,7 @@ if (canvas && hero && !reduz) {
     () => {
       const rect = heroEl.getBoundingClientRect();
       const progress = Math.min(1, Math.max(0, -rect.top / (rect.height || 1)));
-      scrollY = progress * 48;
+      scrollY = progress * 40;
     },
     { passive: true }
   );

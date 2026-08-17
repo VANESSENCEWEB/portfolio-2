@@ -37,8 +37,8 @@
   --accent-green: var(--color-green);
 
   /* Active accent (switched via data-color on <html>) */
-  --accent: var(--color-green);
-  --accent-glow: var(--color-green-glow);
+  --accent: var(--color-pink);
+  --accent-glow: var(--color-pink-glow);
   --accent-green: var(--accent);
 
   /* Page layout — shared gutters so nav / hero / sections align */

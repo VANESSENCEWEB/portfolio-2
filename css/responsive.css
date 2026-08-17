@@ -40,7 +40,7 @@
   }
 
   .hero-photo-stage {
-    --photo-size: min(300px, 72vw);
+    --photo-size: min(320px, 68vw);
   }
 
   .hero-title {
