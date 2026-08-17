@@ -10,12 +10,19 @@
 
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 2.25rem;
+    gap: 1.75rem;
+  }
+
+  .hero-social {
+    flex-direction: row;
+    justify-content: center;
+    order: 2;
   }
 
   .hero-copy {
     align-items: center;
     text-align: center;
+    order: 1;
   }
 
   .hero-greeting,
@@ -28,11 +35,12 @@
   }
 
   .hero-photo {
-    order: -1;
+    order: 0;
+    padding-block: 1.5rem .5rem;
   }
 
   .hero-photo-stage {
-    width: min(300px, 78vw);
+    --photo-size: min(300px, 72vw);
   }
 
   .hero-title {
@@ -128,12 +136,15 @@
   .hero-cursor,
   .hero-wave,
   .hero-photo-ring,
-  .hero-photo-ring-soft,
+  .hero-photo-dots,
+  .hero-photo-orbit,
+  .hero-photo-glow,
   .hero-status::before {
     animation: none;
   }
 
-  .hero-photo-stage {
+  .hero-photo-stage,
+  .hero-photo-pop {
     transition: none;
   }
 

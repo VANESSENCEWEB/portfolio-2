@@ -44,7 +44,7 @@ function runHeroIntro() {
     { y: '0%', duration: 1, ease: 'power4.out', stagger: 0.12 }
   );
   window.gsap.fromTo(
-    '.hero-greeting, .hero-status, .hero-sub, .hero-ctas, .hero-typed-wrap',
+    '.hero-greeting, .hero-sub, .hero-ctas, .hero-social',
     { opacity: 0, y: 16 },
     { opacity: 1, y: 0, duration: 0.8, delay: 0.45, ease: 'power2.out', stagger: 0.06 }
   );
@@ -212,11 +212,15 @@ if (canvas && hero && !reduz) {
   });
 })();
 
-/* ── 6. HERO PHOTO PARALLAX (3D tilt) ────────────────────── */
+/* ── 6. HERO PHOTO PARALLAX (3D tilt + layered depth) ────── */
 (function initPhotoParallax() {
   const stage = document.getElementById('heroPhotoStage');
   const heroEl = document.querySelector('.hero');
   if (!stage || !heroEl || reduz) return;
+
+  const glow = stage.querySelector('.hero-photo-glow');
+  const pop = stage.querySelector('.hero-photo-pop');
+  const ring = stage.querySelector('.hero-photo-ring');
 
   let targetX = 0;
   let targetY = 0;
@@ -226,10 +230,25 @@ if (canvas && hero && !reduz) {
   let rafId = 0;
 
   const tick = () => {
-    curX += (targetX - curX) * 0.08;
-    curY += (targetY - curY) * 0.08;
+    curX += (targetX - curX) * 0.1;
+    curY += (targetY - curY) * 0.1;
+
     stage.style.transform =
       `translate3d(0, ${scrollY}px, 0) rotateY(${curX}deg) rotateX(${curY}deg)`;
+
+    if (glow) {
+      glow.style.transform =
+        `translate3d(${curX * -1.2}px, ${curY * 1.4}px, -40px) scale(1.05)`;
+    }
+    if (ring) {
+      ring.style.transform =
+        `translate3d(${curX * 0.35}px, ${curY * -0.25}px, 12px)`;
+    }
+    if (pop) {
+      pop.style.transform =
+        `translateX(-50%) translate3d(${curX * 0.9}px, ${curY * -1.1}px, 48px)`;
+    }
+
     rafId = requestAnimationFrame(tick);
   };
   rafId = requestAnimationFrame(tick);
@@ -240,8 +259,8 @@ if (canvas && hero && !reduz) {
       const rect = heroEl.getBoundingClientRect();
       const px = (e.clientX - rect.left) / rect.width - 0.5;
       const py = (e.clientY - rect.top) / rect.height - 0.5;
-      targetX = px * 16;
-      targetY = py * -12;
+      targetX = px * 18;
+      targetY = py * -14;
     },
     { passive: true }
   );
@@ -260,7 +279,7 @@ if (canvas && hero && !reduz) {
     () => {
       const rect = heroEl.getBoundingClientRect();
       const progress = Math.min(1, Math.max(0, -rect.top / (rect.height || 1)));
-      scrollY = progress * 40;
+      scrollY = progress * 48;
     },
     { passive: true }
   );
