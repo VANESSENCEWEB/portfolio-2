@@ -222,18 +222,19 @@
   color: var(--accent);
 }
 
-/* Photo — Figma layers: glow → base → dashed ring → orbit → pop-out above */
+/* Photo — glow → base circle → dashed ring → orbit → pop-out */
 .hero-photo {
   display: flex;
   justify-content: center;
   align-items: center;
   perspective: 1200px;
-  padding-block: 5.25rem 1.25rem;
+  padding-block: 5rem 1.5rem;
   overflow: visible;
 }
 
 .hero-photo-stage {
-  --photo-size: min(420px, 62vw);
+  /* Circle diameter — solid middle size for the live Pages deploy */
+  --photo-size: min(430px, 60vw);
   position: relative;
   width: var(--photo-size);
   height: var(--photo-size);
@@ -260,14 +261,17 @@
   transition: background var(--transition);
 }
 
-/* Fills the circle; shifted up so forehead/hair clear the rim */
+/*
+  Natural aspect + height:auto so base/pop stay aligned.
+  Lifted so the crown clears the rim into the pop layer.
+*/
 .hero-photo-img {
   position: absolute;
   left: 50%;
-  width: 115%;
+  width: 118%;
   height: auto;
   max-width: none;
-  top: -15%;
+  top: -12%;
   transform: translateX(-50%);
   display: block;
   user-select: none;
@@ -282,19 +286,18 @@
   z-index: 2;
   border-radius: 50%;
   overflow: hidden;
-  clip-path: circle(50%);
   border: 3px solid var(--accent);
   box-shadow:
     0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent),
-    0 0 40px var(--accent-glow),
+    0 0 44px var(--accent-glow),
     0 16px 42px rgba(0, 0, 0, .45);
   background: #0a0a0b;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 .hero-photo-base .hero-photo-img {
-  width: 115%;
-  top: -15%;
+  width: 118%;
+  top: -12%;
 }
 
 .hero-photo-ring {
@@ -329,13 +332,13 @@
   text-transform: uppercase;
 }
 
-/* Pop-out: crown + forehead above the neon rim, soft fade (no seam) */
+/* Pop sits ABOVE the circle — head/hair leave the neon rim */
 .hero-photo-pop {
   position: absolute;
   left: 50%;
   top: -20%;
-  width: 122%;
-  height: 52%;
+  width: 126%;
+  height: 56%;
   z-index: 6;
   overflow: hidden;
   border: none;
@@ -343,31 +346,32 @@
   background: transparent;
   box-shadow: none;
   pointer-events: none;
-  transform: translateX(-50%) translateZ(36px);
+  transform: translateX(-50%) translateZ(40px);
   -webkit-mask-image: linear-gradient(
     to bottom,
     #000 0%,
-    #000 40%,
-    rgba(0, 0, 0, .5) 60%,
-    transparent 86%
+    #000 48%,
+    rgba(0, 0, 0, .55) 68%,
+    transparent 92%
   );
   mask-image: linear-gradient(
     to bottom,
     #000 0%,
-    #000 40%,
-    rgba(0, 0, 0, .5) 60%,
-    transparent 86%
+    #000 48%,
+    rgba(0, 0, 0, .55) 68%,
+    transparent 92%
   );
   filter:
-    drop-shadow(0 0 12px var(--accent-glow))
-    drop-shadow(0 10px 20px rgba(0, 0, 0, .35));
+    drop-shadow(0 0 14px var(--accent-glow))
+    drop-shadow(0 12px 22px rgba(0, 0, 0, .4));
   transition: filter var(--transition);
 }
 
-/* base top -15%; pop top -20% → relative top (20-15)/52 */
+/* base top -12% / pop top -20% → (20-12)/56 ≈ 14.3% */
 .hero-photo-pop .hero-photo-img {
-  width: 94.3%; /* 115 / 122 */
-  top: 9.6%;
+  width: 93.7%; /* 118 / 126 */
+  top: 14.3%;
+  height: auto;
   transform: translateX(-50%);
 }
 

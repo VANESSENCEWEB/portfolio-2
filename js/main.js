@@ -240,9 +240,8 @@ if (canvas && hero && !reduz) {
         `translate3d(${curX * -1.1}px, ${curY * 1.2}px, 0)`;
     }
     if (pop) {
-      // Pop sits above the circle (translateX -50%); nudge XY/Z for depth
       pop.style.transform =
-        `translate(calc(-50% + ${curX * 0.45}px), ${curY * -0.4}px) translateZ(36px)`;
+        `translate(calc(-50% + ${curX * 0.45}px), ${curY * -0.4}px) translateZ(40px)`;
     }
 
     rafId = requestAnimationFrame(tick);

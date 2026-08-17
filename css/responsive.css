@@ -40,11 +40,11 @@
   }
 
   .hero-photo-stage {
-    --photo-size: min(310px, 68vw);
+    --photo-size: min(300px, 64vw);
   }
 
   .hero-photo {
-    padding-block: 3.5rem .75rem;
+    padding-block: 3.75rem .75rem;
   }
 
   .hero-title {
