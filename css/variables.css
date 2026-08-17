@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
    VARIABLES — Vanessa Lima Design System tokens
-   Apple-clean neutrals + aurora accents + neon hero accents
+   Apple-clean neutrals + dificil-style accent/glow system
    ═══════════════════════════════════════════════════════════ */
 
 :root {
@@ -16,13 +16,44 @@
   --surface-50: #f8f8fa;
   --surface-100: #eef0f3;
 
-  /* Accents */
+  /* Accent palette (dificil color system) */
+  --color-green: #39ff88;
+  --color-green-glow: rgba(57, 255, 136, 0.35);
+  --color-cyan: #06b6d4;
+  --color-cyan-glow: rgba(6, 182, 212, 0.35);
+  --color-pink: #ff2ea6;
+  --color-pink-glow: rgba(255, 46, 166, 0.35);
+  --color-purple: #9b6bff;
+  --color-purple-glow: rgba(155, 107, 255, 0.35);
+  --color-orange: #f97316;
+  --color-orange-glow: rgba(249, 115, 22, 0.35);
+
+  /* Portfolio accents */
   --accent-blue: #3d7bff;
-  --accent-violet: #9b6bff;
+  --accent-violet: var(--color-purple);
   --accent-coral: #ff6b5e;
   --accent-amber: #ffd400;
-  --accent-pink: #ff2ea6;
-  --accent-green: #39ff88;
+  --accent-pink: var(--color-pink);
+  --accent-green: var(--color-green);
+
+  /* Active accent (switched via data-color on <html>) */
+  --accent: var(--color-green);
+  --accent-glow: var(--color-green-glow);
+  --accent-green: var(--accent);
+
+  /* Page layout — shared gutters so nav / hero / sections align */
+  --page-max: 1200px;
+  --page-gutter: clamp(1.25rem, 5vw, 3.5rem);
+
+  /* Platform brand colors */
+  --brand-linkedin: #0a66c2;
+  --brand-linkedin-glow: rgba(10, 102, 194, 0.45);
+  --brand-github: #24292f;
+  --brand-github-glow: rgba(36, 41, 47, 0.4);
+  --brand-whatsapp: #25d366;
+  --brand-whatsapp-glow: rgba(37, 211, 102, 0.45);
+  --brand-instagram: #e4405f;
+  --brand-instagram-glow: rgba(228, 64, 95, 0.45);
 
   /* Gradients */
   --gradient-aurora: linear-gradient(120deg, #3d7bff 0%, #9b6bff 45%, #ff6b5e 100%);
@@ -75,7 +106,7 @@
   --shadow-sm: 0 1px 2px rgba(10, 10, 11, .06);
   --shadow-md: 0 8px 24px rgba(10, 10, 11, .08);
   --shadow-lg: 0 24px 64px rgba(10, 10, 11, .12);
-  --shadow-glow: 0 0 0 1px rgba(10, 10, 11, .04), 0 20px 60px rgba(61, 123, 255, .22);
+  --shadow-glow: 0 0 0 1px rgba(10, 10, 11, .04), 0 20px 60px rgba(57, 255, 136, .22);
 
   --blur-nav: saturate(180%) blur(20px);
 
@@ -87,4 +118,27 @@
   --dur-base: 300ms;
   --dur-slow: 600ms;
   --dur-reveal: 900ms;
+  --transition: 0.3s ease;
+}
+
+/* Accent color system (from dificil) */
+[data-color="green"] {
+  --accent: var(--color-green);
+  --accent-glow: var(--color-green-glow);
+}
+[data-color="cyan"] {
+  --accent: var(--color-cyan);
+  --accent-glow: var(--color-cyan-glow);
+}
+[data-color="pink"] {
+  --accent: var(--color-pink);
+  --accent-glow: var(--color-pink-glow);
+}
+[data-color="purple"] {
+  --accent: var(--color-purple);
+  --accent-glow: var(--color-purple-glow);
+}
+[data-color="orange"] {
+  --accent: var(--color-orange);
+  --accent-glow: var(--color-orange-glow);
 }

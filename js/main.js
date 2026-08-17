@@ -44,14 +44,14 @@ function runHeroIntro() {
     { y: '0%', duration: 1, ease: 'power4.out', stagger: 0.12 }
   );
   window.gsap.fromTo(
-    '.hero-sub, .hero-ctas, .hero-typed-wrap',
+    '.hero-greeting, .hero-sub, .hero-ctas, .hero-social',
     { opacity: 0, y: 16 },
-    { opacity: 1, y: 0, duration: 0.8, delay: 0.5, ease: 'power2.out' }
+    { opacity: 1, y: 0, duration: 0.8, delay: 0.45, ease: 'power2.out', stagger: 0.06 }
   );
   window.gsap.fromTo(
-    '.hero-photo',
-    { opacity: 0, scale: 0.92 },
-    { opacity: 1, scale: 1, duration: 1, delay: 0.3, ease: 'power3.out' }
+    '.hero-photo-stage',
+    { opacity: 0, scale: 0.88 },
+    { opacity: 1, scale: 1, duration: 1, delay: 0.2, ease: 'power3.out' }
   );
 }
 
@@ -124,8 +124,18 @@ if (canvas && hero && !reduz) {
     for (let i = 0; i < cols; i += 1) {
       const ch = glyphs[Math.floor(Math.random() * glyphs.length)];
       const y = drops[i] * 20;
-      const neon = Math.random() > 0.5 ? '57,255,136' : '255,46,166';
-      ctx.fillStyle = Math.random() > 0.92 ? `rgba(${neon},0.9)` : `rgba(${neon},0.18)`;
+      const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#39ff88';
+      // Convert #rrggbb → r,g,b for canvas neon drops
+      let neon = '57,255,136';
+      if (accent.startsWith('#') && accent.length >= 7) {
+        const r = parseInt(accent.slice(1, 3), 16);
+        const g = parseInt(accent.slice(3, 5), 16);
+        const b = parseInt(accent.slice(5, 7), 16);
+        if (![r, g, b].some(Number.isNaN)) neon = `${r},${g},${b}`;
+      }
+      const alt = '255,46,166';
+      const pick = Math.random() > 0.55 ? neon : alt;
+      ctx.fillStyle = Math.random() > 0.92 ? `rgba(${pick},0.9)` : `rgba(${pick},0.18)`;
       ctx.fillText(ch, i * 20, y);
       if (y > h && Math.random() > 0.985) drops[i] = 0;
       else drops[i] += 1;
@@ -156,29 +166,314 @@ if (canvas && hero && !reduz) {
   heroObserver.observe(hero);
 }
 
-/* ── 5. HERO PHOTO PARALLAX ──────────────────────────────── */
-const photo = document.querySelector('.hero-photo');
-if (hero && photo && !reduz && !matchMedia('(pointer: coarse)').matches) {
-  hero.addEventListener(
-    'mousemove',
+/* ── 5. COLOR SYSTEM (dificil-style accent picker) ───────── */
+(function initColorSystem() {
+  const html = document.documentElement;
+  const colorToggle = document.getElementById('colorToggle');
+  const colorOptions = document.getElementById('colorOptions');
+  const colorOptionBtns = document.querySelectorAll('.color-option');
+  const allowed = ['green', 'cyan', 'pink', 'purple', 'orange'];
+  let currentColor = localStorage.getItem('portfolio-color') || 'green';
+  if (!allowed.includes(currentColor)) currentColor = 'green';
+
+  function applyColor() {
+    html.setAttribute('data-color', currentColor);
+    colorOptionBtns.forEach((btn) => {
+      btn.classList.toggle('is-active', btn.dataset.color === currentColor);
+    });
+    localStorage.setItem('portfolio-color', currentColor);
+  }
+
+  applyColor();
+
+  if (!colorToggle || !colorOptions) return;
+
+  colorToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = colorOptions.classList.toggle('is-open');
+    colorToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  colorOptionBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentColor = btn.dataset.color;
+      applyColor();
+      colorOptions.classList.remove('is-open');
+      colorToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!colorToggle.contains(e.target) && !colorOptions.contains(e.target)) {
+      colorOptions.classList.remove('is-open');
+      colorToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+
+/* ── 6. HERO PHOTO PARALLAX (3D tilt + layered depth) ────── */
+(function initPhotoParallax() {
+  const stage = document.getElementById('heroPhotoStage');
+  const heroEl = document.querySelector('.hero');
+  if (!stage || !heroEl || reduz) return;
+
+  const glow = stage.querySelector('.hero-photo-glow');
+  const pop = stage.querySelector('.hero-photo-pop');
+  const ring = stage.querySelector('.hero-photo-ring');
+
+  let targetX = 0;
+  let targetY = 0;
+  let curX = 0;
+  let curY = 0;
+  let scrollY = 0;
+  let rafId = 0;
+
+  const tick = () => {
+    curX += (targetX - curX) * 0.1;
+    curY += (targetY - curY) * 0.1;
+
+    stage.style.transform =
+      `translate3d(0, ${scrollY}px, 0) rotateY(${curX}deg) rotateX(${curY}deg)`;
+
+    if (glow) {
+      glow.style.transform =
+        `translate3d(${curX * -1.2}px, ${curY * 1.4}px, -40px) scale(1.05)`;
+    }
+    if (ring) {
+      ring.style.transform =
+        `translate3d(${curX * 0.35}px, ${curY * -0.25}px, 12px)`;
+    }
+    if (pop) {
+      pop.style.transform =
+        `translateX(-50%) translate3d(${curX * 0.9}px, ${curY * -1.1}px, 48px)`;
+    }
+
+    rafId = requestAnimationFrame(tick);
+  };
+  rafId = requestAnimationFrame(tick);
+
+  heroEl.addEventListener(
+    'pointermove',
     (e) => {
-      const r = hero.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width - 0.5;
-      const py = (e.clientY - r.top) / r.height - 0.5;
-      photo.style.transform =
-        `perspective(800px) rotateY(${px * 10}deg) rotateX(${-py * 10}deg) translate(${px * 14}px, ${py * 14}px)`;
+      const rect = heroEl.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      targetX = px * 18;
+      targetY = py * -14;
     },
     { passive: true }
   );
-  hero.addEventListener('mouseleave', () => {
-    photo.style.transform = '';
-  });
-}
 
-/* ── 6. LANG TOGGLE (visual state only — content is pt-BR) ─ */
+  heroEl.addEventListener(
+    'pointerleave',
+    () => {
+      targetX = 0;
+      targetY = 0;
+    },
+    { passive: true }
+  );
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      const rect = heroEl.getBoundingClientRect();
+      const progress = Math.min(1, Math.max(0, -rect.top / (rect.height || 1)));
+      scrollY = progress * 48;
+    },
+    { passive: true }
+  );
+
+  window.addEventListener('beforeunload', () => cancelAnimationFrame(rafId));
+})();
+
+/* ── 7. LANG TOGGLE (visual state only — content is pt-BR) ─ */
 document.querySelectorAll('.lang-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.lang-btn').forEach((b) => b.classList.remove('lang-active'));
     btn.classList.add('lang-active');
   });
 });
+
+/* ── 8. SPLIT TITLES (agency-style word reveal) ───────────── */
+function splitTitleWords(el) {
+  if (el.dataset.split === '1') return;
+  const text = el.textContent.trim();
+  const words = text.split(/\s+/);
+  el.setAttribute('aria-label', text);
+  el.textContent = '';
+  words.forEach((word) => {
+    const wrap = document.createElement('span');
+    wrap.className = 'split-word';
+    wrap.setAttribute('aria-hidden', 'true');
+    const inner = document.createElement('span');
+    inner.textContent = word;
+    wrap.appendChild(inner);
+    el.appendChild(wrap);
+  });
+  el.dataset.split = '1';
+}
+
+function runSplitTitles() {
+  const titles = document.querySelectorAll('.js-split');
+  if (!titles.length) return;
+
+  titles.forEach(splitTitleWords);
+
+  if (reduz) {
+    titles.forEach((el) => {
+      el.querySelectorAll('.split-word > span').forEach((s) => {
+        s.style.transform = 'none';
+      });
+    });
+    return;
+  }
+
+  const animate = (el) => {
+    const inners = el.querySelectorAll('.split-word > span');
+    if (window.gsap) {
+      window.gsap.fromTo(
+        inners,
+        { y: '110%' },
+        {
+          y: '0%',
+          duration: 0.85,
+          ease: 'power4.out',
+          stagger: 0.045,
+          overwrite: true,
+        }
+      );
+      const heading = el.closest('.section-heading');
+      if (heading) {
+        const extras = heading.querySelectorAll('.section-eyebrow, .section-desc');
+        window.gsap.fromTo(
+          extras,
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.6, delay: 0.15, ease: 'power2.out', overwrite: true }
+        );
+      }
+    } else {
+      inners.forEach((s) => {
+        s.style.transform = 'none';
+      });
+    }
+  };
+
+  // Hide inners until animated (avoid flash of full text)
+  if (window.gsap) {
+    titles.forEach((el) => {
+      window.gsap.set(el.querySelectorAll('.split-word > span'), { y: '110%' });
+      const heading = el.closest('.section-heading');
+      if (heading) {
+        window.gsap.set(heading.querySelectorAll('.section-eyebrow, .section-desc'), { opacity: 0 });
+      }
+    });
+  }
+
+  if (window.gsap && window.ScrollTrigger) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+    titles.forEach((el) => {
+      window.ScrollTrigger.create({
+        trigger: el,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => animate(el),
+      });
+    });
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(entry.target);
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    titles.forEach((el) => io.observe(el));
+  }
+}
+
+(function waitSplit(attempts) {
+  if (reduz || window.gsap || attempts <= 0) {
+    runSplitTitles();
+    return;
+  }
+  setTimeout(() => waitSplit(attempts - 1), 50);
+})(40);
+
+/* ── 9. NAV SCROLL SPY (numbered active underline) ───────── */
+(function navSpy() {
+  const links = [...document.querySelectorAll('.nav-links a[data-section]')];
+  if (!links.length) return;
+
+  const sections = links.map((link) => {
+    const id = link.dataset.section;
+    const el =
+      id === 'topo'
+        ? document.getElementById('demo') || document.querySelector('.hero') || document.getElementById('topo')
+        : document.getElementById(id);
+    return { id, el, link };
+  }).filter((s) => s.el);
+
+  function setActive(id) {
+    links.forEach((link) => {
+      if (link.dataset.section === id) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+  }
+
+  let ticking = false;
+  function update() {
+    const marker = window.scrollY + Math.min(160, window.innerHeight * 0.25);
+    let current = sections[0]?.id || 'topo';
+    for (const s of sections) {
+      const top = s.el.getBoundingClientRect().top + window.scrollY;
+      if (top <= marker) current = s.id;
+    }
+    setActive(current);
+    ticking = false;
+  }
+
+  addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+  update();
+})();
+
+/* ── 10. CONTACT FORM → mailto (no backend required) ──────── */
+(function contactForm() {
+  const form = document.getElementById('contact-form');
+  const success = document.getElementById('form-success');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const nome = String(data.get('nome') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const assunto = String(data.get('assunto') || 'contato');
+    const mensagem = String(data.get('mensagem') || '').trim();
+    if (!nome || !email || !mensagem) {
+      form.reportValidity();
+      return;
+    }
+    const subject = encodeURIComponent(`Portfolio — ${assunto} — ${nome}`);
+    const body = encodeURIComponent(
+      `Nome: ${nome}\nEmail: ${email}\nAssunto: ${assunto}\n\n${mensagem}`
+    );
+    window.location.href = `mailto:vanessalimaunicap@gmail.com?subject=${subject}&body=${body}`;
+    if (success) {
+      success.hidden = false;
+    }
+  });
+})();

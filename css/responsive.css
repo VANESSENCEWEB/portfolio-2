@@ -3,13 +3,44 @@
    ═══════════════════════════════════════════════════════════ */
 
 @media (max-width: 900px) {
+  .hero {
+    min-height: 0;
+    padding-block: var(--sp-4);
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .hero-social {
+    flex-direction: row;
+    justify-content: center;
+    order: 2;
+  }
+
+  .hero-copy {
+    align-items: center;
+    text-align: center;
+    order: 1;
+  }
+
+  .hero-greeting,
+  .hero-ctas {
+    justify-content: center;
+  }
+
+  .hero-sub {
+    margin-inline: auto;
   }
 
   .hero-photo {
-    max-width: 280px;
-    margin-inline: auto;
+    order: 0;
+    padding-block: 1.5rem .5rem;
+  }
+
+  .hero-photo-stage {
+    --photo-size: min(300px, 72vw);
   }
 
   .hero-title {
@@ -28,6 +59,16 @@
 
   .nav-name {
     font-size: .95rem;
+  }
+
+  .nav-brand-photo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-brand-photo img {
+    width: 36px;
+    height: 36px;
   }
 
   .stats {
@@ -51,16 +92,39 @@
     grid-template-columns: 1fr;
   }
 
+  .contato-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-cols {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .section {
     padding-block: var(--sp-6);
   }
 
-  .hero {
-    padding-block: var(--sp-4);
+  .hero-copy {
+    gap: 1.1rem;
   }
 
-  .hero-copy {
-    gap: 1.5rem;
+  .social-bar {
+    gap: .75rem;
+    padding-block: 1.15rem;
+  }
+
+  .social-icon {
+    width: 44px;
+    height: 44px;
   }
 }
 
@@ -69,12 +133,37 @@
     transform: none;
   }
 
-  .hero-cursor {
+  .hero-cursor,
+  .hero-wave,
+  .hero-photo-ring,
+  .hero-photo-dots,
+  .hero-photo-orbit,
+  .hero-photo-glow,
+  .hero-status::before {
     animation: none;
+  }
+
+  .hero-photo-stage,
+  .hero-photo-pop {
+    transition: none;
   }
 
   .marquee-track {
     animation: none;
+  }
+
+  .marquee-track-reverse {
+    animation: none;
+    transform: none;
+  }
+
+  .project:hover .cover-img img,
+  .project:hover .project-cover span {
+    transform: none;
+  }
+
+  .section-title .split-word > span {
+    transform: none !important;
   }
 
   .reveal {
@@ -84,18 +173,13 @@
     transition: none;
   }
 
-  .hero-photo {
-    transition: none;
-  }
-
   html {
     scroll-behavior: auto;
   }
 
   .btn:hover:not(:disabled),
   .project:hover,
-  .hero-btn:hover,
-  .social-link:hover {
+  .social-icon:hover {
     transform: none;
   }
 }
