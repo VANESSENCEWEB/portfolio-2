@@ -241,7 +241,7 @@ if (canvas && hero && !reduz) {
     }
     if (pop) {
       pop.style.transform =
-        `translate(calc(-50% + ${curX * 0.45}px), ${curY * -0.4}px) translateZ(40px)`;
+        `translate(calc(-50% + ${curX * 0.5}px), ${curY * -0.45}px)`;
     }
 
     rafId = requestAnimationFrame(tick);
