@@ -333,8 +333,8 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  /* Sized so path r=84 sits between the photo rim and the dashed ring */
-  width: 118%;
+  /* path r=92 sits just inside the dashed ring (112%) */
+  width: 120%;
   aspect-ratio: 1 / 1;
   height: auto;
   translate: -50% -50%;
