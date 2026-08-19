@@ -150,12 +150,20 @@
             <!-- 3b. Texto circular orbitante -->
             <svg class="hero-photo-orbit" viewBox="0 0 200 200" aria-hidden="true">
               <defs>
-                <path id="heroOrbitPath" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0" fill="none" />
+                <!-- One full circle; circumference ≈ 2π·84 = 527.8 -->
+                <path
+                  id="heroOrbitPath"
+                  d="M100,100 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0"
+                  fill="none"
+                />
               </defs>
               <text class="hero-photo-orbit-text">
-                <textPath href="#heroOrbitPath" xlink:href="#heroOrbitPath" startOffset="0%">
-                  FRONT-END DEV <tspan fill="var(--accent)">•</tspan> DISPONÍVEL PARA ESTÁGIO <tspan fill="var(--accent)">•</tspan> FRONT-END DEV <tspan fill="var(--accent)">•</tspan> DISPONÍVEL PARA ESTÁGIO <tspan fill="var(--accent)">•</tspan>
-                </textPath>
+                <textPath
+                  href="#heroOrbitPath"
+                  startOffset="0"
+                  textLength="528"
+                  lengthAdjust="spacing"
+                >FRONT-END DEV <tspan class="hero-orbit-dot">•</tspan> DISPONÍVEL PARA ESTÁGIO <tspan class="hero-orbit-dot">•</tspan> FRONT-END DEV <tspan class="hero-orbit-dot">•</tspan> DISPONÍVEL PARA ESTÁGIO <tspan class="hero-orbit-dot">•</tspan> FRONT-END DEV <tspan class="hero-orbit-dot">•</tspan> DISPONÍVEL PARA ESTÁGIO <tspan class="hero-orbit-dot">•</tspan> FRONT-END DEV <tspan class="hero-orbit-dot">•</tspan> DISPONÍVEL PARA ESTÁGIO <tspan class="hero-orbit-dot">•</tspan></textPath>
               </text>
             </svg>
 

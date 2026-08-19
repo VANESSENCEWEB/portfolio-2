@@ -333,7 +333,8 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 124%;
+  /* Sized so path r=84 sits between the photo rim and the dashed ring */
+  width: 118%;
   aspect-ratio: 1 / 1;
   height: auto;
   translate: -50% -50%;
@@ -341,16 +342,20 @@
   pointer-events: none;
   overflow: visible;
   transform-origin: 50% 50%;
-  animation: hero-spin 20s linear infinite;
+  animation: hero-spin 24s linear infinite;
 }
 
 .hero-photo-orbit-text {
-  fill: rgba(255, 255, 255, .9);
+  fill: rgba(255, 255, 255, .92);
   font-family: var(--f-body);
-  font-size: 6.2px;
+  font-size: 5.6px;
   font-weight: 600;
-  letter-spacing: 1.4px;
+  letter-spacing: 0; /* must stay 0 — conflicts with textLength spacing */
   text-transform: uppercase;
+}
+
+.hero-orbit-dot {
+  fill: var(--accent);
 }
 
 .hero-photo-pop {
