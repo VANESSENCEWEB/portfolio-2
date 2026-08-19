@@ -36,14 +36,7 @@
 
   .hero-photo {
     order: 0;
-    padding-block: 1.5rem .5rem;
-  }
-
-  .hero-photo-stage {
-    --photo-size: min(320px, 70vw);
-  }
-
-  .hero-photo {
+    width: min(320px, 78vw);
     padding-block: 4.5rem .75rem;
   }
 

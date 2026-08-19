@@ -27,7 +27,7 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: auto minmax(0, 1.1fr) minmax(280px, 1fr);
+  grid-template-columns: auto minmax(0, 1.05fr) minmax(300px, 0.95fr);
   gap: clamp(1.5rem, 4vw, 3.5rem);
   align-items: center;
   width: 100%;
@@ -222,33 +222,37 @@
   color: var(--accent);
 }
 
-/* Photo — glow → base → ring → orbit → pop-out (all share one center) */
+/* Photo — glow → base → ring → orbit → pop-out (perfect circles, one center) */
 .hero-photo {
   display: flex;
   justify-content: center;
   align-items: center;
+  justify-self: center;
+  width: min(500px, 100%);
   perspective: 1200px;
-  padding-block: 5.5rem 1.5rem;
+  padding-block: 5.5rem 2rem;
   overflow: visible;
+  min-width: 0;
 }
 
 .hero-photo-stage {
-  --photo-size: min(500px, 66vw);
+  /* Size from WIDTH only + aspect-ratio so the grid can never make an oval */
   position: relative;
-  width: var(--photo-size);
-  height: var(--photo-size);
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
   transform-style: flat;
   will-change: transform;
   overflow: visible;
 }
 
-/* Centered with `translate` so spin `transform` never knocks rings off-axis */
 .hero-photo-glow {
   position: absolute;
   left: 50%;
   top: 50%;
   width: 148%;
-  height: 148%;
+  aspect-ratio: 1 / 1;
+  height: auto;
   translate: -50% -50%;
   border-radius: 50%;
   background: radial-gradient(
@@ -285,7 +289,8 @@
   left: 50%;
   top: 50%;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
   translate: -50% -50%;
   z-index: 2;
   border-radius: 50%;
@@ -309,7 +314,8 @@
   left: 50%;
   top: 50%;
   width: 112%;
-  height: 112%;
+  aspect-ratio: 1 / 1;
+  height: auto;
   translate: -50% -50%;
   border: 2px dashed var(--accent);
   border-radius: 50%;
@@ -323,13 +329,13 @@
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
-/* Sized so textPath r=86 sits between the photo rim and the dashed ring */
 .hero-photo-orbit {
   position: absolute;
   left: 50%;
   top: 50%;
   width: 124%;
-  height: 124%;
+  aspect-ratio: 1 / 1;
+  height: auto;
   translate: -50% -50%;
   z-index: 4;
   pointer-events: none;
@@ -377,9 +383,8 @@
   );
 }
 
-/* base -24% / pop -28% → (28-24)/60 = 6.7% */
 .hero-photo-pop .hero-photo-img {
-  width: 95.5%; /* 126 / 132 */
+  width: 95.5%;
   top: 6.7%;
   height: auto;
   left: 50%;
