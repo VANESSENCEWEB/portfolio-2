@@ -222,7 +222,7 @@
   color: var(--accent);
 }
 
-/* Photo — glow → base circle → dashed ring → orbit → pop-out */
+/* Photo — glow → base → ring → orbit → pop-out (all share one center) */
 .hero-photo {
   display: flex;
   justify-content: center;
@@ -233,19 +233,23 @@
 }
 
 .hero-photo-stage {
-  --photo-size: min(520px, 68vw);
+  --photo-size: min(500px, 66vw);
   position: relative;
   width: var(--photo-size);
   height: var(--photo-size);
-  /* flat stacking avoids translateZ popping behind the circle in some browsers */
   transform-style: flat;
   will-change: transform;
   overflow: visible;
 }
 
+/* Centered with `translate` so spin `transform` never knocks rings off-axis */
 .hero-photo-glow {
   position: absolute;
-  inset: -24%;
+  left: 50%;
+  top: 50%;
+  width: 148%;
+  height: 148%;
+  translate: -50% -50%;
   border-radius: 50%;
   background: radial-gradient(
     circle,
@@ -254,21 +258,20 @@
     transparent 68%
   );
   filter: blur(12px);
-  opacity: .9;
+  opacity: .85;
   pointer-events: none;
   z-index: 0;
   animation: hero-pulse 3.2s ease-in-out infinite;
   transition: background var(--transition);
 }
 
-/* Lifted hard so crown + forehead cross the rim */
 .hero-photo-img {
   position: absolute;
   left: 50%;
-  width: 128%;
+  width: 126%;
   height: auto;
   max-width: none;
-  top: -26%;
+  top: -24%;
   transform: translateX(-50%);
   display: block;
   user-select: none;
@@ -279,7 +282,11 @@
 
 .hero-photo-base {
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  translate: -50% -50%;
   z-index: 2;
   border-radius: 50%;
   overflow: hidden;
@@ -293,13 +300,17 @@
 }
 
 .hero-photo-base .hero-photo-img {
-  width: 128%;
-  top: -26%;
+  width: 126%;
+  top: -24%;
 }
 
 .hero-photo-ring {
   position: absolute;
-  inset: -5.5%;
+  left: 50%;
+  top: 50%;
+  width: 112%;
+  height: 112%;
+  translate: -50% -50%;
   border: 2px dashed var(--accent);
   border-radius: 50%;
   box-shadow:
@@ -307,16 +318,23 @@
     inset 0 0 18px var(--accent-glow);
   pointer-events: none;
   z-index: 3;
+  transform-origin: 50% 50%;
   animation: hero-spin 30s linear infinite;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
+/* Sized so textPath r=86 sits between the photo rim and the dashed ring */
 .hero-photo-orbit {
   position: absolute;
-  inset: -4%;
+  left: 50%;
+  top: 50%;
+  width: 124%;
+  height: 124%;
+  translate: -50% -50%;
   z-index: 4;
   pointer-events: none;
   overflow: visible;
+  transform-origin: 50% 50%;
   animation: hero-spin 20s linear infinite;
 }
 
@@ -329,16 +347,12 @@
   text-transform: uppercase;
 }
 
-/*
-  Pop-out layer: same photo, above the rim, z-index over ring/orbit.
-  No translateZ / filter that can collapse stacking in WebKit.
-*/
 .hero-photo-pop {
   position: absolute;
   left: 50%;
-  top: -30%;
-  width: 134%;
-  height: 62%;
+  top: -28%;
+  width: 132%;
+  height: 60%;
   z-index: 8;
   overflow: hidden;
   border: none;
@@ -363,14 +377,13 @@
   );
 }
 
-/* base -26% / pop -30% → (30-26)/62 ≈ 6.5% */
+/* base -24% / pop -28% → (28-24)/60 = 6.7% */
 .hero-photo-pop .hero-photo-img {
-  width: 95.5%; /* 128 / 134 */
-  top: 6.5%;
+  width: 95.5%; /* 126 / 132 */
+  top: 6.7%;
   height: auto;
   left: 50%;
   transform: translateX(-50%);
-  /* soft glow on the protruding head only */
   filter:
     drop-shadow(0 0 12px var(--accent-glow))
     drop-shadow(0 10px 18px rgba(0, 0, 0, .45));
@@ -382,8 +395,8 @@
 }
 
 @keyframes hero-pulse {
-  0%, 100% { opacity: .55; transform: scale(1); }
-  50% { opacity: .95; transform: scale(1.03); }
+  0%, 100% { opacity: .55; }
+  50% { opacity: .95; }
 }
 
 /* Social icons (hero rail + footer) */

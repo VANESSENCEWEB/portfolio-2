@@ -218,7 +218,6 @@ if (canvas && hero && !reduz) {
   const heroEl = document.querySelector('.hero');
   if (!stage || !heroEl || reduz) return;
 
-  const glow = stage.querySelector('.hero-photo-glow');
   const pop = stage.querySelector('.hero-photo-pop');
 
   let targetX = 0;
@@ -232,16 +231,14 @@ if (canvas && hero && !reduz) {
     curX += (targetX - curX) * 0.1;
     curY += (targetY - curY) * 0.1;
 
+    // Soft shift only — strong 3D tilt made the rings look off-center
     stage.style.transform =
-      `translate3d(0, ${scrollY}px, 0) rotateY(${curX}deg) rotateX(${curY}deg)`;
+      `translate3d(${curX * 1.2}px, ${scrollY + curY * 0.9}px, 0)`;
 
-    if (glow) {
-      glow.style.transform =
-        `translate3d(${curX * -1.1}px, ${curY * 1.2}px, 0)`;
-    }
+    // Glow stays locked to the circle center (no independent offset)
     if (pop) {
       pop.style.transform =
-        `translate(calc(-50% + ${curX * 0.5}px), ${curY * -0.45}px)`;
+        `translate(calc(-50% + ${curX * 0.35}px), ${curY * -0.3}px)`;
     }
 
     rafId = requestAnimationFrame(tick);
@@ -254,8 +251,8 @@ if (canvas && hero && !reduz) {
       const rect = heroEl.getBoundingClientRect();
       const px = (e.clientX - rect.left) / rect.width - 0.5;
       const py = (e.clientY - rect.top) / rect.height - 0.5;
-      targetX = px * 14;
-      targetY = py * -11;
+      targetX = px * 8;
+      targetY = py * -6;
     },
     { passive: true }
   );
