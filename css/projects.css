@@ -79,6 +79,20 @@
   width: fit-content;
 }
 
+.project .case-cta.btn-subtle {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  box-shadow: none;
+}
+
+.project .case-cta.btn-subtle:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--ink-900);
+  border-color: var(--accent);
+  box-shadow: 0 0 22px var(--accent-glow);
+}
+
 .feats {
   display: flex;
   flex-wrap: wrap;
