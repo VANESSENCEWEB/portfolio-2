@@ -399,6 +399,7 @@ function runSplitTitles() {
 /* ── 9. NAV SCROLL SPY (numbered active underline) ───────── */
 (function navSpy() {
   const links = [...document.querySelectorAll('.nav-links a[data-section]')];
+  const sideDots = [...document.querySelectorAll('.side-dots a[data-section]')];
   if (!links.length) return;
 
   const sections = links.map((link) => {
@@ -414,6 +415,12 @@ function runSplitTitles() {
     links.forEach((link) => {
       if (link.dataset.section === id) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
+    });
+    sideDots.forEach((dot) => {
+      const on = dot.dataset.section === id;
+      dot.classList.toggle('is-active', on);
+      if (on) dot.setAttribute('aria-current', 'page');
+      else dot.removeAttribute('aria-current');
     });
   }
 

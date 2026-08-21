@@ -265,8 +265,9 @@
   opacity: .85;
   pointer-events: none;
   z-index: 0;
-  animation: hero-pulse 3.2s ease-in-out infinite;
+  animation: hero-glow-drift 5.5s ease-in-out infinite;
   transition: background var(--transition);
+  will-change: opacity, filter, transform;
 }
 
 .hero-photo-img {
@@ -407,6 +408,25 @@
 @keyframes hero-pulse {
   0%, 100% { opacity: .55; }
   50% { opacity: .95; }
+}
+
+/* Soft ambient drift — glow only, never the photo or title */
+@keyframes hero-glow-drift {
+  0%, 100% {
+    opacity: .58;
+    filter: blur(12px) hue-rotate(0deg);
+    transform: scale(1);
+  }
+  40% {
+    opacity: .92;
+    filter: blur(16px) hue-rotate(10deg);
+    transform: scale(1.045);
+  }
+  70% {
+    opacity: .72;
+    filter: blur(14px) hue-rotate(-6deg);
+    transform: scale(1.02);
+  }
 }
 
 /* Social icons (hero rail + footer) */

@@ -136,7 +136,9 @@
   .hero-photo-dots,
   .hero-photo-orbit,
   .hero-photo-glow,
-  .hero-status::before {
+  .hero-status::before,
+  .side-dots a.is-active,
+  .side-dots a[aria-current="page"] {
     animation: none;
   }
 

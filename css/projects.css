@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   PROJECTS — soft cards, typographic covers, featured case
+   PROJECTS — neon cards aligned with hero accent system
    ═══════════════════════════════════════════════════════════ */
 
 .projects {
@@ -11,19 +11,23 @@
 .project {
   display: block;
   text-decoration: none;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--surface-0);
-  box-shadow: var(--shadow-sm);
+  background: var(--ink-900);
+  box-shadow: 0 0 0 transparent;
   transition:
     transform var(--dur-base) var(--ease-out-quart),
-    box-shadow var(--dur-base) var(--ease-out-quart);
+    box-shadow var(--dur-base) var(--ease-out-quart),
+    border-color var(--dur-base) var(--ease-out-quart);
 }
 
 .project:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow:
+    0 0 28px var(--accent-glow),
+    0 18px 40px rgba(0, 0, 0, 0.35);
 }
 
 .project-destaque {
@@ -39,13 +43,13 @@
 }
 
 .case-label {
-  color: var(--accent-blue);
+  color: var(--accent);
   margin-bottom: .25rem;
 }
 
 .case-lead {
   font: var(--text-body-md) !important;
-  color: var(--ink-700) !important;
+  color: var(--ink-100) !important;
   max-width: 40rem;
 }
 
@@ -55,17 +59,17 @@
   gap: 1.25rem;
   margin: .75rem 0 .25rem;
   padding: 1.25rem 0;
-  border-block: 1px solid var(--border-subtle);
+  border-block: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
 .case-k {
-  color: var(--accent-blue);
+  color: var(--accent);
   margin-bottom: .4rem;
 }
 
 .case-grid p:not(.case-k) {
   font: var(--text-body-sm);
-  color: var(--ink-700);
+  color: var(--ink-300);
   margin: 0;
 }
 
@@ -87,13 +91,24 @@
   font-size: .65rem;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
   padding: .25rem .65rem;
   border-radius: var(--radius-pill);
-  color: var(--ink-700);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  transition:
+    border-color var(--dur-base),
+    box-shadow var(--dur-base),
+    background var(--dur-base);
+}
+
+.project:hover .feats span {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
 }
 
 .project-cover {
+  position: relative;
   height: 180px;
   display: flex;
   align-items: center;
@@ -101,29 +116,76 @@
   overflow: hidden;
 }
 
+.project-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    color-mix(in srgb, var(--ink-900) 55%, transparent) 100%
+  );
+  pointer-events: none;
+  opacity: .7;
+  transition: opacity var(--dur-base);
+}
+
+.project:hover .project-cover::after {
+  opacity: .4;
+}
+
 .project-cover span {
+  position: relative;
+  z-index: 1;
   font-family: var(--f-display);
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
   letter-spacing: var(--tracking-tight);
   color: #fff;
+  text-shadow: 0 0 24px var(--accent-glow);
   transition: transform var(--dur-slow) var(--ease-out-quart);
 }
 
-.cover-a { background: var(--accent-coral); }
-.cover-b { background: var(--ink-900); }
-.cover-c { background: var(--accent-blue); }
-.cover-violet { background: var(--accent-violet); }
+.cover-a {
+  background:
+    radial-gradient(circle at 30% 20%, var(--accent-glow), transparent 55%),
+    linear-gradient(135deg, #1a0a12 0%, var(--accent-coral) 120%);
+}
+
+.cover-b {
+  background:
+    radial-gradient(circle at 70% 30%, var(--accent-glow), transparent 50%),
+    linear-gradient(145deg, #050508 0%, #1a1220 60%, color-mix(in srgb, var(--accent) 35%, #0a0a0b) 100%);
+}
+
+.cover-c {
+  background:
+    radial-gradient(circle at 40% 70%, var(--accent-glow), transparent 55%),
+    linear-gradient(135deg, #0a1020 0%, var(--accent-blue) 130%);
+}
+
+.cover-violet {
+  background:
+    radial-gradient(circle at 50% 40%, var(--accent-glow), transparent 50%),
+    linear-gradient(135deg, #12081f 0%, var(--accent-violet) 120%);
+}
 
 .cover-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transform: scale(1.01);
-  transition: transform var(--dur-slow) var(--ease-out-quart);
+  transition:
+    transform var(--dur-slow) var(--ease-out-quart),
+    filter var(--dur-slow) var(--ease-out-quart);
+  filter: saturate(1.05) brightness(0.92);
 }
 
-.project:hover .cover-img img,
+.project:hover .cover-img img {
+  transform: scale(1.08);
+  filter: saturate(1.15) brightness(1);
+}
+
 .project:hover .project-cover span {
   transform: scale(1.08);
 }
@@ -137,20 +199,48 @@
 .project-info h3 {
   font: var(--text-display-md);
   font-size: 1.15rem;
-  color: var(--ink-900);
+  color: #fff;
+  transition: color var(--dur-base), text-shadow var(--dur-base);
+}
+
+.project:hover .project-info h3 {
+  color: var(--accent);
+  text-shadow: 0 0 18px var(--accent-glow);
 }
 
 .project-info p {
   font: var(--text-body-sm);
-  color: var(--text-secondary);
+  color: var(--ink-300);
 }
 
 .project-tags {
-  color: var(--accent-blue);
+  color: var(--accent);
   margin-top: .2rem;
 }
 
 .project-lock {
-  opacity: .65;
+  opacity: .75;
   margin-top: .25rem;
+  color: var(--ink-300);
+}
+
+/* Soft entrance for cards already using .reveal */
+.project.reveal {
+  transition:
+    opacity var(--dur-reveal) var(--ease-out-quart),
+    transform var(--dur-reveal) var(--ease-out-quart),
+    filter var(--dur-reveal) var(--ease-out-quart),
+    box-shadow var(--dur-base) var(--ease-out-quart),
+    border-color var(--dur-base) var(--ease-out-quart);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project:hover {
+    transform: none;
+  }
+
+  .project:hover .cover-img img,
+  .project:hover .project-cover span {
+    transform: none;
+  }
 }
