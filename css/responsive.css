@@ -89,6 +89,15 @@
     grid-template-columns: 1fr;
   }
 
+  .project,
+  .project-destaque {
+    grid-template-columns: 1fr;
+  }
+
+  .project-visual {
+    max-width: none;
+  }
+
   .contato-grid {
     grid-template-columns: 1fr;
   }
@@ -157,7 +166,8 @@
   }
 
   .project:hover .cover-img img,
-  .project:hover .project-cover span {
+  .project:hover .project-media-mark,
+  .project:hover .project-visual {
     transform: none;
   }
 
