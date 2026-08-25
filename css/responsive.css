@@ -145,6 +145,9 @@
   .hero-photo-dots,
   .hero-photo-orbit,
   .hero-photo-glow,
+  .hero-photo.is-ring-rainbow .hero-photo-base,
+  .hero-photo.is-ring-rainbow .hero-photo-ring,
+  .hero-photo.is-ring-rainbow .hero-photo-glow,
   .hero-status::before,
   .side-dots a.is-active,
   .side-dots a[aria-current="page"] {

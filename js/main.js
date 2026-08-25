@@ -172,19 +172,60 @@ if (canvas && hero && !reduz) {
   const colorToggle = document.getElementById('colorToggle');
   const colorOptions = document.getElementById('colorOptions');
   const colorOptionBtns = document.querySelectorAll('.color-option');
+  const heroPhoto = document.querySelector('.hero-photo');
   const allowed = ['green', 'cyan', 'pink', 'purple', 'orange'];
-  let currentColor = localStorage.getItem('portfolio-color') || 'pink';
+  const RAINBOW_MS = 2400;
+  const lockedKey = 'portfolio-color-locked';
+  const colorKey = 'portfolio-color';
+
+  let currentColor = localStorage.getItem(colorKey) || 'pink';
   if (!allowed.includes(currentColor)) currentColor = 'pink';
+  let userPicked = false;
+  let settleTimer = 0;
 
   function applyColor() {
     html.setAttribute('data-color', currentColor);
     colorOptionBtns.forEach((btn) => {
       btn.classList.toggle('is-active', btn.dataset.color === currentColor);
     });
-    localStorage.setItem('portfolio-color', currentColor);
+    localStorage.setItem(colorKey, currentColor);
   }
 
-  applyColor();
+  function pickRandom() {
+    return allowed[Math.floor(Math.random() * allowed.length)];
+  }
+
+  function settleTo(color, { lock = false } = {}) {
+    currentColor = allowed.includes(color) ? color : pickRandom();
+    applyColor();
+    if (heroPhoto) heroPhoto.classList.remove('is-ring-rainbow');
+    if (lock) localStorage.setItem(lockedKey, '1');
+  }
+
+  function settleAfterRainbow() {
+    if (userPicked) return;
+    const locked = localStorage.getItem(lockedKey) === '1';
+    const saved = localStorage.getItem(colorKey);
+    // Locked choice from the picker wins; otherwise land on a random accent
+    const next = locked && allowed.includes(saved) ? saved : pickRandom();
+    settleTo(next, { lock: false });
+  }
+
+  // Keep rainbow on first paint; sync picker UI lightly without ending rainbow
+  colorOptionBtns.forEach((btn) => {
+    btn.classList.toggle('is-active', btn.dataset.color === currentColor);
+  });
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    if (heroPhoto) heroPhoto.classList.remove('is-ring-rainbow');
+    const locked = localStorage.getItem(lockedKey) === '1';
+    const saved = localStorage.getItem(colorKey);
+    settleTo(locked && allowed.includes(saved) ? saved : pickRandom());
+  } else {
+    if (heroPhoto) heroPhoto.classList.add('is-ring-rainbow');
+    settleTimer = window.setTimeout(settleAfterRainbow, RAINBOW_MS);
+  }
 
   if (!colorToggle || !colorOptions) return;
 
@@ -197,8 +238,9 @@ if (canvas && hero && !reduz) {
   colorOptionBtns.forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      currentColor = btn.dataset.color;
-      applyColor();
+      userPicked = true;
+      window.clearTimeout(settleTimer);
+      settleTo(btn.dataset.color, { lock: true });
       colorOptions.classList.remove('is-open');
       colorToggle.setAttribute('aria-expanded', 'false');
     });

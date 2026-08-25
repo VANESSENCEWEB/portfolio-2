@@ -345,7 +345,89 @@
   z-index: 3;
   transform-origin: 50% 50%;
   animation: hero-spin 30s linear infinite;
-  transition: border-color var(--transition), box-shadow var(--transition);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition),
+    background var(--transition),
+    opacity var(--dur-base);
+}
+
+/* Rainbow intro — colorful conic ring before accent settles */
+@property --rainbow-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+.hero-photo.is-ring-rainbow {
+  --rainbow-angle: 0deg;
+  --rainbow-spectrum: conic-gradient(
+    from var(--rainbow-angle),
+    #39ff88 0deg,
+    #06b6d4 60deg,
+    #3d7bff 120deg,
+    #9b6bff 180deg,
+    #ff2ea6 240deg,
+    #f97316 300deg,
+    #39ff88 360deg
+  );
+}
+
+.hero-photo.is-ring-rainbow .hero-photo-base {
+  border-color: transparent;
+  background:
+    linear-gradient(#0a0a0b 0 0) padding-box,
+    var(--rainbow-spectrum) border-box;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 48px rgba(255, 46, 166, 0.28),
+    0 0 64px rgba(57, 255, 136, 0.18),
+    0 18px 48px rgba(0, 0, 0, 0.45);
+  animation: hero-rainbow-shift 5s linear infinite;
+}
+
+.hero-photo.is-ring-rainbow .hero-photo-ring {
+  border-color: transparent;
+  box-shadow:
+    0 0 28px rgba(155, 107, 255, 0.35),
+    0 0 48px rgba(6, 182, 212, 0.2);
+  background: var(--rainbow-spectrum);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
+  animation:
+    hero-spin 30s linear infinite,
+    hero-rainbow-shift 5s linear infinite;
+}
+
+.hero-photo.is-ring-rainbow .hero-photo-glow {
+  background: conic-gradient(
+    from var(--rainbow-angle),
+    rgba(57, 255, 136, 0.45),
+    rgba(6, 182, 212, 0.35),
+    rgba(155, 107, 255, 0.4),
+    rgba(255, 46, 166, 0.45),
+    rgba(249, 115, 22, 0.35),
+    rgba(57, 255, 136, 0.45)
+  );
+  filter: blur(18px);
+  opacity: 0.9;
+  animation:
+    hero-glow-drift 5.5s ease-in-out infinite,
+    hero-rainbow-shift 5s linear infinite;
+}
+
+.hero-photo.is-ring-rainbow .hero-orbit-dot {
+  fill: #fff;
+}
+
+.hero-photo.is-ring-rainbow .hero-photo-pop .hero-photo-img {
+  filter:
+    drop-shadow(0 0 10px rgba(255, 46, 166, 0.35))
+    drop-shadow(0 0 18px rgba(57, 255, 136, 0.25));
+}
+
+@keyframes hero-rainbow-shift {
+  to { --rainbow-angle: 360deg; }
 }
 
 .hero-photo-orbit {
