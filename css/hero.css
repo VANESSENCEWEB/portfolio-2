@@ -347,87 +347,101 @@
   animation: hero-spin 30s linear infinite;
   transition:
     border-color var(--transition),
-    box-shadow var(--transition),
-    background var(--transition),
-    opacity var(--dur-base);
+    box-shadow var(--transition);
 }
 
-/* Rainbow intro — colorful conic ring before accent settles */
-@property --rainbow-angle {
+/* Neon chase intro — light runs along the ring, then accent settles */
+@property --neon-angle {
   syntax: "<angle>";
-  inherits: true;
+  inherits: false;
   initial-value: 0deg;
 }
 
-.hero-photo.is-ring-rainbow {
-  --rainbow-angle: 0deg;
-  --rainbow-spectrum: conic-gradient(
-    from var(--rainbow-angle),
-    #39ff88 0deg,
-    #06b6d4 60deg,
-    #3d7bff 120deg,
-    #9b6bff 180deg,
-    #ff2ea6 240deg,
-    #f97316 300deg,
-    #39ff88 360deg
-  );
-}
-
-.hero-photo.is-ring-rainbow .hero-photo-base {
-  border-color: transparent;
-  background:
-    linear-gradient(#0a0a0b 0 0) padding-box,
-    var(--rainbow-spectrum) border-box;
+.hero-photo.is-ring-neon .hero-photo-base {
+  border-color: rgba(255, 255, 255, 0.28);
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.08),
-    0 0 48px rgba(255, 46, 166, 0.28),
-    0 0 64px rgba(57, 255, 136, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 0 28px rgba(255, 255, 255, 0.08),
     0 18px 48px rgba(0, 0, 0, 0.45);
-  animation: hero-rainbow-shift 5s linear infinite;
 }
 
-.hero-photo.is-ring-rainbow .hero-photo-ring {
-  border-color: transparent;
-  box-shadow:
-    0 0 28px rgba(155, 107, 255, 0.35),
-    0 0 48px rgba(6, 182, 212, 0.2);
-  background: var(--rainbow-spectrum);
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
-  mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
-  animation:
-    hero-spin 30s linear infinite,
-    hero-rainbow-shift 5s linear infinite;
+.hero-photo.is-ring-neon .hero-photo-ring {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+  animation: none; /* pause slow spin while the neon runs */
+  overflow: visible;
 }
 
-.hero-photo.is-ring-rainbow .hero-photo-glow {
+.hero-photo.is-ring-neon .hero-photo-ring::before,
+.hero-photo.is-ring-neon .hero-photo-ring::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  pointer-events: none;
   background: conic-gradient(
-    from var(--rainbow-angle),
-    rgba(57, 255, 136, 0.45),
-    rgba(6, 182, 212, 0.35),
-    rgba(155, 107, 255, 0.4),
-    rgba(255, 46, 166, 0.45),
-    rgba(249, 115, 22, 0.35),
-    rgba(57, 255, 136, 0.45)
+    from var(--neon-angle),
+    transparent 0deg,
+    transparent 292deg,
+    rgba(57, 255, 136, 0.15) 308deg,
+    #39ff88 328deg,
+    #06b6d4 340deg,
+    #ff2ea6 350deg,
+    #ffffff 355deg,
+    transparent 360deg
   );
-  filter: blur(18px);
-  opacity: 0.9;
-  animation:
-    hero-glow-drift 5.5s ease-in-out infinite,
-    hero-rainbow-shift 5s linear infinite;
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 3px),
+    #000 calc(100% - 1px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 3px),
+    #000 calc(100% - 1px)
+  );
+  animation: hero-neon-chase 1.35s linear infinite;
 }
 
-.hero-photo.is-ring-rainbow .hero-orbit-dot {
+.hero-photo.is-ring-neon .hero-photo-ring::before {
+  filter: drop-shadow(0 0 6px rgba(255, 46, 166, 0.65))
+    drop-shadow(0 0 10px rgba(57, 255, 136, 0.45));
+  opacity: 1;
+}
+
+.hero-photo.is-ring-neon .hero-photo-ring::after {
+  inset: -8px;
+  filter: blur(7px);
+  opacity: 0.75;
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 10px),
+    #000 calc(100% - 4px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 10px),
+    #000 calc(100% - 4px)
+  );
+}
+
+.hero-photo.is-ring-neon .hero-photo-glow {
+  opacity: 0.35;
+  filter: blur(14px);
+  animation: none;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 68%
+  );
+}
+
+.hero-photo.is-ring-neon .hero-orbit-dot {
   fill: #fff;
 }
 
-.hero-photo.is-ring-rainbow .hero-photo-pop .hero-photo-img {
-  filter:
-    drop-shadow(0 0 10px rgba(255, 46, 166, 0.35))
-    drop-shadow(0 0 18px rgba(57, 255, 136, 0.25));
-}
-
-@keyframes hero-rainbow-shift {
-  to { --rainbow-angle: 360deg; }
+@keyframes hero-neon-chase {
+  to { --neon-angle: 360deg; }
 }
 
 .hero-photo-orbit {

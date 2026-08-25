@@ -174,7 +174,7 @@ if (canvas && hero && !reduz) {
   const colorOptionBtns = document.querySelectorAll('.color-option');
   const heroPhoto = document.querySelector('.hero-photo');
   const allowed = ['green', 'cyan', 'pink', 'purple', 'orange'];
-  const RAINBOW_MS = 2400;
+  const RAINBOW_MS = 2800;
   const lockedKey = 'portfolio-color-locked';
   const colorKey = 'portfolio-color';
 
@@ -198,11 +198,11 @@ if (canvas && hero && !reduz) {
   function settleTo(color, { lock = false } = {}) {
     currentColor = allowed.includes(color) ? color : pickRandom();
     applyColor();
-    if (heroPhoto) heroPhoto.classList.remove('is-ring-rainbow');
+    if (heroPhoto) heroPhoto.classList.remove('is-ring-neon');
     if (lock) localStorage.setItem(lockedKey, '1');
   }
 
-  function settleAfterRainbow() {
+  function settleAfterNeon() {
     if (userPicked) return;
     const locked = localStorage.getItem(lockedKey) === '1';
     const saved = localStorage.getItem(colorKey);
@@ -211,20 +211,20 @@ if (canvas && hero && !reduz) {
     settleTo(next, { lock: false });
   }
 
-  // Keep rainbow on first paint; sync picker UI lightly without ending rainbow
+  // Keep neon chase on first paint; sync picker UI lightly without ending intro
   colorOptionBtns.forEach((btn) => {
     btn.classList.toggle('is-active', btn.dataset.color === currentColor);
   });
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduceMotion) {
-    if (heroPhoto) heroPhoto.classList.remove('is-ring-rainbow');
+    if (heroPhoto) heroPhoto.classList.remove('is-ring-neon');
     const locked = localStorage.getItem(lockedKey) === '1';
     const saved = localStorage.getItem(colorKey);
     settleTo(locked && allowed.includes(saved) ? saved : pickRandom());
   } else {
-    if (heroPhoto) heroPhoto.classList.add('is-ring-rainbow');
-    settleTimer = window.setTimeout(settleAfterRainbow, RAINBOW_MS);
+    if (heroPhoto) heroPhoto.classList.add('is-ring-neon');
+    settleTimer = window.setTimeout(settleAfterNeon, RAINBOW_MS);
   }
 
   if (!colorToggle || !colorOptions) return;
