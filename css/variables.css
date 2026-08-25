@@ -119,6 +119,11 @@
   --dur-slow: 600ms;
   --dur-reveal: 900ms;
   --transition: 0.3s ease;
+
+  /* Spotlight cursor (position updated via CSS vars) */
+  --spot-x: 50vw;
+  --spot-y: 40vh;
+  --spot-size: 38rem;
 }
 
 /* Accent color system (from dificil) */
