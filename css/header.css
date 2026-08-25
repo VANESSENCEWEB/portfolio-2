@@ -257,3 +257,68 @@
   background: var(--ink-900);
   color: var(--surface-0);
 }
+
+/* ── Side neon scroll dots ─────────────────────────────── */
+.side-dots {
+  position: fixed;
+  right: clamp(0.75rem, 2vw, 1.5rem);
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.5rem 0;
+  pointer-events: none;
+}
+
+.side-dots a {
+  pointer-events: auto;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  background: transparent;
+  box-shadow: 0 0 0 transparent;
+  transition:
+    background var(--dur-base) var(--ease-out-quart),
+    border-color var(--dur-base) var(--ease-out-quart),
+    box-shadow var(--dur-base) var(--ease-out-quart),
+    transform var(--dur-base) var(--ease-out-quart);
+}
+
+.side-dots a:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+  transform: scale(1.15);
+}
+
+.side-dots a.is-active,
+.side-dots a[aria-current="page"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent),
+    0 0 16px var(--accent-glow);
+  animation: side-dot-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes side-dot-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent),
+      0 0 14px var(--accent-glow);
+  }
+  50% {
+    box-shadow:
+      0 0 0 7px color-mix(in srgb, var(--accent) 8%, transparent),
+      0 0 22px var(--accent-glow);
+  }
+}
+
+@media (max-width: 900px) {
+  .side-dots {
+    display: none;
+  }
+}

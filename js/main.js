@@ -173,8 +173,8 @@ if (canvas && hero && !reduz) {
   const colorOptions = document.getElementById('colorOptions');
   const colorOptionBtns = document.querySelectorAll('.color-option');
   const allowed = ['green', 'cyan', 'pink', 'purple', 'orange'];
-  let currentColor = localStorage.getItem('portfolio-color') || 'green';
-  if (!allowed.includes(currentColor)) currentColor = 'green';
+  let currentColor = localStorage.getItem('portfolio-color') || 'pink';
+  if (!allowed.includes(currentColor)) currentColor = 'pink';
 
   function applyColor() {
     html.setAttribute('data-color', currentColor);
@@ -218,9 +218,7 @@ if (canvas && hero && !reduz) {
   const heroEl = document.querySelector('.hero');
   if (!stage || !heroEl || reduz) return;
 
-  const glow = stage.querySelector('.hero-photo-glow');
   const pop = stage.querySelector('.hero-photo-pop');
-  const ring = stage.querySelector('.hero-photo-ring');
 
   let targetX = 0;
   let targetY = 0;
@@ -233,20 +231,14 @@ if (canvas && hero && !reduz) {
     curX += (targetX - curX) * 0.1;
     curY += (targetY - curY) * 0.1;
 
+    // Soft shift only — strong 3D tilt made the rings look off-center
     stage.style.transform =
-      `translate3d(0, ${scrollY}px, 0) rotateY(${curX}deg) rotateX(${curY}deg)`;
+      `translate3d(${curX * 1.2}px, ${scrollY + curY * 0.9}px, 0)`;
 
-    if (glow) {
-      glow.style.transform =
-        `translate3d(${curX * -1.2}px, ${curY * 1.4}px, -40px) scale(1.05)`;
-    }
-    if (ring) {
-      ring.style.transform =
-        `translate3d(${curX * 0.35}px, ${curY * -0.25}px, 12px)`;
-    }
+    // Glow stays locked to the circle center (no independent offset)
     if (pop) {
       pop.style.transform =
-        `translateX(-50%) translate3d(${curX * 0.9}px, ${curY * -1.1}px, 48px)`;
+        `translate(calc(-50% + ${curX * 0.35}px), ${curY * -0.3}px)`;
     }
 
     rafId = requestAnimationFrame(tick);
@@ -259,8 +251,8 @@ if (canvas && hero && !reduz) {
       const rect = heroEl.getBoundingClientRect();
       const px = (e.clientX - rect.left) / rect.width - 0.5;
       const py = (e.clientY - rect.top) / rect.height - 0.5;
-      targetX = px * 18;
-      targetY = py * -14;
+      targetX = px * 8;
+      targetY = py * -6;
     },
     { passive: true }
   );
@@ -279,7 +271,7 @@ if (canvas && hero && !reduz) {
     () => {
       const rect = heroEl.getBoundingClientRect();
       const progress = Math.min(1, Math.max(0, -rect.top / (rect.height || 1)));
-      scrollY = progress * 48;
+      scrollY = progress * 40;
     },
     { passive: true }
   );
@@ -407,6 +399,7 @@ function runSplitTitles() {
 /* ── 9. NAV SCROLL SPY (numbered active underline) ───────── */
 (function navSpy() {
   const links = [...document.querySelectorAll('.nav-links a[data-section]')];
+  const sideDots = [...document.querySelectorAll('.side-dots a[data-section]')];
   if (!links.length) return;
 
   const sections = links.map((link) => {
@@ -422,6 +415,12 @@ function runSplitTitles() {
     links.forEach((link) => {
       if (link.dataset.section === id) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
+    });
+    sideDots.forEach((dot) => {
+      const on = dot.dataset.section === id;
+      dot.classList.toggle('is-active', on);
+      if (on) dot.setAttribute('aria-current', 'page');
+      else dot.removeAttribute('aria-current');
     });
   }
 

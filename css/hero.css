@@ -27,7 +27,7 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: auto minmax(0, 1.1fr) minmax(280px, 1fr);
+  grid-template-columns: auto minmax(0, 1.05fr) minmax(300px, 0.95fr);
   gap: clamp(1.5rem, 4vw, 3.5rem);
   align-items: center;
   width: 100%;
@@ -109,7 +109,7 @@
 
 .hero-title {
   font-family: var(--f-display);
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-size: clamp(3.2rem, 8vw, 6rem);
   line-height: .95;
   font-weight: 700;
   letter-spacing: var(--tracking-tight);
@@ -222,91 +222,182 @@
   color: var(--accent);
 }
 
-/* Photo — dual-layer pop-out + neon orbit + parallax */
+/* Photo — glow → base → ring → orbit → pop-out (perfect circles, one center) */
 .hero-photo {
   display: flex;
   justify-content: center;
   align-items: center;
+  justify-self: center;
+  width: min(500px, 100%);
   perspective: 1200px;
-  padding-block: 2.5rem 1rem;
+  padding-block: 5.5rem 2rem;
+  overflow: visible;
+  min-width: 0;
 }
 
 .hero-photo-stage {
-  --photo-size: min(400px, 78vw);
+  /* Size from WIDTH only + aspect-ratio so the grid can never make an oval */
   position: relative;
-  width: var(--photo-size);
-  height: var(--photo-size);
-  transform-style: preserve-3d;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  transform-style: flat;
   will-change: transform;
+  overflow: visible;
 }
 
 .hero-photo-glow {
   position: absolute;
-  inset: -18%;
+  left: 50%;
+  top: 50%;
+  width: 148%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  translate: -50% -50%;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 42%, var(--accent-glow) 0%, transparent 58%),
-    radial-gradient(circle at 50% 70%, color-mix(in srgb, var(--accent) 22%, transparent) 0%, transparent 55%);
-  filter: blur(18px);
-  opacity: .95;
+  background: radial-gradient(
+    circle,
+    var(--accent-glow) 0%,
+    color-mix(in srgb, var(--accent) 18%, transparent) 34%,
+    transparent 68%
+  );
+  filter: blur(12px);
+  opacity: .85;
   pointer-events: none;
   z-index: 0;
-  animation: hero-pulse 3.2s ease-in-out infinite;
+  animation: hero-glow-drift 5.5s ease-in-out infinite;
   transition: background var(--transition);
+  will-change: opacity, filter, transform;
 }
 
-.hero-photo-dots {
+.hero-photo-img {
   position: absolute;
-  inset: -22px;
-  border-radius: 50%;
-  z-index: 1;
+  left: 50%;
+  width: 126%;
+  height: auto;
+  max-width: none;
+  top: -24%;
+  transform: translateX(-50%);
+  display: block;
+  user-select: none;
   pointer-events: none;
-  background: repeating-conic-gradient(
-    from 0deg,
-    var(--accent) 0deg 3deg,
-    transparent 3deg 18deg
-  );
-  -webkit-mask-image: radial-gradient(closest-side, transparent calc(100% - 7px), #000 calc(100% - 6px), #000 100%, transparent 101%);
-  mask-image: radial-gradient(closest-side, transparent calc(100% - 7px), #000 calc(100% - 6px), #000 100%, transparent 101%);
-  opacity: .85;
-  animation: hero-spin 28s linear infinite;
-  filter: drop-shadow(0 0 8px var(--accent-glow));
-  transition: background var(--transition), filter var(--transition);
+  object-fit: cover;
+  object-position: center top;
 }
 
-.hero-photo-orbit {
+.hero-photo-base {
   position: absolute;
-  inset: -8px;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  translate: -50% -50%;
   z-index: 2;
-  pointer-events: none;
-  animation: hero-spin 22s linear infinite;
-  overflow: visible;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--accent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent),
+    0 0 48px var(--accent-glow),
+    0 18px 48px rgba(0, 0, 0, .45);
+  background: #0a0a0b;
+  transition: border-color var(--transition), box-shadow var(--transition);
 }
 
-.hero-photo-orbit-text {
-  fill: var(--accent);
-  font-family: var(--f-mono);
-  font-size: 7.2px;
-  font-weight: 600;
-  letter-spacing: 1.6px;
-  text-transform: uppercase;
-  transition: fill var(--transition);
+.hero-photo-base .hero-photo-img {
+  width: 126%;
+  top: -24%;
 }
 
 .hero-photo-ring {
   position: absolute;
-  inset: 4%;
-  border: 2px solid var(--accent);
+  left: 50%;
+  top: 50%;
+  width: 112%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  translate: -50% -50%;
+  border: 2px dashed var(--accent);
   border-radius: 50%;
   box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent),
-    0 0 28px var(--accent-glow),
-    inset 0 0 24px var(--accent-glow);
+    0 0 22px var(--accent-glow),
+    inset 0 0 18px var(--accent-glow);
   pointer-events: none;
   z-index: 3;
+  transform-origin: 50% 50%;
+  animation: hero-spin 30s linear infinite;
   transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.hero-photo-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  /* path r=92 sits just inside the dashed ring (112%) */
+  width: 120%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  translate: -50% -50%;
+  z-index: 4;
+  pointer-events: none;
+  overflow: visible;
+  transform-origin: 50% 50%;
+  animation: hero-spin 24s linear infinite;
+}
+
+.hero-photo-orbit-text {
+  fill: rgba(255, 255, 255, .92);
+  font-family: var(--f-body);
+  font-size: 5.6px;
+  font-weight: 600;
+  letter-spacing: 0; /* must stay 0 — conflicts with textLength spacing */
+  text-transform: uppercase;
+}
+
+.hero-orbit-dot {
+  fill: var(--accent);
+}
+
+.hero-photo-pop {
+  position: absolute;
+  left: 50%;
+  top: -28%;
+  width: 132%;
+  height: 60%;
+  z-index: 8;
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+  transform: translateX(-50%);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 52%,
+    rgba(0, 0, 0, .7) 70%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 52%,
+    rgba(0, 0, 0, .7) 70%,
+    transparent 100%
+  );
+}
+
+.hero-photo-pop .hero-photo-img {
+  width: 95.5%;
+  top: 6.7%;
+  height: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  filter:
+    drop-shadow(0 0 12px var(--accent-glow))
+    drop-shadow(0 10px 18px rgba(0, 0, 0, .45));
 }
 
 @keyframes hero-spin {
@@ -315,74 +406,27 @@
 }
 
 @keyframes hero-pulse {
-  0%, 100% { opacity: .55; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.04); }
+  0%, 100% { opacity: .55; }
+  50% { opacity: .95; }
 }
 
-/* Shared subject framing for base + pop layers */
-.hero-photo-img {
-  position: absolute;
-  left: 50%;
-  width: 118%;
-  height: auto;
-  max-width: none;
-  transform: translateX(-50%);
-  top: -4%;
-  display: block;
-  user-select: none;
-  pointer-events: none;
-}
-
-/* Layer 1: clipped inside the circle (behind pop, above ring fill) */
-.hero-photo-base {
-  position: absolute;
-  inset: 7%;
-  border-radius: 50%;
-  overflow: hidden;
-  z-index: 4;
-  background: color-mix(in srgb, var(--ink-900) 70%, var(--accent) 8%);
-}
-
-.hero-photo-base .hero-photo-img {
-  top: -6%;
-  width: 128%;
-}
-
-/* Layer 2: top half above rings — head/shoulders “sair do círculo” */
-.hero-photo-pop {
-  position: absolute;
-  left: 50%;
-  top: -14%;
-  width: 128%;
-  height: 68%;
-  transform: translateX(-50%) translateZ(36px);
-  z-index: 6;
-  overflow: hidden;
-  pointer-events: none;
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 52%,
-    rgba(0, 0, 0, .75) 68%,
-    transparent 88%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 52%,
-    rgba(0, 0, 0, .75) 68%,
-    transparent 88%
-  );
-  filter:
-    drop-shadow(0 0 18px var(--accent-glow))
-    drop-shadow(0 0 42px color-mix(in srgb, var(--accent) 55%, transparent))
-    drop-shadow(0 18px 28px rgba(0, 0, 0, .45));
-  transition: filter var(--transition);
-}
-
-.hero-photo-pop .hero-photo-img {
-  top: 0;
-  width: 100%;
+/* Soft ambient drift — glow only, never the photo or title */
+@keyframes hero-glow-drift {
+  0%, 100% {
+    opacity: .58;
+    filter: blur(12px) hue-rotate(0deg);
+    transform: scale(1);
+  }
+  40% {
+    opacity: .92;
+    filter: blur(16px) hue-rotate(10deg);
+    transform: scale(1.045);
+  }
+  70% {
+    opacity: .72;
+    filter: blur(14px) hue-rotate(-6deg);
+    transform: scale(1.02);
+  }
 }
 
 /* Social icons (hero rail + footer) */

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-color="green">
+<html lang="pt-BR" data-color="pink">
 <head>
   <!--
   ═══════════════════════════════════════════════════════════
@@ -31,7 +31,7 @@
     <div class="shell nav-inner">
       <a class="nav-brand" href="#topo">
         <span class="nav-brand-photo">
-          <img src="assets/img/vanessa-lima.webp" alt="" width="42" height="42" />
+          <img src="assets/img/vanessa-lima.jpg" alt="" width="42" height="42" />
           <span class="nav-status" aria-hidden="true" title="Online"></span>
         </span>
         <span class="nav-brand-text">
@@ -70,9 +70,9 @@
             </svg>
           </button>
           <div class="color-options" id="colorOptions" role="listbox" aria-label="Cor de destaque">
-            <button class="color-option is-active" type="button" data-color="green" title="Verde" aria-label="Verde"></button>
+            <button class="color-option" type="button" data-color="green" title="Verde" aria-label="Verde"></button>
             <button class="color-option" type="button" data-color="cyan" title="Ciano" aria-label="Ciano"></button>
-            <button class="color-option" type="button" data-color="pink" title="Rosa" aria-label="Rosa"></button>
+            <button class="color-option is-active" type="button" data-color="pink" title="Rosa" aria-label="Rosa"></button>
             <button class="color-option" type="button" data-color="purple" title="Roxo" aria-label="Roxo"></button>
             <button class="color-option" type="button" data-color="orange" title="Laranja" aria-label="Laranja"></button>
           </div>
@@ -102,9 +102,6 @@
           <a class="social-icon social-icon--github" href="https://github.com/VANESSENCEWEB" target="_blank" rel="noopener" aria-label="GitHub">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.35 9.35 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.81c0 .27.18.59.69.49A10.06 10.06 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
           </a>
-          <a class="social-icon social-icon--instagram" href="https://instagram.com/vanessenceweb" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zm0-2.16C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95C23.73 2.69 21.31.27 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
-          </a>
         </aside>
 
         <div class="hero-copy">
@@ -121,7 +118,7 @@
           <p class="hero-sub">
             Front-end em formação na <strong>UNICAP</strong> (3º período).
             Construo sites e sistemas em <strong>HTML, CSS e JavaScript</strong>
-            — com projetos reais em produção. Fundadora da <strong>Vanessenceweb</strong>.
+            — com projetos reais em produção.
           </p>
 
           <div class="hero-ctas">
@@ -130,10 +127,57 @@
           </div>
         </div>
 
-        <div class="hero-photo">
-          <div class="hero-photo-glow" aria-hidden="true"></div>
-          <div class="hero-photo-inner">
-            <img src="assets/img/vanessa-lima.jpg" alt="Foto de Vanessa Lima" onerror="this.parentElement.classList.add('sem-foto'); this.remove()" />
+        <div class="hero-photo" aria-label="Foto de Vanessa Lima">
+          <div class="hero-photo-stage" id="heroPhotoStage">
+            <!-- 1. Glow -->
+            <div class="hero-photo-glow" aria-hidden="true"></div>
+
+            <!-- 2. Foto base (dentro do anel) -->
+            <div class="hero-photo-base">
+              <img
+                class="hero-photo-img"
+                src="assets/img/figma/hero-cutout.webp"
+                alt="Vanessa Lima"
+                width="688"
+                height="1195"
+                decoding="async"
+              />
+            </div>
+
+            <!-- 3. Anel tracejado -->
+            <div class="hero-photo-ring" aria-hidden="true"></div>
+
+            <!-- 3b. Texto circular orbitante -->
+            <svg class="hero-photo-orbit" viewBox="0 0 200 200" aria-hidden="true">
+              <defs>
+                <!-- Circle between photo rim and dashed ring; circumference ≈ 2π·92 = 578 -->
+                <path
+                  id="heroOrbitPath"
+                  d="M100,100 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"
+                  fill="none"
+                />
+              </defs>
+              <text class="hero-photo-orbit-text">
+                <textPath
+                  href="#heroOrbitPath"
+                  startOffset="0"
+                  textLength="578"
+                  lengthAdjust="spacing"
+                >FRONT-END DEV <tspan class="hero-orbit-dot">•</tspan> DISPONÍVEL PARA ESTÁGIO <tspan class="hero-orbit-dot">•</tspan> FRONT-END DEV <tspan class="hero-orbit-dot">•</tspan> DISPONÍVEL PARA ESTÁGIO <tspan class="hero-orbit-dot">•</tspan> FRONT-END DEV <tspan class="hero-orbit-dot">•</tspan> DISPONÍVEL PARA ESTÁGIO <tspan class="hero-orbit-dot">•</tspan> FRONT-END DEV <tspan class="hero-orbit-dot">•</tspan> DISPONÍVEL PARA ESTÁGIO <tspan class="hero-orbit-dot">•</tspan></textPath>
+              </text>
+            </svg>
+
+            <!-- 4. Pop-out (cabeça/ombros acima dos anéis) -->
+            <div class="hero-photo-pop" aria-hidden="true">
+              <img
+                class="hero-photo-img"
+                src="assets/img/figma/hero-cutout.webp"
+                alt=""
+                width="688"
+                height="1195"
+                decoding="async"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -193,16 +237,34 @@
 
       <div class="projects">
 
-        <article class="project project-destaque case-study reveal">
-          <div class="project-cover cover-b"><span>SISTEMA FLATS</span></div>
-          <div class="project-info">
-            <p class="mono case-label">Case em destaque · negócio real</p>
-            <h3>Recife Flats — Sistema de Hospedagem</h3>
+        <article class="project project-destaque case-study reveal" style="--project-tint: #ff2ea6; --project-tint-ink: #0a0a0b;">
+          <div class="project-visual">
+            <div class="project-media cover-flats" aria-hidden="true">
+              <span class="project-media-mark">FLATS</span>
+            </div>
+            <div class="project-chip-row">
+              <span class="project-chip">Full-stack</span>
+              <span class="project-chip">Produção</span>
+            </div>
+            <div class="project-title-slab">
+              <p class="project-slab-kicker mono">Case em destaque</p>
+              <h3>Recife Flats</h3>
+            </div>
+            <div class="project-card-foot">
+              <span class="project-avatar" aria-hidden="true">VL</span>
+              <div>
+                <p class="project-foot-name">Vanessa Lima</p>
+                <p class="project-foot-role mono">sistema de hospedagem</p>
+              </div>
+            </div>
+          </div>
+          <div class="project-panel">
+            <p class="mono case-label">negócio real · dados sensíveis</p>
+            <h3 class="project-panel-title">Sistema de Hospedagem</h3>
             <p class="case-lead">
-              Sistema completo de gestão para 4 apartamentos de temporada em Recife:
+              Gestão completa para 4 apartamentos de temporada em Recife:
               da landing pública ao painel interno com autenticação e banco no Supabase.
             </p>
-
             <div class="case-grid">
               <div>
                 <p class="mono case-k">Problema</p>
@@ -217,61 +279,171 @@
                 <p>Sistema em uso real: auth, diárias, PDF, welcome book e relatórios.</p>
               </div>
             </div>
-
-            <div class="feats">
-              <span>autenticação</span><span>dashboard</span><span>cálculo de diárias</span>
-              <span>contratos em PDF</span><span>welcome book</span>
-              <span>check-in/out</span><span>relatórios</span>
+            <div class="tech-badges" aria-label="Tecnologias">
+              <span>JavaScript</span><span>Supabase</span><span>GitHub Pages</span>
+              <span>Auth</span><span>PDF</span>
             </div>
-            <p class="project-tags mono">JavaScript · Supabase · GitHub Pages</p>
-            <p class="mono project-lock">🔒 em produção — demo sob solicitação (dados sensíveis)</p>
-            <a class="btn btn-subtle btn-sm case-cta" href="mailto:vanessalimaunicap@gmail.com?subject=Demo%20Recife%20Flats">Pedir demonstração</a>
+            <div class="feats">
+              <span>dashboard</span><span>diárias</span><span>contratos</span>
+              <span>welcome book</span><span>check-in/out</span><span>relatórios</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link project-link--solid" href="mailto:vanessalimaunicap@gmail.com?subject=Demo%20Recife%20Flats">Pedir demo</a>
+              <span class="project-lock mono">em produção — demo sob solicitação</span>
+            </div>
           </div>
         </article>
 
-        <a class="project reveal" href="https://nasa-explorer-nine-rho.vercel.app/" target="_blank" rel="noopener">
-          <div class="project-cover cover-img">
-            <img src="https://nasa-explorer-nine-rho.vercel.app/assets/og-image.png" alt="NASA Explorer — painel conectado às APIs da NASA" loading="lazy" />
+        <article class="project reveal" style="--project-tint: #06b6d4; --project-tint-ink: #041016;">
+          <div class="project-visual">
+            <div class="project-media cover-img">
+              <img src="https://nasa-explorer-nine-rho.vercel.app/assets/og-image.png" alt="" loading="lazy" />
+            </div>
+            <div class="project-chip-row">
+              <span class="project-chip">3D</span>
+              <span class="project-chip">APIs</span>
+            </div>
+            <div class="project-title-slab">
+              <p class="project-slab-kicker mono">Live product</p>
+              <h3>NASA Explorer</h3>
+            </div>
+            <div class="project-card-foot">
+              <span class="project-avatar" aria-hidden="true">VL</span>
+              <div>
+                <p class="project-foot-name">Vanessa Lima</p>
+                <p class="project-foot-role mono">space data dashboard</p>
+              </div>
+            </div>
           </div>
-          <div class="project-info">
-            <h3>NASA Explorer</h3>
-            <p>Painel conectado às APIs da NASA: foto astronômica do dia, asteroides em 3D
-               com Three.js e CRUD de favoritos persistido no Back4app.</p>
-            <p class="project-tags mono">JS · Three.js · APIs NASA · Back4app</p>
+          <div class="project-panel">
+            <p class="mono case-label">APIs · Three.js · persistência</p>
+            <h3 class="project-panel-title">Painel conectado à NASA</h3>
+            <p>
+              Foto astronômica do dia, asteroides em 3D com Three.js e CRUD de favoritos
+              persistido no Back4app.
+            </p>
+            <div class="tech-badges" aria-label="Tecnologias">
+              <span>JavaScript</span><span>Three.js</span><span>NASA APIs</span><span>Back4app</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link project-link--solid" href="https://nasa-explorer-nine-rho.vercel.app/" target="_blank" rel="noopener">Ver ao vivo</a>
+              <a class="project-link" href="https://github.com/VANESSENCEWEB" target="_blank" rel="noopener">GitHub</a>
+            </div>
           </div>
-        </a>
+        </article>
 
-        <a class="project reveal" href="https://github.com/VANESSENCEWEB/api-projeto-integrador" target="_blank" rel="noopener">
-          <div class="project-cover cover-c"><span>API</span></div>
-          <div class="project-info">
-            <h3>API REST — Node.js + Express</h3>
-            <p>CRUD completo com 40 testes automatizados em Newman/Postman (100% de aprovação),
-               CI no GitHub Actions e deploy no Render.</p>
-            <p class="project-tags mono">Node · Express · Newman · CI/CD</p>
+        <article class="project reveal" style="--project-tint: #39ff88; --project-tint-ink: #04140c;">
+          <div class="project-visual">
+            <div class="project-media cover-api" aria-hidden="true">
+              <span class="project-media-mark">{ }</span>
+            </div>
+            <div class="project-chip-row">
+              <span class="project-chip">Backend</span>
+              <span class="project-chip">CI/CD</span>
+            </div>
+            <div class="project-title-slab">
+              <p class="project-slab-kicker mono">API REST</p>
+              <h3>Node + Express</h3>
+            </div>
+            <div class="project-card-foot">
+              <span class="project-avatar" aria-hidden="true">VL</span>
+              <div>
+                <p class="project-foot-name">Vanessa Lima</p>
+                <p class="project-foot-role mono">40 testes · 100% ok</p>
+              </div>
+            </div>
           </div>
-        </a>
+          <div class="project-panel">
+            <p class="mono case-label">CRUD · testes · deploy</p>
+            <h3 class="project-panel-title">API REST com CI no GitHub Actions</h3>
+            <p>
+              CRUD completo com 40 testes automatizados em Newman/Postman (100% de aprovação),
+              pipeline no GitHub Actions e deploy no Render.
+            </p>
+            <div class="tech-badges" aria-label="Tecnologias">
+              <span>Node.js</span><span>Express</span><span>Newman</span><span>GitHub Actions</span><span>Render</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link project-link--solid" href="https://github.com/VANESSENCEWEB/api-projeto-integrador" target="_blank" rel="noopener">Ver no GitHub</a>
+            </div>
+          </div>
+        </article>
 
-        <a class="project reveal" href="https://vanessenceweb.github.io/simulador-irpf/" target="_blank" rel="noopener">
-          <div class="project-cover cover-a"><span>IRPF</span></div>
-          <div class="project-info">
-            <h3>Simulador IRPF 2025</h3>
-            <p>Calculadora educacional do Imposto de Renda com tabela progressiva,
-               alíquota efetiva e exportação em PDF. Projeto UNICAP.</p>
-            <p class="project-tags mono">HTML · CSS · JS</p>
+        <article class="project reveal" style="--project-tint: #ff6b5e; --project-tint-ink: #140806;">
+          <div class="project-visual">
+            <div class="project-media cover-irpf" aria-hidden="true">
+              <span class="project-media-mark">IRPF</span>
+            </div>
+            <div class="project-chip-row">
+              <span class="project-chip">UNICAP</span>
+              <span class="project-chip">PDF</span>
+            </div>
+            <div class="project-title-slab">
+              <p class="project-slab-kicker mono">Ferramenta</p>
+              <h3>Simulador IRPF</h3>
+            </div>
+            <div class="project-card-foot">
+              <span class="project-avatar" aria-hidden="true">VL</span>
+              <div>
+                <p class="project-foot-name">Vanessa Lima</p>
+                <p class="project-foot-role mono">imposto de renda 2025</p>
+              </div>
+            </div>
           </div>
-        </a>
+          <div class="project-panel">
+            <p class="mono case-label">educacional · front-end puro</p>
+            <h3 class="project-panel-title">Calculadora do Imposto de Renda</h3>
+            <p>
+              Tabela progressiva, alíquota efetiva e exportação em PDF.
+              Projeto acadêmico UNICAP.
+            </p>
+            <div class="tech-badges" aria-label="Tecnologias">
+              <span>HTML</span><span>CSS</span><span>JavaScript</span><span>PDF</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link project-link--solid" href="https://vanessenceweb.github.io/simulador-irpf/" target="_blank" rel="noopener">Ver ao vivo</a>
+              <a class="project-link" href="https://github.com/VANESSENCEWEB/simulador-irpf" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </article>
 
-        <a class="project reveal" href="https://vanessenceweb.github.io/qualitytravel/" target="_blank" rel="noopener">
-          <div class="project-cover cover-img">
-            <img src="https://raw.githubusercontent.com/VANESSENCEWEB/qualitytravel/main/quality-travel-screenshot.png" alt="Tela do site Quality Travel" loading="lazy" />
+        <article class="project reveal" style="--project-tint: #9b6bff; --project-tint-ink: #0c0618;">
+          <div class="project-visual">
+            <div class="project-media cover-img">
+              <img src="https://raw.githubusercontent.com/VANESSENCEWEB/qualitytravel/main/quality-travel-screenshot.png" alt="" loading="lazy" />
+            </div>
+            <div class="project-chip-row">
+              <span class="project-chip">UI</span>
+              <span class="project-chip">Motion</span>
+            </div>
+            <div class="project-title-slab">
+              <p class="project-slab-kicker mono">Landing</p>
+              <h3>Quality Travel</h3>
+            </div>
+            <div class="project-card-foot">
+              <span class="project-avatar" aria-hidden="true">VL</span>
+              <div>
+                <p class="project-foot-name">Vanessa Lima</p>
+                <p class="project-foot-role mono">agência de viagens</p>
+              </div>
+            </div>
           </div>
-          <div class="project-info">
-            <h3>Quality Travel</h3>
-            <p>Site de agência de viagens com animações e interface moderna,
-               em HTML, CSS e JavaScript puros.</p>
-            <p class="project-tags mono">HTML · CSS · JS</p>
+          <div class="project-panel">
+            <p class="mono case-label">site · animações · HTML/CSS/JS</p>
+            <h3 class="project-panel-title">Site de agência de viagens</h3>
+            <p>
+              Interface moderna com animações, em HTML, CSS e JavaScript puros —
+              sem framework.
+            </p>
+            <div class="tech-badges" aria-label="Tecnologias">
+              <span>HTML</span><span>CSS</span><span>JavaScript</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link project-link--solid" href="https://vanessenceweb.github.io/qualitytravel/" target="_blank" rel="noopener">Ver ao vivo</a>
+              <a class="project-link" href="https://github.com/VANESSENCEWEB/qualitytravel" target="_blank" rel="noopener">GitHub</a>
+            </div>
           </div>
-        </a>
+        </article>
 
       </div>
     </section>
@@ -279,7 +451,7 @@
     <!-- ══════════════ SOBRE ══════════════ -->
     <section class="section sobre" id="sobre">
       <div class="sobre-foto reveal">
-        <img src="assets/img/vanessa-lima.webp" alt="Foto de Vanessa Lima" onerror="this.parentElement.classList.add('sem-foto'); this.remove()" />
+        <img src="assets/img/vanessa-lima.jpg" alt="Foto de Vanessa Lima" onerror="this.parentElement.classList.add('sem-foto'); this.remove()" />
         <span class="mono foto-legenda">recife, pe</span>
       </div>
 
@@ -455,6 +627,15 @@
       </div>
     </section>
   </main>
+
+  <!-- Side neon scroll indicators -->
+  <nav class="side-dots" aria-label="Navegação por seções">
+    <a href="#topo" data-section="topo" aria-label="Home" aria-current="page"></a>
+    <a href="#projetos" data-section="projetos" aria-label="Projetos"></a>
+    <a href="#sobre" data-section="sobre" aria-label="Sobre"></a>
+    <a href="#curriculo" data-section="curriculo" aria-label="Currículo"></a>
+    <a href="#contato" data-section="contato" aria-label="Contato"></a>
+  </nav>
 
   <footer class="site-footer">
     <div class="footer-top">
