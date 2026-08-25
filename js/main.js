@@ -518,3 +518,62 @@ function runSplitTitles() {
     }
   });
 })();
+
+/* ── 11. SPOTLIGHT CURSOR (CSS radial + mouse CSS vars) ──── */
+(function initSpotlight() {
+  const finePointer = matchMedia('(pointer: fine)').matches;
+  if (reduz || !finePointer) return;
+
+  const root = document.documentElement;
+  const body = document.body;
+  body.classList.add('spotlight-on');
+
+  let x = window.innerWidth * 0.5;
+  let y = window.innerHeight * 0.4;
+  let tx = x;
+  let ty = y;
+  let raf = 0;
+  let active = false;
+
+  const paint = () => {
+    x += (tx - x) * 0.18;
+    y += (ty - y) * 0.18;
+    root.style.setProperty('--spot-x', `${x.toFixed(1)}px`);
+    root.style.setProperty('--spot-y', `${y.toFixed(1)}px`);
+    if (Math.abs(tx - x) > 0.4 || Math.abs(ty - y) > 0.4) {
+      raf = requestAnimationFrame(paint);
+    } else {
+      raf = 0;
+    }
+  };
+
+  const move = (e) => {
+    tx = e.clientX;
+    ty = e.clientY;
+    if (!active) {
+      active = true;
+      body.classList.add('is-spotlight-active');
+      x = tx;
+      y = ty;
+    }
+    if (!raf) raf = requestAnimationFrame(paint);
+  };
+
+  window.addEventListener('pointermove', move, { passive: true });
+  window.addEventListener(
+    'pointerleave',
+    () => {
+      active = false;
+      body.classList.remove('is-spotlight-active');
+    },
+    { passive: true }
+  );
+  document.addEventListener(
+    'mouseleave',
+    () => {
+      active = false;
+      body.classList.remove('is-spotlight-active');
+    },
+    { passive: true }
+  );
+})();
