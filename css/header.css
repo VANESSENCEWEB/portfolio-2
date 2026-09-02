@@ -44,7 +44,27 @@
   object-fit: cover;
   border: 2px solid var(--accent);
   display: block;
-  transition: border-color var(--transition);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--dur-base) var(--ease-out-quart);
+}
+
+.nav-brand:hover .nav-brand-photo img,
+.nav-brand:focus-visible .nav-brand-photo img {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent),
+    0 0 22px var(--accent-glow),
+    0 0 40px var(--accent-glow);
+  transform: scale(1.04);
+}
+
+.nav-brand:hover .nav-status,
+.nav-brand:focus-visible .nav-status {
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent),
+    0 0 16px var(--accent-glow);
 }
 
 .nav-status {
@@ -98,7 +118,11 @@
 }
 
 .nav-links a:hover {
-  opacity: .7;
+  opacity: 1;
+}
+
+.nav-links a:hover .nav-label {
+  color: var(--ink-900);
 }
 
 .nav-num {
@@ -124,11 +148,15 @@
   right: 0;
   bottom: 0;
   height: 3px;
-  background: var(--accent-coral);
+  background: var(--accent);
   border-radius: 2px;
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform var(--dur-base) var(--ease-out-quart);
+  box-shadow: 0 0 12px var(--accent-glow);
+  transition:
+    transform var(--dur-base) var(--ease-out-quart),
+    background var(--transition),
+    box-shadow var(--transition);
 }
 
 .nav-links a:hover::after,

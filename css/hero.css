@@ -23,6 +23,40 @@
   pointer-events: none;
 }
 
+/* Floating code phrases — extra layer inspired by sistema-financeiro */
+.hero-float-codes {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-float-code {
+  position: absolute;
+  left: -110%;
+  font-family: var(--f-mono);
+  font-size: clamp(0.68rem, 1.4vw, 0.85rem);
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 28%, transparent);
+  text-shadow: 0 0 12px var(--accent-glow);
+  animation: hero-float-code 18s linear infinite;
+}
+
+.hero-float-code:nth-child(1) { top: 12%; animation-delay: 0s; animation-duration: 20s; }
+.hero-float-code:nth-child(2) { top: 28%; animation-delay: 3s; animation-duration: 22s; color: color-mix(in srgb, var(--color-cyan) 30%, transparent); }
+.hero-float-code:nth-child(3) { top: 44%; animation-delay: 6s; animation-duration: 19s; color: color-mix(in srgb, var(--color-purple) 28%, transparent); }
+.hero-float-code:nth-child(4) { top: 58%; animation-delay: 9s; animation-duration: 21s; }
+.hero-float-code:nth-child(5) { top: 72%; animation-delay: 12s; animation-duration: 23s; color: color-mix(in srgb, var(--color-green) 30%, transparent); }
+.hero-float-code:nth-child(6) { top: 86%; animation-delay: 15s; animation-duration: 20s; color: color-mix(in srgb, var(--color-orange) 28%, transparent); }
+
+@keyframes hero-float-code {
+  0% { transform: translateX(0); opacity: 0; }
+  8% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { transform: translateX(calc(100vw + 140%)); opacity: 0; }
+}
+
 .hero-grid {
   position: relative;
   z-index: 1;
@@ -46,6 +80,33 @@
   gap: 1.35rem;
   align-items: flex-start;
   text-align: left;
+}
+
+/* Live status pills (cyber header vibe) */
+.hero-live {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+}
+
+.hero-live-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--ink-300);
+}
+
+.hero-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  animation: status-pulse 2s ease-in-out infinite;
 }
 
 .hero-greeting {
@@ -177,12 +238,36 @@
   align-items: center;
   gap: .5rem;
   padding: 1rem 2rem;
-  border-radius: var(--radius-pill);
-  font-family: var(--f-body);
+  border-radius: 10px;
+  font-family: var(--f-mono);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   text-decoration: none;
-  transition: transform var(--dur-fast) ease, border-color var(--dur-base), color var(--dur-base), background var(--transition), box-shadow var(--transition);
+  border: 1px solid transparent;
+  transition:
+    transform var(--dur-fast) ease,
+    border-color var(--dur-base),
+    color var(--dur-base),
+    background var(--transition),
+    box-shadow var(--transition);
+}
+
+.hero-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+
+.hero-btn:hover::before {
+  left: 120%;
 }
 
 .hero-btn:hover {
@@ -190,21 +275,26 @@
 }
 
 .hero-btn-solid {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 22px var(--accent-glow);
+  animation: hero-btn-glow 2.4s ease-in-out infinite alternate;
+}
+
+.hero-btn-solid:hover {
   background: var(--accent);
   color: var(--ink-900);
-  box-shadow: 0 0 28px var(--accent-glow);
+  box-shadow: 0 0 32px var(--accent-glow);
 }
 
 .hero-btn-solid::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .55), transparent);
-  transform: translateX(-120%) skewX(-15deg);
+  display: none;
 }
 
-.hero-btn-solid:hover::after {
-  animation: hero-shimmer .7s ease;
+@keyframes hero-btn-glow {
+  from { box-shadow: 0 0 16px var(--accent-glow); }
+  to { box-shadow: 0 0 28px var(--accent-glow), 0 0 40px color-mix(in srgb, var(--accent) 25%, transparent); }
 }
 
 @keyframes hero-shimmer {
@@ -214,12 +304,42 @@
 .hero-btn-ghost {
   background: transparent;
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, .25);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, rgba(255, 255, 255, 0.25));
 }
 
 .hero-btn-ghost:hover {
   border-color: var(--accent);
   color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* Neon scan line under hero (homepage / financeiro vibe) */
+.hero-neon-line {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 0;
+  height: 2px;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-cyan) 18%,
+    var(--accent) 50%,
+    var(--color-purple) 82%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 12px var(--accent-glow),
+    0 0 22px color-mix(in srgb, var(--color-cyan) 35%, transparent);
+  animation: hero-line-flow 6s ease-in-out infinite;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+@keyframes hero-line-flow {
+  0%, 100% { transform: scaleX(0.35); opacity: 0.45; }
+  50% { transform: scaleX(1); opacity: 1; }
 }
 
 /* Photo — glow → base → ring → orbit → pop-out (perfect circles, one center) */
@@ -266,7 +386,7 @@
   pointer-events: none;
   z-index: 0;
   animation: hero-glow-drift 5.5s ease-in-out infinite;
-  transition: background var(--transition);
+  transition: background var(--transition), opacity var(--dur-base), filter var(--dur-base);
   will-change: opacity, filter, transform;
 }
 
@@ -302,7 +422,25 @@
     0 0 48px var(--accent-glow),
     0 18px 48px rgba(0, 0, 0, .45);
   background: #0a0a0b;
-  transition: border-color var(--transition), box-shadow var(--transition);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.hero-photo:hover .hero-photo-base,
+.hero-photo:focus-within .hero-photo-base {
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--accent) 28%, transparent),
+    0 0 64px var(--accent-glow),
+    0 0 110px var(--accent-glow),
+    0 18px 48px rgba(0, 0, 0, .45);
+}
+
+.hero-photo:hover .hero-photo-glow,
+.hero-photo:focus-within .hero-photo-glow {
+  opacity: 1;
+  filter: blur(16px) brightness(1.15);
+  animation-play-state: paused;
 }
 
 .hero-photo-base .hero-photo-img {
@@ -327,7 +465,103 @@
   z-index: 3;
   transform-origin: 50% 50%;
   animation: hero-spin 30s linear infinite;
-  transition: border-color var(--transition), box-shadow var(--transition);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+/* Neon chase intro — light runs along the ring, then accent settles */
+@property --neon-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.hero-photo.is-ring-neon .hero-photo-base {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 0 28px rgba(255, 255, 255, 0.08),
+    0 18px 48px rgba(0, 0, 0, 0.45);
+}
+
+.hero-photo.is-ring-neon .hero-photo-ring {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+  animation: none; /* pause slow spin while the neon runs */
+  overflow: visible;
+}
+
+.hero-photo.is-ring-neon .hero-photo-ring::before,
+.hero-photo.is-ring-neon .hero-photo-ring::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--neon-angle),
+    transparent 0deg,
+    transparent 292deg,
+    rgba(57, 255, 136, 0.15) 308deg,
+    #39ff88 328deg,
+    #06b6d4 340deg,
+    #ff2ea6 350deg,
+    #ffffff 355deg,
+    transparent 360deg
+  );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 3px),
+    #000 calc(100% - 1px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 3px),
+    #000 calc(100% - 1px)
+  );
+  animation: hero-neon-chase 1.35s linear infinite;
+}
+
+.hero-photo.is-ring-neon .hero-photo-ring::before {
+  filter: drop-shadow(0 0 6px rgba(255, 46, 166, 0.65))
+    drop-shadow(0 0 10px rgba(57, 255, 136, 0.45));
+  opacity: 1;
+}
+
+.hero-photo.is-ring-neon .hero-photo-ring::after {
+  inset: -8px;
+  filter: blur(7px);
+  opacity: 0.75;
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 10px),
+    #000 calc(100% - 4px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 10px),
+    #000 calc(100% - 4px)
+  );
+}
+
+.hero-photo.is-ring-neon .hero-photo-glow {
+  opacity: 0.35;
+  filter: blur(14px);
+  animation: none;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 68%
+  );
+}
+
+.hero-photo.is-ring-neon .hero-orbit-dot {
+  fill: #fff;
+}
+
+@keyframes hero-neon-chase {
+  to { --neon-angle: 360deg; }
 }
 
 .hero-photo-orbit {
@@ -519,8 +753,9 @@
 }
 
 .marquee-track i {
-  color: var(--accent-blue);
+  color: var(--accent);
   font-style: normal;
+  text-shadow: 0 0 10px var(--accent-glow);
 }
 
 .marquee-status {

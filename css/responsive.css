@@ -145,6 +145,12 @@
   .hero-photo-dots,
   .hero-photo-orbit,
   .hero-photo-glow,
+  .hero-float-code,
+  .hero-neon-line,
+  .hero-btn-solid,
+  .hero-live-dot,
+  .hero-photo.is-ring-neon .hero-photo-ring::before,
+  .hero-photo.is-ring-neon .hero-photo-ring::after,
   .hero-status::before,
   .side-dots a.is-active,
   .side-dots a[aria-current="page"] {
@@ -184,6 +190,10 @@
 
   html {
     scroll-behavior: auto;
+  }
+
+  body.spotlight-on::before {
+    display: none;
   }
 
   .btn:hover:not(:disabled),
