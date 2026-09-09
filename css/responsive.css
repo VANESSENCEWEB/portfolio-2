@@ -85,19 +85,6 @@
     grid-template-columns: 1fr;
   }
 
-  .case-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .project,
-  .project-destaque {
-    grid-template-columns: 1fr;
-  }
-
-  .project-visual {
-    max-width: none;
-  }
-
   .contato-grid {
     grid-template-columns: 1fr;
   }
@@ -171,9 +158,7 @@
     transform: none;
   }
 
-  .project:hover .cover-img img,
-  .project:hover .project-media-mark,
-  .project:hover .project-visual {
+  .project:hover .project-media img {
     transform: none;
   }
 
