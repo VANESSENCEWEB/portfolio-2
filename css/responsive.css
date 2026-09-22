@@ -85,19 +85,6 @@
     grid-template-columns: 1fr;
   }
 
-  .case-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .project,
-  .project-destaque {
-    grid-template-columns: 1fr;
-  }
-
-  .project-visual {
-    max-width: none;
-  }
-
   .contato-grid {
     grid-template-columns: 1fr;
   }
@@ -152,6 +139,7 @@
   .hero-photo.is-ring-neon .hero-photo-ring::before,
   .hero-photo.is-ring-neon .hero-photo-ring::after,
   .hero-status::before,
+  .obra-name,
   .side-dots a.is-active,
   .side-dots a[aria-current="page"] {
     animation: none;
@@ -171,13 +159,8 @@
     transform: none;
   }
 
-  .project:hover .cover-img img,
-  .project:hover .project-media-mark,
-  .project:hover .project-visual {
-    transform: none;
-  }
-
-  .section-title .split-word > span {
+  .section-title .split-word > span,
+  .projetos-title .split-word > span {
     transform: none !important;
   }
 
@@ -197,7 +180,6 @@
   }
 
   .btn:hover:not(:disabled),
-  .project:hover,
   .social-icon:hover {
     transform: none;
   }

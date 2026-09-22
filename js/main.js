@@ -444,13 +444,16 @@ function runSplitTitles() {
   const sideDots = [...document.querySelectorAll('.side-dots a[data-section]')];
   if (!links.length) return;
 
-  const sections = links.map((link) => {
-    const id = link.dataset.section;
+  const sectionIds = [...new Set([
+    ...links.map((link) => link.dataset.section),
+    ...sideDots.map((dot) => dot.dataset.section),
+  ])];
+  const sections = sectionIds.map((id) => {
     const el =
       id === 'topo'
         ? document.getElementById('demo') || document.querySelector('.hero') || document.getElementById('topo')
         : document.getElementById(id);
-    return { id, el, link };
+    return { id, el };
   }).filter((s) => s.el);
 
   function setActive(id) {
@@ -489,6 +492,79 @@ function runSplitTitles() {
     { passive: true }
   );
   update();
+})();
+
+/* ── 9b. CERTIFICATE SLIDER ──────────────────────────────── */
+(function certSlider() {
+  const root = document.querySelector('[data-cert-slider]');
+  if (!root) return;
+  const track = root.querySelector('.cert-track');
+  const prev = root.querySelector('[data-cert-prev]');
+  const next = root.querySelector('[data-cert-next]');
+  const cards = [...track.children];
+  if (!track || cards.length < 2) return;
+
+  let index = 0;
+  let timer = 0;
+
+  function step() {
+    const card = cards[0];
+    const styles = getComputedStyle(track);
+    const gap = parseFloat(styles.columnGap || styles.gap) || 0;
+    return card.getBoundingClientRect().width + gap;
+  }
+
+  function go(nextIndex) {
+    index = (nextIndex + cards.length) % cards.length;
+    track.scrollTo({
+      left: index * step(),
+      behavior: reduz ? 'auto' : 'smooth',
+    });
+  }
+
+  function stop() {
+    window.clearInterval(timer);
+    timer = 0;
+  }
+
+  function start() {
+    if (reduz || timer) return;
+    timer = window.setInterval(() => go(index + 1), 3800);
+  }
+
+  prev?.addEventListener('click', () => {
+    stop();
+    go(index - 1);
+    start();
+  });
+  next?.addEventListener('click', () => {
+    stop();
+    go(index + 1);
+    start();
+  });
+
+  track.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      stop();
+      go(index + 1);
+      start();
+    } else if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      stop();
+      go(index - 1);
+      start();
+    }
+  });
+
+  root.addEventListener('mouseenter', stop);
+  root.addEventListener('mouseleave', start);
+  root.addEventListener('focusin', stop);
+  root.addEventListener('focusout', (event) => {
+    if (!root.contains(event.relatedTarget)) start();
+  });
+
+  start();
 })();
 
 /* ── 10. CONTACT FORM → mailto (no backend required) ──────── */

@@ -16,12 +16,13 @@
   <link rel="stylesheet" href="css/header.css" />
   <link rel="stylesheet" href="css/hero.css" />
   <link rel="stylesheet" href="css/projects.css" />
+  <link rel="stylesheet" href="css/formacao.css" />
   <link rel="stylesheet" href="css/sections.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Oswald:wdth,wght@75..125,700&display=swap" rel="stylesheet" />
 </head>
 
 <body>
@@ -48,16 +49,20 @@
           <span class="nav-num">02</span>
           <span class="nav-label">work</span>
         </a>
-        <a href="#sobre" data-section="sobre">
+        <a href="#formacao" data-section="formacao">
           <span class="nav-num">03</span>
+          <span class="nav-label">construção</span>
+        </a>
+        <a href="#sobre" data-section="sobre">
+          <span class="nav-num">04</span>
           <span class="nav-label">about</span>
         </a>
         <a href="#curriculo" data-section="curriculo">
-          <span class="nav-num">04</span>
+          <span class="nav-num">05</span>
           <span class="nav-label">resume</span>
         </a>
         <a href="#contato" data-section="contato">
-          <span class="nav-num">05</span>
+          <span class="nav-num">06</span>
           <span class="nav-label">contact</span>
         </a>
       </nav>
@@ -257,223 +262,269 @@
     </section>
 
     <!-- ══════════════ PROJETOS ══════════════ -->
-    <section class="section" id="projetos">
-      <div class="section-heading">
-        <p class="section-eyebrow">Work</p>
-        <h2 class="section-title js-split">Projetos que mostram o que eu sei fazer</h2>
-        <p class="section-desc">Case em destaque primeiro — o resto são projetos no ar com link.</p>
+    <section class="section projetos" id="projetos" aria-labelledby="projetos-title">
+      <header class="projetos-header">
+        <p class="projetos-kicker">Projetos</p>
+        <h2 class="projetos-title js-split" id="projetos-title">Projetos que mostram o que eu sei fazer</h2>
+        <p class="projetos-lead">Cards editáveis com screenshots, tecnologias, problema resolvido e link para o site - prontos para serem preenchidos com seus projetos reais.</p>
+      </header>
+
+      <div class="projetos-grid">
+
+        <article class="projeto-row reveal">
+          <div class="projeto-visual">
+            <figure class="shot shot--hero">
+              <img src="assets/img/projetos/recife-hero.png" alt="Hero do site Recife Flats, com o texto Um lugar de verdade pra ficar em Recife." width="2880" height="1560" />
+              <span class="shot-badge shot-badge--lg shot-badge--accent">Site principal</span>
+              <figcaption>Hero · "Um lugar de verdade pra ficar em Recife."</figcaption>
+            </figure>
+            <div class="shot-row">
+              <figure class="shot shot--sub">
+                <img src="assets/img/projetos/recife-matching.png" alt="Perguntas guiadas do matching de flats." width="1328" height="924" />
+                <span class="shot-badge shot-badge--accent">Matching IA</span>
+                <figcaption>Perguntas guiadas → flat ideal</figcaption>
+              </figure>
+              <figure class="shot shot--sub">
+                <img src="assets/img/projetos/recife-resultado.png" alt="Resultado do matching com as melhores combinações de flats." width="1208" height="1458" />
+                <span class="shot-badge">98% match</span>
+                <figcaption>Resultado - melhores combinações</figcaption>
+              </figure>
+            </div>
+            <div class="shot-row">
+              <figure class="shot shot--phone">
+                <img class="shot-img--top" src="assets/img/projetos/recife-mobile-1.png" alt="Versão mobile do site Recife Flats." width="802" height="1438" />
+                <span class="shot-badge shot-badge--tight">Mobile</span>
+              </figure>
+              <figure class="shot shot--phone">
+                <img class="shot-img--top" src="assets/img/projetos/recife-mobile-2.png" alt="Segunda tela mobile do site Recife Flats." width="802" height="1438" />
+              </figure>
+              <figure class="shot shot--reviews">
+                <img class="shot-img--reviews" src="assets/img/projetos/recife-avaliacoes.png" alt="Avaliações de hóspedes do Recife Flats." width="2344" height="1560" />
+                <span class="shot-badge shot-badge--tight shot-badge--accent">Avaliações</span>
+              </figure>
+            </div>
+            <figure class="shot shot--wide">
+              <img src="assets/img/projetos/recife-apartamentos.png" alt="Página de apartamentos e reservas do Recife Flats." width="1274" height="908" />
+              <figcaption>Página de apartamentos e reservas</figcaption>
+            </figure>
+          </div>
+
+          <div class="projeto-content">
+            <div class="projeto-intro">
+              <h3 class="projeto-name">Site Recife Flats</h3>
+              <p class="projeto-summary">Site institucional para flat de temporada em Recife com matching inteligente, galeria de apartamentos, avaliações reais e versão mobile completa.</p>
+              <ul class="projeto-tags" aria-label="Tecnologias">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Matching IA</li>
+                <li>Responsivo</li>
+              </ul>
+            </div>
+            <div class="projeto-problem">
+              <p class="projeto-kicker">Problema resolvido</p>
+              <p>Visitantes tinham dificuldade em escolher o flat ideal. O site guia o usuário por perguntas simples - objetivo da viagem, número de hóspedes e preferências - e recomenda a hospedagem mais compatível. Inclui galeria de apartamentos, avaliações reais de hóspedes e experiência mobile nativa.</p>
+            </div>
+            <div class="projeto-card">
+              <p class="projeto-card-label">O que o site entrega</p>
+              <ul class="projeto-list">
+                <li><span class="projeto-dot" aria-hidden="true"></span>Hero com Reclame Aqui 4.8 e botão WhatsApp</li>
+                <li><span class="projeto-dot" aria-hidden="true"></span>Matching inteligente em 6 perguntas</li>
+                <li><span class="projeto-dot" aria-hidden="true"></span>Galeria de apartamentos com filtros e reserva</li>
+                <li><span class="projeto-dot" aria-hidden="true"></span>Avaliações reais de hóspedes + mobile responsivo</li>
+              </ul>
+            </div>
+            <div class="projeto-card projeto-card--flow">
+              <p class="projeto-card-label">Fluxo do matching</p>
+              <div class="fluxo-steps">
+                <span class="fluxo-chip">Perguntas guiadas</span>
+                <span class="fluxo-arrow" aria-hidden="true">→</span>
+                <span class="fluxo-chip">Preferências</span>
+                <span class="fluxo-arrow" aria-hidden="true">→</span>
+                <span class="fluxo-chip fluxo-chip--accent">Match ideal</span>
+              </div>
+            </div>
+            <div class="projeto-ctas">
+              <a class="projeto-cta" href="https://vanessenceweb.github.io/recife-flats-temporada/" target="_blank" rel="noopener">Ver site<span class="projeto-arrow" aria-hidden="true"></span></a>
+              <a class="projeto-cta" href="https://github.com/VANESSENCEWEB/recife-flats-temporada" target="_blank" rel="noopener">GitHub<span class="projeto-arrow" aria-hidden="true"></span></a>
+            </div>
+          </div>
+        </article>
+
+        <hr class="projetos-rule" />
+
+        <article class="projeto-row projeto-row--flip reveal">
+          <div class="projeto-content">
+            <div class="projeto-intro">
+              <h3 class="projeto-name">NASA Explorer</h3>
+              <p class="projeto-summary">Aplicação web que conecta entusiastas do espaço às APIs públicas da NASA - com visualização 3D de asteroides, galeria com 150K+ imagens e coleção pessoal persistida.</p>
+              <ul class="projeto-tags" aria-label="Tecnologias">
+                <li>React</li>
+                <li>Three.js</li>
+                <li>Chart.js</li>
+                <li>NASA APIs</li>
+                <li>Back4app</li>
+              </ul>
+            </div>
+            <div class="projeto-problem">
+              <p class="projeto-kicker">Problema resolvido</p>
+              <p>Dados astronômicos da NASA são públicos mas dispersos e inacessíveis. O NASA Explorer centraliza APOD, NEO Watch com Terra 3D, galeria com busca em 150K+ imagens e coleção pessoal com CRUD completo.</p>
+            </div>
+            <div class="projeto-card">
+              <p class="projeto-card-label">4 módulos principais</p>
+              <ul class="projeto-list">
+                <li><span class="projeto-dot" aria-hidden="true"></span>🏠 Home - Hero mission control + APOD do dia</li>
+                <li><span class="projeto-dot" aria-hidden="true"></span>🔭 NEO Watch - Terra 3D em Three.js + Chart.js</li>
+                <li><span class="projeto-dot" aria-hidden="true"></span>🚀 Image Library - busca em acervo com 150K+ imagens</li>
+                <li><span class="projeto-dot" aria-hidden="true"></span>⭐ Favoritos - CRUD completo persistido no Back4app</li>
+              </ul>
+            </div>
+            <div class="projeto-ctas">
+              <a class="projeto-cta" href="https://nasa-explorer-nine-rho.vercel.app/" target="_blank" rel="noopener">Ver site<span class="projeto-arrow" aria-hidden="true"></span></a>
+              <a class="projeto-cta" href="https://github.com/VANESSENCEWEB/nasa_explorer" target="_blank" rel="noopener">GitHub<span class="projeto-arrow" aria-hidden="true"></span></a>
+            </div>
+          </div>
+
+          <div class="projeto-visual">
+            <div class="shot-row">
+              <figure class="shot shot--nasa-lg">
+                <img src="assets/img/projetos/nasa-home.jpg" alt="Home do NASA Explorer com hero mission control e a foto astronômica do dia." width="1264" height="848" />
+                <span class="shot-badge shot-badge--dark">🏠 Home</span>
+                <figcaption>Hero mission control + APOD do dia</figcaption>
+              </figure>
+              <figure class="shot shot--nasa-lg">
+                <img src="assets/img/projetos/nasa-neo.jpg" alt="Módulo NEO Watch com a Terra em 3D." width="1264" height="848" />
+                <span class="shot-badge shot-badge--dark">🔭 NEO Watch</span>
+                <figcaption>Terra 3D em Three.js + Chart.js</figcaption>
+              </figure>
+            </div>
+            <div class="shot-row">
+              <figure class="shot shot--nasa-sm">
+                <img src="assets/img/projetos/nasa-library.jpg" alt="Biblioteca de imagens da NASA com busca no acervo." width="1376" height="768" />
+                <span class="shot-badge shot-badge--dark">🚀 Image Library</span>
+                <figcaption>Busca em acervo com 150K+ imagens</figcaption>
+              </figure>
+              <figure class="shot shot--nasa-sm">
+                <img src="assets/img/projetos/nasa-favoritos.jpg" alt="Tela de favoritos do NASA Explorer." width="1376" height="768" />
+                <span class="shot-badge shot-badge--accent">⭐ Favoritos</span>
+                <figcaption>CRUD completo persistido no Back4app</figcaption>
+              </figure>
+            </div>
+          </div>
+        </article>
+
+        <hr class="projetos-rule" />
+
+        <article class="projeto-row reveal">
+          <div class="projeto-visual">
+            <figure class="shot shot--about shot--on-light">
+              <img src="assets/img/projetos/priscilla-about.jpg" alt="Seção sobre a Dra. Priscilla Barros, cirurgiã bucomaxilofacial." width="1584" height="672" />
+              <span class="shot-badge shot-badge--lg shot-badge--light">Sobre a profissional</span>
+              <figcaption>Dra. Priscilla Barros · Cirurgiã Bucomaxilofacial</figcaption>
+            </figure>
+            <figure class="shot shot--gallery shot--on-light">
+              <img src="assets/img/projetos/priscilla-galeria.jpg" alt="Galeria de resultados da clínica da Dra. Priscilla Barros." width="1584" height="672" />
+              <span class="shot-badge shot-badge--lg shot-badge--light">Galeria de resultados</span>
+              <figcaption>Resultados e momentos da clínica</figcaption>
+            </figure>
+            <ul class="servico-pills" aria-label="Serviços">
+              <li>Rino Estruturada</li>
+              <li>Cirurgia de Face</li>
+              <li>Platismoplastia</li>
+              <li>HOF</li>
+              <li>Laser CO2</li>
+            </ul>
+          </div>
+
+          <div class="projeto-content">
+            <div class="projeto-intro">
+              <h3 class="projeto-name">Site Dra. Priscilla Barros</h3>
+              <p class="projeto-summary">Site institucional para cirurgiã bucomaxilofacial especializada em cirurgia de face e HOF - com galeria de resultados reais, credenciais, vídeos e agendamento online.</p>
+              <ul class="projeto-tags" aria-label="Tecnologias">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Design Elegante</li>
+              </ul>
+            </div>
+            <div class="projeto-problem">
+              <p class="projeto-kicker">Problema resolvido</p>
+              <p>Pacientes buscavam uma profissional de confiança mas não encontravam presença digital à altura. O site transmite sofisticação, credibilidade e acolhimento - com galeria de resultados reais, credenciais verificadas (CRO-PE 13633 · CTBMF 13633) e agendamento facilitado.</p>
+            </div>
+            <blockquote class="projeto-quote">
+              <p>"Cada rosto conta uma história. Nosso papel é preservar sua identidade enquanto devolvemos um aspecto mais jovem e descansado."</p>
+              <cite>- Dra. Priscilla Barros</cite>
+            </blockquote>
+            <div class="projeto-card">
+              <p class="projeto-card-label">Seções do site</p>
+              <ul class="projeto-list">
+                <li><span class="projeto-dot" aria-hidden="true"></span>Sobre · credenciais e formação verificados</li>
+                <li><span class="projeto-dot" aria-hidden="true"></span>Galeria de resultados reais (antes/depois)</li>
+                <li><span class="projeto-dot" aria-hidden="true"></span>Serviços · Rino, Face, HOF, Laser CO2</li>
+                <li><span class="projeto-dot" aria-hidden="true"></span>Vídeos, FAQ e botão Agendar</li>
+              </ul>
+            </div>
+            <div class="projeto-ctas">
+              <a class="projeto-cta" href="https://facial-harmony-clinic.vercel.app/" target="_blank" rel="noopener">Ver site<span class="projeto-arrow" aria-hidden="true"></span></a>
+              <a class="projeto-cta" href="https://github.com/VANESSENCEWEB/facial-harmony-clinic" target="_blank" rel="noopener">GitHub<span class="projeto-arrow" aria-hidden="true"></span></a>
+            </div>
+          </div>
+        </article>
+
       </div>
+    </section>
 
-      <div class="projects">
+    <!-- ══════════════ FORMAÇÃO / EM CONSTRUÇÃO ══════════════ -->
+    <section class="obra" id="formacao" aria-labelledby="formacao-title">
+      <div class="obra-inner">
+        <p class="obra-kicker">Em construção.</p>
+        <h2 class="obra-name" id="formacao-title" aria-label="Vanessa Lima">
+          <span>Vanessa</span>
+          <span>Lima</span>
+        </h2>
+        <p class="obra-lead">Estudante de Sistemas para Internet na UNICAP.</p>
+        <p class="obra-sub">Já concluí alguns cursos. A formação continua.</p>
 
-        <article class="project project-destaque case-study reveal" style="--project-tint: #ff2ea6; --project-tint-ink: #0a0a0b;">
-          <div class="project-visual">
-            <div class="project-media cover-flats" aria-hidden="true">
-              <span class="project-media-mark">FLATS</span>
-            </div>
-            <div class="project-chip-row">
-              <span class="project-chip">Full-stack</span>
-              <span class="project-chip">Produção</span>
-            </div>
-            <div class="project-title-slab">
-              <p class="project-slab-kicker mono">Case em destaque</p>
-              <h3>Recife Flats</h3>
-            </div>
-            <div class="project-card-foot">
-              <span class="project-avatar" aria-hidden="true">VL</span>
-              <div>
-                <p class="project-foot-name">Vanessa Lima</p>
-                <p class="project-foot-role mono">sistema de hospedagem</p>
-              </div>
+        <div class="cert-slider" data-cert-slider>
+          <div class="cert-slider-head">
+            <p class="mono cert-slider-label">Alguns certificados</p>
+            <div class="cert-nav">
+              <button type="button" data-cert-prev aria-label="Certificado anterior">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg>
+              </button>
+              <button type="button" data-cert-next aria-label="Próximo certificado">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
             </div>
           </div>
-          <div class="project-panel">
-            <p class="mono case-label">negócio real · dados sensíveis</p>
-            <h3 class="project-panel-title">Sistema de Hospedagem</h3>
-            <p class="case-lead">
-              Gestão completa para 4 apartamentos de temporada em Recife:
-              da landing pública ao painel interno com autenticação e banco no Supabase.
-            </p>
-            <div class="case-grid">
-              <div>
-                <p class="mono case-k">Problema</p>
-                <p>Operação manual de reservas, contratos e check-in — sem painel único.</p>
-              </div>
-              <div>
-                <p class="mono case-k">Meu papel</p>
-                <p>Produto + front-end + integração com Supabase, do zero à produção.</p>
-              </div>
-              <div>
-                <p class="mono case-k">Resultado</p>
-                <p>Sistema em uso real: auth, diárias, PDF, welcome book e relatórios.</p>
-              </div>
-            </div>
-            <div class="tech-badges" aria-label="Tecnologias">
-              <span>JavaScript</span><span>Supabase</span><span>GitHub Pages</span>
-              <span>Auth</span><span>PDF</span>
-            </div>
-            <div class="feats">
-              <span>dashboard</span><span>diárias</span><span>contratos</span>
-              <span>welcome book</span><span>check-in/out</span><span>relatórios</span>
-            </div>
-            <div class="project-links">
-              <a class="project-link project-link--solid" href="mailto:vanessalimaunicap@gmail.com?subject=Demo%20Recife%20Flats">Pedir demo</a>
-              <span class="project-lock mono">em produção — demo sob solicitação</span>
-            </div>
+          <div class="cert-track" tabindex="0" aria-label="Certificados concluídos">
+            <article class="cert-card">
+              <p class="cert-issuer">DIO</p>
+              <h3 class="cert-course">Campus Expert</h3>
+              <p class="cert-meta">Formação concluída</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-issuer">Origamid</p>
+              <h3 class="cert-course">Interface e CSS</h3>
+              <p class="cert-meta">Formação concluída</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-issuer">Rocketseat</p>
+              <h3 class="cert-course">Programação</h3>
+              <p class="cert-meta">Formação concluída</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-issuer">RiseUp</p>
+              <h3 class="cert-course">Residência Tecnológica</h3>
+              <p class="cert-meta">Porto Digital · 2026.1</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-issuer">UNICAP</p>
+              <h3 class="cert-course">Sistemas para Internet</h3>
+              <p class="cert-meta">3º período · em andamento</p>
+            </article>
           </div>
-        </article>
-
-        <article class="project reveal" style="--project-tint: #06b6d4; --project-tint-ink: #041016;">
-          <div class="project-visual">
-            <div class="project-media cover-img">
-              <img src="https://nasa-explorer-nine-rho.vercel.app/assets/og-image.png" alt="" loading="lazy" />
-            </div>
-            <div class="project-chip-row">
-              <span class="project-chip">3D</span>
-              <span class="project-chip">APIs</span>
-            </div>
-            <div class="project-title-slab">
-              <p class="project-slab-kicker mono">Live product</p>
-              <h3>NASA Explorer</h3>
-            </div>
-            <div class="project-card-foot">
-              <span class="project-avatar" aria-hidden="true">VL</span>
-              <div>
-                <p class="project-foot-name">Vanessa Lima</p>
-                <p class="project-foot-role mono">space data dashboard</p>
-              </div>
-            </div>
-          </div>
-          <div class="project-panel">
-            <p class="mono case-label">APIs · Three.js · persistência</p>
-            <h3 class="project-panel-title">Painel conectado à NASA</h3>
-            <p>
-              Foto astronômica do dia, asteroides em 3D com Three.js e CRUD de favoritos
-              persistido no Back4app.
-            </p>
-            <div class="tech-badges" aria-label="Tecnologias">
-              <span>JavaScript</span><span>Three.js</span><span>NASA APIs</span><span>Back4app</span>
-            </div>
-            <div class="project-links">
-              <a class="project-link project-link--solid" href="https://nasa-explorer-nine-rho.vercel.app/" target="_blank" rel="noopener">Ver ao vivo</a>
-              <a class="project-link" href="https://github.com/VANESSENCEWEB" target="_blank" rel="noopener">GitHub</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="project reveal" style="--project-tint: #39ff88; --project-tint-ink: #04140c;">
-          <div class="project-visual">
-            <div class="project-media cover-api" aria-hidden="true">
-              <span class="project-media-mark">{ }</span>
-            </div>
-            <div class="project-chip-row">
-              <span class="project-chip">Backend</span>
-              <span class="project-chip">CI/CD</span>
-            </div>
-            <div class="project-title-slab">
-              <p class="project-slab-kicker mono">API REST</p>
-              <h3>Node + Express</h3>
-            </div>
-            <div class="project-card-foot">
-              <span class="project-avatar" aria-hidden="true">VL</span>
-              <div>
-                <p class="project-foot-name">Vanessa Lima</p>
-                <p class="project-foot-role mono">40 testes · 100% ok</p>
-              </div>
-            </div>
-          </div>
-          <div class="project-panel">
-            <p class="mono case-label">CRUD · testes · deploy</p>
-            <h3 class="project-panel-title">API REST com CI no GitHub Actions</h3>
-            <p>
-              CRUD completo com 40 testes automatizados em Newman/Postman (100% de aprovação),
-              pipeline no GitHub Actions e deploy no Render.
-            </p>
-            <div class="tech-badges" aria-label="Tecnologias">
-              <span>Node.js</span><span>Express</span><span>Newman</span><span>GitHub Actions</span><span>Render</span>
-            </div>
-            <div class="project-links">
-              <a class="project-link project-link--solid" href="https://github.com/VANESSENCEWEB/api-projeto-integrador" target="_blank" rel="noopener">Ver no GitHub</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="project reveal" style="--project-tint: #ff6b5e; --project-tint-ink: #140806;">
-          <div class="project-visual">
-            <div class="project-media cover-irpf" aria-hidden="true">
-              <span class="project-media-mark">IRPF</span>
-            </div>
-            <div class="project-chip-row">
-              <span class="project-chip">UNICAP</span>
-              <span class="project-chip">PDF</span>
-            </div>
-            <div class="project-title-slab">
-              <p class="project-slab-kicker mono">Ferramenta</p>
-              <h3>Simulador IRPF</h3>
-            </div>
-            <div class="project-card-foot">
-              <span class="project-avatar" aria-hidden="true">VL</span>
-              <div>
-                <p class="project-foot-name">Vanessa Lima</p>
-                <p class="project-foot-role mono">imposto de renda 2025</p>
-              </div>
-            </div>
-          </div>
-          <div class="project-panel">
-            <p class="mono case-label">educacional · front-end puro</p>
-            <h3 class="project-panel-title">Calculadora do Imposto de Renda</h3>
-            <p>
-              Tabela progressiva, alíquota efetiva e exportação em PDF.
-              Projeto acadêmico UNICAP.
-            </p>
-            <div class="tech-badges" aria-label="Tecnologias">
-              <span>HTML</span><span>CSS</span><span>JavaScript</span><span>PDF</span>
-            </div>
-            <div class="project-links">
-              <a class="project-link project-link--solid" href="https://vanessenceweb.github.io/simulador-irpf/" target="_blank" rel="noopener">Ver ao vivo</a>
-              <a class="project-link" href="https://github.com/VANESSENCEWEB/simulador-irpf" target="_blank" rel="noopener">GitHub</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="project reveal" style="--project-tint: #9b6bff; --project-tint-ink: #0c0618;">
-          <div class="project-visual">
-            <div class="project-media cover-img">
-              <img src="https://raw.githubusercontent.com/VANESSENCEWEB/qualitytravel/main/quality-travel-screenshot.png" alt="" loading="lazy" />
-            </div>
-            <div class="project-chip-row">
-              <span class="project-chip">UI</span>
-              <span class="project-chip">Motion</span>
-            </div>
-            <div class="project-title-slab">
-              <p class="project-slab-kicker mono">Landing</p>
-              <h3>Quality Travel</h3>
-            </div>
-            <div class="project-card-foot">
-              <span class="project-avatar" aria-hidden="true">VL</span>
-              <div>
-                <p class="project-foot-name">Vanessa Lima</p>
-                <p class="project-foot-role mono">agência de viagens</p>
-              </div>
-            </div>
-          </div>
-          <div class="project-panel">
-            <p class="mono case-label">site · animações · HTML/CSS/JS</p>
-            <h3 class="project-panel-title">Site de agência de viagens</h3>
-            <p>
-              Interface moderna com animações, em HTML, CSS e JavaScript puros —
-              sem framework.
-            </p>
-            <div class="tech-badges" aria-label="Tecnologias">
-              <span>HTML</span><span>CSS</span><span>JavaScript</span>
-            </div>
-            <div class="project-links">
-              <a class="project-link project-link--solid" href="https://vanessenceweb.github.io/qualitytravel/" target="_blank" rel="noopener">Ver ao vivo</a>
-              <a class="project-link" href="https://github.com/VANESSENCEWEB/qualitytravel" target="_blank" rel="noopener">GitHub</a>
-            </div>
-          </div>
-        </article>
-
+        </div>
       </div>
     </section>
 
@@ -661,6 +712,7 @@
   <nav class="side-dots" aria-label="Navegação por seções">
     <a href="#topo" data-section="topo" aria-label="Home" aria-current="page"></a>
     <a href="#projetos" data-section="projetos" aria-label="Projetos"></a>
+    <a href="#formacao" data-section="formacao" aria-label="Formação"></a>
     <a href="#sobre" data-section="sobre" aria-label="Sobre"></a>
     <a href="#curriculo" data-section="curriculo" aria-label="Currículo"></a>
     <a href="#contato" data-section="contato" aria-label="Contato"></a>
@@ -691,6 +743,7 @@
           <p class="mono footer-col-title">Navegação</p>
           <a href="#topo">Home</a>
           <a href="#projetos">Work</a>
+          <a href="#formacao">Formação</a>
           <a href="#sobre">About</a>
           <a href="#curriculo">Resume</a>
           <a href="#contato">Contact</a>
