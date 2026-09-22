@@ -139,6 +139,7 @@
   .hero-photo.is-ring-neon .hero-photo-ring::before,
   .hero-photo.is-ring-neon .hero-photo-ring::after,
   .hero-status::before,
+  .obra-name,
   .side-dots a.is-active,
   .side-dots a[aria-current="page"] {
     animation: none;

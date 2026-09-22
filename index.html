@@ -16,12 +16,13 @@
   <link rel="stylesheet" href="css/header.css" />
   <link rel="stylesheet" href="css/hero.css" />
   <link rel="stylesheet" href="css/projects.css" />
+  <link rel="stylesheet" href="css/formacao.css" />
   <link rel="stylesheet" href="css/sections.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Oswald:wdth,wght@75..125,700&display=swap" rel="stylesheet" />
 </head>
 
 <body>
@@ -469,6 +470,60 @@
       </div>
     </section>
 
+    <!-- ══════════════ FORMAÇÃO / EM CONSTRUÇÃO ══════════════ -->
+    <section class="obra" id="formacao" aria-labelledby="formacao-title">
+      <div class="obra-inner">
+        <p class="obra-kicker">Em construção.</p>
+        <h2 class="obra-name" id="formacao-title" aria-label="Vanessa Lima">
+          <span>Vanessa</span>
+          <span>Lima</span>
+        </h2>
+        <p class="obra-lead">Estudante de Sistemas para Internet na UNICAP.</p>
+        <p class="obra-sub">Já concluí alguns cursos. A formação continua.</p>
+
+        <div class="cert-slider" data-cert-slider>
+          <div class="cert-slider-head">
+            <p class="mono cert-slider-label">Alguns certificados</p>
+            <div class="cert-nav">
+              <button type="button" data-cert-prev aria-label="Certificado anterior">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg>
+              </button>
+              <button type="button" data-cert-next aria-label="Próximo certificado">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="cert-track" tabindex="0" aria-label="Certificados concluídos">
+            <article class="cert-card">
+              <p class="cert-issuer">DIO</p>
+              <h3 class="cert-course">Campus Expert</h3>
+              <p class="cert-meta">Formação concluída</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-issuer">Origamid</p>
+              <h3 class="cert-course">Interface e CSS</h3>
+              <p class="cert-meta">Formação concluída</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-issuer">Rocketseat</p>
+              <h3 class="cert-course">Programação</h3>
+              <p class="cert-meta">Formação concluída</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-issuer">RiseUp</p>
+              <h3 class="cert-course">Residência Tecnológica</h3>
+              <p class="cert-meta">Porto Digital · 2026.1</p>
+            </article>
+            <article class="cert-card">
+              <p class="cert-issuer">UNICAP</p>
+              <h3 class="cert-course">Sistemas para Internet</h3>
+              <p class="cert-meta">3º período · em andamento</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ══════════════ SOBRE ══════════════ -->
     <section class="section sobre" id="sobre">
       <div class="sobre-foto reveal">
@@ -653,6 +708,7 @@
   <nav class="side-dots" aria-label="Navegação por seções">
     <a href="#topo" data-section="topo" aria-label="Home" aria-current="page"></a>
     <a href="#projetos" data-section="projetos" aria-label="Projetos"></a>
+    <a href="#formacao" data-section="formacao" aria-label="Formação"></a>
     <a href="#sobre" data-section="sobre" aria-label="Sobre"></a>
     <a href="#curriculo" data-section="curriculo" aria-label="Currículo"></a>
     <a href="#contato" data-section="contato" aria-label="Contato"></a>
@@ -683,6 +739,7 @@
           <p class="mono footer-col-title">Navegação</p>
           <a href="#topo">Home</a>
           <a href="#projetos">Work</a>
+          <a href="#formacao">Formação</a>
           <a href="#sobre">About</a>
           <a href="#curriculo">Resume</a>
           <a href="#contato">Contact</a>
