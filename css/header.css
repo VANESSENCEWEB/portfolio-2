@@ -102,7 +102,7 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: clamp(1.25rem, 3vw, 2.75rem);
+  gap: clamp(0.85rem, 1.6vw, 1.5rem);
 }
 
 .nav-links a {
